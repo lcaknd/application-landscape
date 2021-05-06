@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import Palette from './Palette';
 
 const Sidebar = styled.div`
 display: flex;
@@ -44,7 +45,7 @@ text-decoration: none;
                 {subNav ? item.iconOpened:item.iconClosed}
             </div>
         </Sidebar>
-        {subNav ? <Items /> : null}
+        {subNav ? <Palette /> : null}
         </>
     );
 };

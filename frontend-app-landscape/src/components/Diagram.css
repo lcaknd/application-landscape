@@ -1,0 +1,13 @@
+
+  .myDiagramDiv {   
+    background-color: #dddfd9;
+    width: 700px;
+    height: 100vh;
+    margin: 5px;
+  }   
+  .myPaletteDiv {
+      width: 250px;
+      height: 100px;
+      background: #FFFFFF
+  }
+ 
