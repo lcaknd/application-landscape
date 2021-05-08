@@ -9,7 +9,7 @@ import * as go from 'gojs';
     const myDiagram =
         $(go.Diagram, 
           { "undoManager.isEnabled": true,
-            allowHorizontalScroll: false,
+            allowHorizontalScroll: true,
             allowVerticalScroll: false,
             model: $(go.GraphLinksModel,
                   {
