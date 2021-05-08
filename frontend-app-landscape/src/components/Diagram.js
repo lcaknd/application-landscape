@@ -9,15 +9,13 @@ import * as go from 'gojs';
     const myDiagram =
         $(go.Diagram, 
           {
-            "LinkDrawn": showLinkLabel,
-            "LinkRelinked": showLinkLabel,
-            "undoManager.isEnabled": true,
+            allowHorizontalScroll: false,
+            allowVerticalScroll: false,
             model: $(go.GraphLinksModel,
-                            {
-                              linkKeyProperty: 'key' 
-                            }) 
+                  {
+                    linkKeyProperty: 'key' 
+                  }) 
           });
-
       function nodeStyle() {
         return [
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
@@ -55,15 +53,15 @@ import * as go from 'gojs';
       function textStyle() {
         return {
           font: "bold 11pt Lato, Helvetica, Arial, sans-serif",
-          stroke: "#F8F8F8"
+          stroke: "#8696a3"
         }
       }
 
       myDiagram.nodeTemplateMap.add("",  
         $(go.Node, "Table", nodeStyle(),
           $(go.Panel, "Auto",
-            $(go.Shape, "Rectangle",
-              { fill: "#282c34", stroke: "#00A9C9", strokeWidth: 3.5 },
+            $(go.Shape, "RoundedRectangle",
+              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
               new go.Binding("figure", "figure")),
             $(go.TextBlock, textStyle(),
               {
@@ -106,7 +104,7 @@ import * as go from 'gojs';
         $(go.Node, "Table", nodeStyle(),
           $(go.Panel, "Spot",
             $(go.Shape, "Circle",
-              { desiredSize: new go.Size(70, 70), fill: "#282c34", stroke: "#09d3ac", strokeWidth: 3.5 }),
+              { desiredSize: new go.Size(30, 70), fill: "#282c34", stroke: "#09d3ac", strokeWidth: 3.5 }),
             $(go.TextBlock, "Start", textStyle(),
               new go.Binding("text"))
           ),
@@ -202,23 +200,12 @@ import * as go from 'gojs';
           )
         );
 
-      function showLinkLabel(e) {
-        var label = e.subject.findObject("LABEL");
-        if (label !== null) label.visible = (e.subject.fromNode.data.category === "Conditional");
-      }
-
-      
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
-
-      
 
       return myDiagram
 
     };
-
-    
-
 
 const Diagram =()=>{
 return(
@@ -229,7 +216,7 @@ return(
           divClassName='myDiagramDiv'
           nodeDataArray = {[
             { key:-1, loc:'175 0', text:'Start'},
-            {key:0, loc:'-5 75', text:'Preheat oven to 375 F'}
+            {key:0, loc:'-5 75', text:'Initial node'}
         ]}
           linkDataArray={[
             {from:-1, to:0, fromPort:"B", toPort:"T"},

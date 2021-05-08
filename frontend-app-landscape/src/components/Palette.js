@@ -9,9 +9,9 @@ function initPalette(){
     function animateFadeDown(e) {
         var diagram = e.diagram;
         var animation = new go.Animation();
-        animation.isViewportUnconstrained = true;
+        animation.isViewportUnconstrained = false;
         animation.easing = go.Animation.EaseOutExpo;
-        animation.duration = 900;
+        animation.duration = 1000;
         
         animation.add(diagram, 'position', diagram.position.copy().offset(0, 200), diagram.position);
         animation.add(diagram, 'opacity', 0, 1);
@@ -23,12 +23,14 @@ function initPalette(){
     const myPalette =
     $(go.Palette,  
       {
-        "animationManager.initialAnimationStyle": go.AnimationManager.None,
+        "animationManager.initialAnimationStyle": go.AnimationManager.AnimateLocations,
         "InitialAnimationStarting": animateFadeDown, 
 
-        nodeTemplateMap: myDiagram.nodeTemplateMap,  
+        nodeTemplateMap: myDiagram.nodeTemplateMap,
+        allowDelete: false,
+        allowZoom: false,  
         model: new go.GraphLinksModel([ 
-          { category: "Start", text: "Start" },
+          { category: "Start", text: "Start", },
           { text: "Step" },
           { category: "Conditional", text: "???" },
           { category: "End", text: "End" },
@@ -44,12 +46,12 @@ const Palette =()=>{
         <ReactPalette
         initPalette={initPalette}
         divClassName='myPaletteDiv'
-        nodeDataArray={[{ key: 0, text: 'Shit1' },
-        { key: 1, text: 'Shit2' },
-        { key: 2, text: 'Shit3' },
-        { key: 3, text: 'Shit4' },
-        { key: 4, text: 'Shit5' },
-        { key: 5, text: 'Shit6' }
+        nodeDataArray={[{ key: 0, text: 'Shit1', color: "cyan" },
+        { key: 1, text: 'Shit2', color: "powderblue" },
+        { key: 2, text: 'Shit3',color: "lightblue" },
+        { key: 3, text: 'Shit4', color: "deepskyblue" },
+        { key: 4, text: 'Shit5', color: "aquamarine"},
+        { key: 5, text: 'Shit6', color: "turquoise" }
         ]}
         />
         </>
