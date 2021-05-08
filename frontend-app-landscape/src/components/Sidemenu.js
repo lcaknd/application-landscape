@@ -7,7 +7,7 @@ import Diagram from './Diagram.js';
 
 
 const Nav = styled.div`
-background: #acb3b4;
+background: #cfeef5;
 height: 80px;
 display: flex;
 justify-content: flex-start;
@@ -15,7 +15,7 @@ align-items: center;
 `;
 
 const SidebarNav = styled.nav`
-background: #acb3b4;
+background: #cfeef5;
 width: 250px;
 height: 100vh;
 margin: 5px;

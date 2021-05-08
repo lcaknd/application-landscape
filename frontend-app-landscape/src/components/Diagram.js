@@ -8,13 +8,13 @@ import * as go from 'gojs';
     const $ = go.GraphObject.make;  
     const myDiagram =
         $(go.Diagram, 
-          {
+          { "undoManager.isEnabled": true,
             allowHorizontalScroll: false,
             allowVerticalScroll: false,
             model: $(go.GraphLinksModel,
                   {
                     linkKeyProperty: 'key' 
-                  }) 
+                  })
           });
       function nodeStyle() {
         return [
