@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
+import { MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
+import './Diagram.css'
 
 
 const Nav = styled.div`
@@ -30,7 +32,41 @@ display: flex;
 const Sidemenu =()=> {
     return (
         <>
-        <Nav> 
+        <Nav > 
+          <div class="nbar">
+                        {MenuItem1.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+                        <div class="nbar">
+                        {MenuItem2.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+                        <div class="nbar">
+                        {MenuItem3.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+                    
         </Nav>
         <WholeDiv>
         <SidebarNav>

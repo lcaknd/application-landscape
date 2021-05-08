@@ -7,3 +7,9 @@
   border: solid 1px black;
   background-color: white;
 }
+.nbar {
+  
+    font-family: arial;
+    margin-left: 500px;
+    letter-spacing: 5px;
+}
