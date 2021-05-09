@@ -1,11 +1,17 @@
 import './App.css';
+import Diagram from './components/Diagram';
+import Palette from './components/Palette';
+import Sidemenu from './components/Sidemenu';
+
 
 function App() {
   return (
     <div className="App">
-      <header>
-       Hello initial Test123
-      </header>
+
+
+     <Sidemenu />
+     
+
     </div>
   );
 }
