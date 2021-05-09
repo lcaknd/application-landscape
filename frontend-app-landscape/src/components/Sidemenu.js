@@ -38,7 +38,7 @@ const Sidemenu =()=> {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
-                                    {item.title} 
+                                    {item.icon}{item.title} 
                                     </a>
                                
                             )
@@ -49,7 +49,7 @@ const Sidemenu =()=> {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
-                                    {item.title} 
+                                    {item.icon}{item.title} 
                                     </a>
                                
                             )
@@ -60,7 +60,7 @@ const Sidemenu =()=> {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
-                                    {item.title} 
+                                    {item.icon}{item.title} 
                                     </a>
                                
                             )
