@@ -4,11 +4,14 @@
     width: 2000px;
     height: 100vh;
     margin: 5px;
+    border-radius: 5px;
   }   
   .myPaletteDiv {
       width: 250px;
       height: 100px;
-      background: #bbecf8
+      background: #bbecf8;
+      
+      
   }
 
   

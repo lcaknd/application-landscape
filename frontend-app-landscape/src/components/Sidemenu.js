@@ -14,6 +14,7 @@ height: 80px;
 display: flex;
 justify-content: flex-start;
 align-items: center;
+border-radius: 5px;
 `;
 
 const SidebarNav = styled.nav`
@@ -21,6 +22,7 @@ background: #cfeef5;
 width: 250px;
 height: 100vh;
 margin: 5px;
+border-radius: 5px;
 `;
 const WholeDiv = styled.div`
 width: 100vw;
