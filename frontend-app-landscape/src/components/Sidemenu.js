@@ -6,7 +6,13 @@ import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
 import { MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
 import './Diagram.css'
+import Test from './test'
 
+const Nav2 = styled.div`
+
+display: flex;
+justify-content: flex-end;
+`;
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -26,9 +32,7 @@ const WholeDiv = styled.div`
 width: 100vw;
 height: 100vh;
 display: flex;
-
 `;
-
 const Sidemenu =()=> {
     return (
         <>
@@ -69,14 +73,15 @@ const Sidemenu =()=> {
                     
         </Nav>
         <WholeDiv>
+        
         <SidebarNav>
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
         })} 
         </SidebarNav>
         <Diagram></Diagram>
+        <Test></Test>
         </WholeDiv>
-        
         </>
     );
 };
