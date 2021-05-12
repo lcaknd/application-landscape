@@ -2,9 +2,12 @@ import React from 'react'
 import * as go from 'gojs';
 import {  ReactPalette } from 'gojs-react';
 import "./Diagram.css"
+import paletteAllShapes from './PaletteAllShapes';
+import paletteOvalShapes from './PaletteOvalShapes';
+import paletteQuadrangle from './PaletteQuadrangle';
 
 
-function initPalette(){
+window.initPalette = function(){
 
     function animateFadeDown(e) {
         var diagram = e.diagram;
@@ -34,7 +37,7 @@ function initPalette(){
           { text: "Step",category:"FivePointedStar" },
           { category: "Conditional", text: "???" },
           { category: "Comment", text: "Comment" },
-          { category: "", text: "RoundedRectagle" },
+          { category: "", text: "RoundedRectangle" },
           { category: "Hexagon", text: "Hexagon" },
           { category: "DataStorage", text: "DataStorage" },
           { category: "DiskStorage", text: "DiskStorage" },
@@ -51,28 +54,31 @@ function initPalette(){
     return myPalette;
 }
 
-const Palette =()=>{
+
+
+const Palette =(props)=>{
+
+    const shapeType = (name) => {
+    
+    switch (name) {
+      case 'All Shapes':
+        return paletteAllShapes
+      case 'Oval Shapes':
+        return paletteOvalShapes
+      case 'Quadrangle':
+        return paletteQuadrangle
+      default: 
+        return []
+    }
+
+  };
+
     return(
         <>
         <ReactPalette
-        initPalette={initPalette}
+        initPalette={window.initPalette}
         divClassName='myPaletteDiv'
-        nodeDataArray={[{ key: 0, text: 'Hello1', color: "cyan",category:"FivePointedStar" },
-        { key: 1, text: 'Hello2', color: "powderblue",category:"Database"},
-        { key: 2, text: 'Hello3',color: "lightblue",category:"Comment" },
-        { key: 3, text: 'Hello3',color: "lightblue",category:"RoundedRectagle" },
-        { key: 4, text: 'Hello3',color: "lightblue",category:"Hexagon" },
-        { key: 5, text: 'Hello3',color: "lightblue",category:"DataStorage" },
-        { key: 6, text: 'Hello3',color: "lightblue",category:"DiskStorage" },
-        { key: 7, text: 'Hello3',color: "lightblue",category:"ExternalOrganization" },
-        { key: 8, text: 'Hello3',color: "lightblue",category:"ExternalProcess" },
-        { key: 9, text: 'Hello3',color: "lightblue",category:"MicroformProcessing" },
-        { key: 10, text: 'Hello3',color: "lightblue",category:"Ellipse" },
-        { key: 11, text: 'Hello3',color: "lightblue",category:"Circle" },
-        { key: 12, text: 'Hello3',color: "lightblue",category:"Diamond" },
-        
-
-        ]}
+        nodeDataArray={shapeType(props.title)}
         />
         </>
 

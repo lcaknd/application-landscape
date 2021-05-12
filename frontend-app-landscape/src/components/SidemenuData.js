@@ -15,19 +15,13 @@ export const SidemenuData = [
         iconOpened: <RiIcons.RiArrowUpSFill />
      },
     {
-        title: 'Rectangles',
+        title: 'Quadrangle',
         icon:<BiIcons.BiRectangle />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />
     },
-    {
-        title: 'Square',
-        icon:<BiIcons.BiSquareRounded />,
-        iconClosed: <RiIcons.RiArrowDownSFill />,
-        iconOpened: <RiIcons.RiArrowUpSFill />
-     },
      {
-        title: 'Circle',
+        title: 'Oval Shapes',
         icon:<BsIcons.BsCircle />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />

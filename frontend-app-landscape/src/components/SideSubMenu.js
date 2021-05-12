@@ -45,7 +45,7 @@ text-decoration: none;
                 {subNav ? item.iconOpened:item.iconClosed}
             </div>
         </Sidebar>
-        {subNav ? <Palette /> : null}
+        {subNav ? <Palette title= {item.title} /> : null}
         </>
     );
 };

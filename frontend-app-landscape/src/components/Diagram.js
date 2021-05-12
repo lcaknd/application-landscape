@@ -377,18 +377,26 @@ import * as go from 'gojs';
     
 
         function createShape(name){
-          myDiagram.nodeTemplateMap.add(name,
-          $(go.Node, "Auto", nodeStyle(),
-            $(go.Panel, "Spot",
-              $(go.Shape, name,
-                { desiredSize: new go.Size(30, 70), fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2}),
-              $(go.TextBlock, "Start", textStyle(),
-                new go.Binding("text"))
-            ),
-            makePort("L", go.Spot.Left, go.Spot.Left, true, false),
-            makePort("R", go.Spot.Right, go.Spot.Right, true, false),
-            makePort("B", go.Spot.Bottom, go.Spot.Bottom, true, false)
-          ));
+          myDiagram.nodeTemplateMap.add(name,  
+        $(go.Node, "Table", nodeStyle(),
+          $(go.Panel, "Auto",
+            $(go.Shape, name,
+              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
+              new go.Binding("figure", "figure")),
+            $(go.TextBlock, textStyle(),
+              {
+                margin: 8,
+                maxSize: new go.Size(160, NaN),
+                wrap: go.TextBlock.WrapFit,
+                editable: true
+              },
+              new go.Binding("text").makeTwoWay())
+          ),
+          makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
+          makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+          makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+          makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
+        ));
 
         }
 
