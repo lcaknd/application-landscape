@@ -6,7 +6,79 @@ import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
 import { MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
 import './Diagram.css'
-import Test from './test'
+import {test} from './test.js'
+import reactCSS from 'reactcss'
+import { SketchPicker } from 'react-color'
+
+class SketchExample extends React.Component {
+  state = {
+    displayColorPicker: false,
+    color: {
+      r: '241',
+      g: '112',
+      b: '19',
+      a: '1',
+    },
+  };
+
+  handleClick = () => {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  };
+
+  handleClose = () => {
+    this.setState({ displayColorPicker: false })
+  };
+
+  handleChange = (color) => {
+    this.setState({ color: color.rgb })
+  };
+
+  render() {
+
+    const styles = reactCSS({
+      'default': {
+        color: {
+          width: '36px',
+          height: '14px',
+          borderRadius: '2px',
+          background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+        },
+        swatch: {
+          padding: '5px',
+          background: '#fff',
+          borderRadius: '1px',
+          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+          display: 'inline-block',
+          cursor: 'pointer',
+        },
+        popover: {
+          position: 'absolute',
+          zIndex: '2',
+        },
+        cover: {
+          position: 'fixed',
+          top: '0px',
+          right: '0px',
+          bottom: '0px',
+          left: '0px',
+        },
+      },
+    });
+
+    return (
+      <div>
+        <div style={ styles.swatch } onClick={ this.handleClick }>
+          <div style={ styles.color } />
+        </div>
+        { this.state.displayColorPicker ? <div style={ styles.popover }>
+          <div style={ styles.cover } onClick={ this.handleClose }/>
+          <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+        </div> : null }
+
+      </div>
+    )
+  }
+}
 
 const Nav2 = styled.div`
 
@@ -28,6 +100,14 @@ width: 250px;
 height: 100vh;
 margin: 5px;
 `;
+
+const Sidebar2Nav = styled.nav`
+background: #cfeef5;
+width: 200px;
+height: 100vh;
+margin: 5px;
+`;
+
 const WholeDiv = styled.div`
 width: 100vw;
 height: 100vh;
@@ -73,14 +153,19 @@ const Sidemenu =()=> {
                     
         </Nav>
         <WholeDiv>
-        
         <SidebarNav>
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
         })} 
         </SidebarNav>
+        <SketchExample></SketchExample>
+        
         <Diagram></Diagram>
-        <Test></Test>
+        <Sidebar2Nav>
+        {test.map((item,index)=> {
+            return <SideSubMenu item ={item} key = {index} />
+        })} 
+        </Sidebar2Nav>
         </WholeDiv>
         </>
     );
