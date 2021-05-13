@@ -2,6 +2,17 @@ import React from 'react'
 import * as go from 'gojs';
   import { ReactDiagram} from 'gojs-react';
   import "./Diagram.css"
+  import {
+    Button,
+    Checkbox,
+    Grid,
+    Header,
+    Icon,
+    Image,
+    Menu,
+    Segment,
+    Sidebar,
+  } from 'semantic-ui-react'
 
 
   window.initDiagram =function() {
@@ -9,7 +20,7 @@ import * as go from 'gojs';
     const myDiagram =
         $(go.Diagram, 
           { "undoManager.isEnabled": true,
-            allowHorizontalScroll: false,
+            allowHorizontalScroll: true,
             allowVerticalScroll: false,
             model: $(go.GraphLinksModel,
                   {
