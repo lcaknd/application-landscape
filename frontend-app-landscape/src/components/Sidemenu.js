@@ -1,11 +1,13 @@
-import React from 'react'
-import { FaIcons } from 'react-icons/fa';
+import React, {useState} from 'react'
+import * as FaIcons from 'react-icons/fa'
+import * as AiIcons from 'react-icons/ai'
 import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
 import { MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
 import './Diagram.css'
+
 
 
 const Nav = styled.div`
@@ -15,6 +17,7 @@ display: flex;
 justify-content: flex-start;
 align-items: center;
 border-radius: 5px;
+margin-left: 5px;
 `;
 
 const SidebarNav = styled.nav`
@@ -23,6 +26,14 @@ width: 250px;
 height: 100vh;
 margin: 5px;
 border-radius: 5px;
+display: flex;
+justify-content: center;
+position: fixed;
+top: 80px;
+left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
+transition: 350ms;
+z-index: 10;
+
 `;
 const WholeDiv = styled.div`
 width: 100vw;
@@ -30,12 +41,32 @@ height: 100vh;
 display: flex;
 
 `;
+const NavIcon = styled.div`
+  margin-left: 2rem;
+  font-size: 2rem;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const SidebarWrap = styled.div`
+  width: 100%;
+`;
 
 const Sidemenu =()=> {
+    const [sidebar, setSidebar] = useState(false);
+
+    const showSidebar = () => setSidebar(!sidebar);
+
     return (
         <>
-        <Nav > 
-          <div class="nbar">
+        <Nav >
+        <NavIcon>
+        {sidebar ? <AiIcons.AiOutlineClose onClick={showSidebar} /> :<FaIcons.FaBars onClick={showSidebar}/>}
+         </NavIcon>
+         <div class="nbar">
+          
                         {MenuItem1.map((item) => {
                             return(
                                     
@@ -71,13 +102,16 @@ const Sidemenu =()=> {
                     
         </Nav>
         <WholeDiv>
-        <SidebarNav>
+        <SidebarNav sidebar={sidebar}>
+        <SidebarWrap>
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
-        })} 
+        })}
+        </SidebarWrap>
         </SidebarNav>
         <Diagram></Diagram>
         </WholeDiv>
+        
         
         </>
     );

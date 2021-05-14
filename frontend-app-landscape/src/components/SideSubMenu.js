@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import Palette from './Palette';
+import { Link } from 'react-router-dom';
 
-const Sidebar = styled.div`
+const Sidebar = styled(Link)`
 display: flex;
 color: #000000;
 justify-content: space-between;
