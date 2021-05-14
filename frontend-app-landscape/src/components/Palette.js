@@ -2,9 +2,12 @@ import React from 'react'
 import * as go from 'gojs';
 import {  ReactPalette } from 'gojs-react';
 import "./Diagram.css"
+import paletteAllShapes from './PaletteAllShapes';
+import paletteOvalShapes from './PaletteOvalShapes';
+import paletteQuadrangle from './PaletteQuadrangle';
 
 
-function initPalette(){
+window.initPalette = function(){
 
     function animateFadeDown(e) {
         var diagram = e.diagram;
@@ -30,29 +33,52 @@ function initPalette(){
         allowDelete: false,
         allowZoom: false,  
         model: new go.GraphLinksModel([ 
-          { category: "Start", text: "Start", },
-          { text: "Step" },
+          { category: "MicroformProcessing", text: "Start", },
+          { text: "Step",category:"FivePointedStar" },
           { category: "Conditional", text: "???" },
-          { category: "End", text: "End" },
-          { category: "Comment", text: "Comment" }
+          { category: "Comment", text: "Comment" },
+          { category: "", text: "RoundedRectangle" },
+          { category: "Hexagon", text: "Hexagon" },
+          { category: "DataStorage", text: "DataStorage" },
+          { category: "DiskStorage", text: "DiskStorage" },
+          { category: "ExternalOrganization", text: "ExternalOrganization" },
+          { category: "ExternalProcess", text: "ExternalProcess"},
+          { category: "MicroformProcessing", text: "MicroformProcessing"},
+          { category: "Ellipse", text: "Ellipse"},
+          { category: "Circle", text: "Circle"},
+          { category: "Diamond", text: "Diamond"},
+
+
         ])
       });
     return myPalette;
 }
 
-const Palette =()=>{
+
+
+const Palette =(props)=>{
+
+    const shapeType = (name) => {
+    
+    switch (name) {
+      case 'All Shapes':
+        return paletteAllShapes
+      case 'Oval Shapes':
+        return paletteOvalShapes
+      case 'Quadrangle':
+        return paletteQuadrangle
+      default: 
+        return []
+    }
+
+  };
+
     return(
         <>
         <ReactPalette
-        initPalette={initPalette}
+        initPalette={window.initPalette}
         divClassName='myPaletteDiv'
-        nodeDataArray={[{ key: 0, text: 'Shit1', color: "cyan" },
-        { key: 1, text: 'Shit2', color: "powderblue" },
-        { key: 2, text: 'Shit3',color: "lightblue" },
-        { key: 3, text: 'Shit4', color: "deepskyblue" },
-        { key: 4, text: 'Shit5', color: "aquamarine"},
-        { key: 5, text: 'Shit6', color: "turquoise" }
-        ]}
+        nodeDataArray={shapeType(props.title)}
         />
         </>
 
