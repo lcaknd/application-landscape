@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import Palette from './Palette';
 
+
 const Sidebar = styled.div`
 display: flex;
 color: #000000;

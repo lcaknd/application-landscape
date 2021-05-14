@@ -1,4 +1,5 @@
 import React from 'react'
+
 import * as go from 'gojs';
   import { ReactDiagram} from 'gojs-react';
   import "./Diagram.css"
@@ -14,6 +15,12 @@ import * as go from 'gojs';
     Sidebar,
   } from 'semantic-ui-react'
 
+import go from 'gojs';
+import Inspector from 'gojs/extensions/DataInspector';
+import { ReactDiagram} from 'gojs-react';
+import "./Diagram.css"
+
+
 
   window.initDiagram =function() {
     const $ = go.GraphObject.make;  
@@ -22,16 +29,121 @@ import * as go from 'gojs';
           { "undoManager.isEnabled": true,
             allowHorizontalScroll: true,
             allowVerticalScroll: false,
+            mouseDrop: function(e) { finishDrop(e, null); },
+            layout:  // Diagram has simple horizontal layout
+              $(go.GridLayout,
+                { wrappingWidth: Infinity, alignment: go.GridLayout.Position, cellSize: new go.Size(1, 1) }),
+            "commandHandler.archetypeGroupData": { isGroup: true, text: "Group", horiz: false },
+            
             model: $(go.GraphLinksModel,
                   {
-                    linkKeyProperty: 'key' 
+                    linkKeyProperty: 'key',
+                    linkCategoryProperty:'category' 
                   })
           });
-      function nodeStyle() {
+
+          function makeLayout(horiz) {  // a Binding conversion function
+            if (horiz) {
+              return $(go.GridLayout,
+                {
+                  wrappingWidth: Infinity, alignment: go.GridLayout.Position,
+                  cellSize: new go.Size(1, 1), spacing: new go.Size(4, 4)
+                });
+            } else {
+              return $(go.GridLayout,
+                {
+                  wrappingColumn: 1, alignment: go.GridLayout.Position,
+                  cellSize: new go.Size(1, 1), spacing: new go.Size(4, 4)
+                });
+            }
+          }
+
+          function highlightGroup(e, grp, show) {
+            if (!grp) return;
+            e.handled = true;
+            if (show) {
+              // cannot depend on the grp.diagram.selection in the case of external drag-and-drops;
+              // instead depend on the DraggingTool.draggedParts or .copiedParts
+              var tool = grp.diagram.toolManager.draggingTool;
+              var map = tool.draggedParts || tool.copiedParts;  // this is a Map
+              // now we can check to see if the Group will accept membership of the dragged Parts
+              if (grp.canAddMembers(map.toKeySet())) {
+                grp.isHighlighted = true;
+                return;
+              }
+            }
+            grp.isHighlighted = false;
+          }
+
+          function finishDrop(e, grp) {
+            var ok = (grp !== null
+              ? grp.addMembers(grp.diagram.selection, true)
+              : e.diagram.commandHandler.addTopLevelParts(e.diagram.selection, true));
+            if (!ok) e.diagram.currentTool.doCancel();
+          }
+          function defaultColor(horiz) {  // a Binding conversion function
+            return horiz ? "#FFDD33" : "#33D3E5";
+          }
+    
+          function defaultFont(horiz) {  // a Binding conversion function
+            return horiz ? "bold 18px sans-serif" : "bold 16px sans-serif";
+          }
+
+          myDiagram.groupTemplate =
+          $(go.Group, "Auto",
+            {
+              background: "transparent",
+              ungroupable: true,
+              // highlight when dragging into the Group
+              mouseDragEnter: function(e, grp, prev) { highlightGroup(e, grp, true); },
+              mouseDragLeave: function(e, grp, next) { highlightGroup(e, grp, false); },
+              computesBoundsAfterDrag: true,
+              // when the selection is dropped into a Group, add the selected Parts into that Group;
+              // if it fails, cancel the tool, rolling back any changes
+              mouseDrop: finishDrop,
+              handlesDragDropForMembers: true,  // don't need to define handlers on member Nodes and Links
+              // Groups containing Groups lay out their members horizontally
+              layout: makeLayout(false)
+            },
+            new go.Binding("layout", "horiz", makeLayout),
+            new go.Binding("background", "isHighlighted", function(h) {
+              return h ? "rgba(255,0,0,0.2)" : "transparent";
+            }).ofObject(),
+            $(go.Shape, "Rectangle",
+              { fill: null, stroke: defaultColor(false), strokeWidth: 2 },
+              new go.Binding("stroke", "horiz", defaultColor),
+              new go.Binding("stroke", "color")),
+            $(go.Panel, "Vertical",  // title above Placeholder
+              $(go.Panel, "Horizontal",  // button next to TextBlock
+                { stretch: go.GraphObject.Horizontal, background: defaultColor(false) },
+                new go.Binding("background", "horiz", defaultColor),
+                new go.Binding("background", "color"),
+                $("SubGraphExpanderButton",
+                  { alignment: go.Spot.Right, margin: 5 }),
+                $(go.TextBlock,
+                  {
+                    alignment: go.Spot.Left,
+                    editable: true,
+                    margin: 5,
+                    font: defaultFont(false),
+                    opacity: 0.75,  // allow some color to show through
+                    stroke: "#404040"
+                  },
+                  new go.Binding("font", "horiz", defaultFont),
+                  new go.Binding("text", "text").makeTwoWay())
+              ),  // end Horizontal Panel
+              $(go.Placeholder,
+                { padding: 5, alignment: go.Spot.TopLeft })
+            )  // end Vertical Panel
+          );
+      function nodeStyle(name) {
         return [
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
           {
-            locationSpot: go.Spot.Center
+            locationSpot: go.Spot.Center,
+            resizable:true,
+            resizeObjectName: name,  // resize the Shape, not the Node
+            selectionObjectName: name
           }
         ];
       }
@@ -69,7 +181,7 @@ import * as go from 'gojs';
       }
 
       myDiagram.nodeTemplateMap.add("",  
-        $(go.Node, "Table", nodeStyle(),
+        $(go.Node,{ resizable: true },"Table", nodeStyle(),
           $(go.Panel, "Auto",
             $(go.Shape, "RoundedRectangle",
               { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
@@ -389,10 +501,10 @@ import * as go from 'gojs';
 
         function createShape(name){
           myDiagram.nodeTemplateMap.add(name,  
-        $(go.Node, "Table", nodeStyle(),
-          $(go.Panel, "Auto",
+        $(go.Node, "Auto",nodeStyle(name),
+          $(go.Panel,  "Auto",
             $(go.Shape, name,
-              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
+              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2,portId: "", fromLinkable: true, toLinkable: true},
               new go.Binding("figure", "figure")),
             $(go.TextBlock, textStyle(),
               {
@@ -451,8 +563,6 @@ import * as go from 'gojs';
           
         ));
 
-
-      
       myDiagram.linkTemplate =
         $(go.Link,  
           {
@@ -469,12 +579,13 @@ import * as go from 'gojs';
           },
           new go.Binding("points").makeTwoWay(),
           $(go.Shape, 
-            { isPanelMain: true, strokeWidth: 8, stroke: "transparent", name: "HIGHLIGHT" }),
+            { isPanelMain: true, strokeWidth: 8, stroke: "transparent", name: "HIGHLIGHT",portId: "", fromLinkable: true, toLinkable: true }),
           $(go.Shape,  
-            { isPanelMain: true, stroke: "gray", strokeWidth: 2 },
+            { isPanelMain: true, stroke: "gray", strokeWidth: 2,portId: "", fromLinkable: true, toLinkable: true },
             new go.Binding("stroke", "isSelected", function(sel) { return sel ? "dodgerblue" : "gray"; }).ofObject()),
           $(go.Shape,  
-            { toArrow: "standard", strokeWidth: 0, fill: "gray" }),
+            { toArrow: "Standard", strokeWidth: 0, fill: "gray",portId: "", fromLinkable: true, toLinkable: true }, new go.Binding("toArrow","arrow").makeTwoWay()
+            ),
           $(go.Panel, "Auto",  
             { visible: false, name: "LABEL", segmentIndex: 2, segmentFraction: 0.5 },
             new go.Binding("visible", "visible").makeTwoWay(),
@@ -490,6 +601,24 @@ import * as go from 'gojs';
               new go.Binding("text").makeTwoWay())
           )
         );
+
+
+      var inspector = new Inspector('myInspector', myDiagram,
+      {
+        // uncomment this line to only inspect the named properties below instead of all properties on each object:
+        // includesOwnProperties: false,
+        properties: {
+          // key would be automatically added for nodes, but we want to declare it read-only also:
+          "key": { readOnly: true, show: Inspector.showIfPresent },
+          // color would be automatically added for nodes, but we want to declare it a color also:
+          // Comments and LinkComments are not in any node or link data (yet), so we add them here:
+          "Comments": { show: Inspector.showIfNode  },
+          "LinkComments": { show: Inspector.showIfLink }
+
+        }
+      });
+
+    myDiagram.select(myDiagram.nodes.first())
 
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
@@ -509,26 +638,31 @@ return(
           nodeDataArray = {[
             { key:-1, loc:'175 0', text:'Start',figure:"MicroformProcessing"},
             {key:0, loc:'-5 75', text:'Initial node',figure:""},
-            {key:1, loc:'-0 75', text:'Initial node',figure:"Database"},
-            {key:2, loc:'-3 56', text:'Initial node',figure:"FivePointedStar"},
-            {key:3, loc:'-3 7', text:'Initial node',figure:"Hexagon"},
-            {key:4, loc:'-89 23', text:'Initial node',figure:"DataStorage"},
-            {key:5, loc:'-23 34', text:'Initial node',figure:"DiskStorage"},
-            {key:6, loc:'-2 33', text:'Initial node',figure:"ExternalOrganization"},
-            {key:7, loc:'-33 33', text:'Initial node',figure:"ExternalProcess"},
-            {key:8, loc:'-1 33', text:'Initial node',figure:"MicroformProcessing"},
-            {key:9, loc:'-18 33', text:'Initial node',figure:"Ellipse"},
-            {key:10, loc:'-33 18', text:'Initial node',figure:"Circle"},
-            {key:11, loc:'-89 33', text:'Initial node',figure:"Diamond"},
+            {key:1, isGroup:true, text:"Group 1", horiz:true},
+            {key:2, isGroup:true, text:"Group 2", horiz:true},
+              // {"key":3, "isGroup":true, "text":"Group A", "group":1},
+            // {key:1, loc:'-0 75', text:'Initial node',figure:"Database"},
+            // {key:2, loc:'-3 56', text:'Initial node',figure:"FivePointedStar"},
+            // {key:3, loc:'-3 7', text:'Initial node',figure:"Hexagon"},
+            // {key:4, loc:'-89 23', text:'Initial node',figure:"DataStorage"},
+            // {key:5, loc:'-23 34', text:'Initial node',figure:"DiskStorage"},
+            // {key:6, loc:'-2 33', text:'Initial node',figure:"ExternalOrganization"},
+            // {key:7, loc:'-33 33', text:'Initial node',figure:"ExternalProcess"},
+            // {key:8, loc:'-1 33', text:'Initial node',figure:"MicroformProcessing"},
+            // {key:9, loc:'-18 33', text:'Initial node',figure:"Ellipse"},
+            // {key:10, loc:'-33 18', text:'Initial node',figure:"Circle"},
+            // {key:11, loc:'-89 33', text:'Initial node',figure:"Diamond"},
 
 
 
         ]}
           linkDataArray={[
-            {from:-1, to:0, fromPort:"B", toPort:"T"},
-            {from:0, to:-1, fromPort:"B", toPort:"T"}
+            {from:-1, to:0, fromPort:"B", toPort:"T",category:"",arrow:"OpenTriangle"}
+           
         ]}
     />
+    <div id="myInspector"></div>
+
     </div>
 </>
 );
