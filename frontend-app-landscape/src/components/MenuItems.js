@@ -1,10 +1,12 @@
 import * as AiIcons from 'react-icons/ai'
 import * as  GrIcons  from "react-icons/gr";
+
+
 export const MenuItem1 = [
     {
         title: 'Home',
         icon:<AiIcons.AiFillHome />,
-        url: 'home',
+        url: '/',
         cName: 'nav-links'
     }
 ]
@@ -13,7 +15,7 @@ export const MenuItem2 = [
     {
         title: 'Filter',
         icon:<AiIcons.AiFillFilter />,
-        url: 'settings',
+        url: 'filter',
         cName: 'nav-links'
     }
     
