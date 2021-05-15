@@ -28,7 +28,7 @@ export const SidemenuData = [
      },
      {
         title: 'Groups',
-        icon:<AiIcons.AiOutlineArrowsAlt />,
+        icon:<AiIcons.AiOutlineGroup/>,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />
         }
