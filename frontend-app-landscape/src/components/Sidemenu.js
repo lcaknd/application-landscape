@@ -22,7 +22,7 @@ margin-left: 5px;
 
 const SidebarNav = styled.nav`
 background: #cfeef5;
-width: 250px;
+width: 230px;
 height: 100vh;
 margin: 5px;
 border-radius: 5px;

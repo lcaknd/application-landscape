@@ -14,6 +14,7 @@ font-size: 18px;
 height: 60px;
 text-decoration: none;
 
+
 &:hover {
     background: #737e7f;
     border-left: 4px solid #632ce4;
@@ -27,6 +28,7 @@ text-decoration: none;
 
   const Items = styled.div `
   height: 100px;
+
   background: #FFFFFF
   `;
 
