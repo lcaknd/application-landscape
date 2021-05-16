@@ -15,10 +15,10 @@ import * as go from 'gojs';
     Sidebar,
   } from 'semantic-ui-react'
 
-import go from 'gojs';
+// import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
-import { ReactDiagram} from 'gojs-react';
-import "./Diagram.css"
+// import { ReactDiagram} from 'gojs-react';
+// import "./Diagram.css"
 
 
 
