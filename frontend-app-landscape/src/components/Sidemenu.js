@@ -10,6 +10,7 @@ import './Diagram.css'
 import {test} from './test.js'
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
+import SideSubMenuR from './SideSubMenuR.js';
 
 class SketchExample extends React.Component {
   state = {
@@ -98,29 +99,38 @@ justify-content: flex-start;
 align-items: center;
 border-radius: 5px;
 margin-left: 5px;
+right: 5px;
 `;
 
 const SidebarNav = styled.nav`
 background: #cfeef5;
 width: 230px;
 height: 100vh;
-margin: 5px;
+margin: 5px 0 0 5px;
 border-radius: 5px;
 display: flex; 
 justify-content: center;
 position: fixed;
-top: 80px;
+top: 85px;
 left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
 ${'' /* transition: 350ms; */}
 ${'' /* z-index: 10; */}
-
 `;
 
 const Sidebar2Nav = styled.nav`
 background: #cfeef5;
-width: 200px;
+width: 230px;
 height: 100vh;
-margin: 5px;
+position: fixed;
+// margin: 0 5px 0 1500px ;
+border-radius: 5px;
+display: flex-start; 
+justify-content: center;
+top: 85px;
+right: 5px;
+right: ${({ sidebarR }) => (sidebarR ? '0.5' : '100%')};
+${'' /* transition: 350ms; */}
+${'' /* z-index: 10; */}
 `;
 
 const WholeDiv = styled.div`
@@ -139,8 +149,21 @@ const NavIcon = styled.div`
   align-items: center;
 `;
 
+const NavRIcon = styled.div`
+  margin-left: 12rem;
+  font-size: 2rem;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
 const SidebarWrap = styled.div`
   width: 100%;
+`;
+const SidebarRWrap = styled.div`
+  width: 100%;
+
 `;
 
 
@@ -149,12 +172,18 @@ const Sidemenu =()=> {
 
     const showSidebar = () => setSidebar(!sidebar);
 
+    const [sidebarR, setSidebarR] = useState(false);
+
+    const showSidebarR = () => setSidebarR(!sidebarR);
+
     return (
         <>
+        
         <Nav >
         <NavIcon>
         {sidebar ? <AiIcons.AiOutlineClose onClick={showSidebar} /> :<FaIcons.FaBars onClick={showSidebar}/>}
          </NavIcon>
+         
          <div class="nbar">
           
                         {MenuItem1.map((item) => {
@@ -189,9 +218,12 @@ const Sidemenu =()=> {
                             )
                         })}
                         </div>
-                    
+         <NavRIcon>
+         {sidebarR ? <AiIcons.AiOutlineClose onClick={showSidebarR} /> :<FaIcons.FaCodeBranch onClick={showSidebarR}/>}
+         </NavRIcon>
         </Nav>
         <WholeDiv>
+          <Diagram></Diagram>
         <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
         {SidemenuData.map((item,index)=> {
@@ -199,15 +231,17 @@ const Sidemenu =()=> {
         })}
         </SidebarWrap>
         </SidebarNav>
-        <SketchExample></SketchExample>
         
-        <Diagram></Diagram>
-        <Sidebar2Nav>
-        {test.map((item,index)=> {
-            return <SideSubMenu item ={item} key = {index} />
-        })} 
-        </Sidebar2Nav>
+        
         </WholeDiv>
+        <Sidebar2Nav sidebarR={sidebarR}>
+        <SidebarRWrap>
+        {test.map((item,index)=> {
+            return <SideSubMenuR item ={item} key = {index} />
+        })} 
+        <SketchExample></SketchExample>
+        </SidebarRWrap>
+        </Sidebar2Nav>
         </>
     );
 };

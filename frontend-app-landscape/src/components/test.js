@@ -7,17 +7,16 @@ import * as BsIcons from 'react-icons/bs'
 
 export const test = [
     {
-        title: 'Test1',
-        icon:<FaIcons.FaBorderAll />,
+        title: 'Save',
+        icon:<FaIcons.FaSave />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />
      },
      {
-      title: 'Test2',
-      icon:<FaIcons.FaBorderAll />,
+      title: 'Upload',
+      icon:<FaIcons.FaCloud />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />
    }
-    
 
 ]
