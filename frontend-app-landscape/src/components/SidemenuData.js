@@ -27,8 +27,8 @@ export const SidemenuData = [
         iconOpened: <RiIcons.RiArrowUpSFill />
      },
      {
-        title: 'Arrows',
-        icon:<AiIcons.AiOutlineArrowsAlt />,
+        title: 'Groups',
+        icon:<AiIcons.AiOutlineGroup/>,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />
         }

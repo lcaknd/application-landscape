@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import Palette from './Palette';
 
+
 const Sidebar = styled.div`
 display: flex;
 color: #000000;
@@ -12,6 +13,7 @@ list-style: none;
 font-size: 18px;
 height: 60px;
 text-decoration: none;
+
 
 &:hover {
     background: #737e7f;
@@ -26,6 +28,7 @@ text-decoration: none;
 
   const Items = styled.div `
   height: 100px;
+
   background: #FFFFFF
   `;
 
