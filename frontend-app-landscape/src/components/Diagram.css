@@ -2,12 +2,14 @@
   .myDiagramDiv {   
     background-color: #d9dedf;
     width: 1000px;
-    height: 100vh;
     margin-left: 250px;
     border-radius: 5px;
+    top:95px;
+    height: 100vh;
+    position: fixed;
   }   
   .myPaletteDiv {
-      width: 250px;
+      width: 230px;
       height: 100px;
       background: #bbecf8;
       
@@ -22,7 +24,7 @@
     border: 4px solid #BBB;
     border-radius: 4px;
     background-color: #F5F5F5;
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     z-index: 500;

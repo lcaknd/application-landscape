@@ -5,6 +5,7 @@ import "./Diagram.css"
 import paletteAllShapes from './PaletteAllShapes';
 import paletteOvalShapes from './PaletteOvalShapes';
 import paletteQuadrangle from './PaletteQuadrangle';
+import paletteGroups from './PaletteGroups';
 
 
 window.initPalette = function(){
@@ -30,6 +31,7 @@ window.initPalette = function(){
         "InitialAnimationStarting": animateFadeDown, 
 
         nodeTemplateMap: myDiagram.nodeTemplateMap,
+        groupTemplateMap: myDiagram.groupTemplateMap,
         allowDelete: false,
         allowZoom: false,  
         model: new go.GraphLinksModel([ 
@@ -47,6 +49,8 @@ window.initPalette = function(){
           { category: "Ellipse", text: "Ellipse"},
           { category: "Circle", text: "Circle"},
           { category: "Diamond", text: "Diamond"},
+          { isGroup: true, text: "H Group", horiz: true },
+          { isGroup: true, text: "V Group", horiz: false }
 
 
         ])
@@ -67,6 +71,8 @@ const Palette =(props)=>{
         return paletteOvalShapes
       case 'Quadrangle':
         return paletteQuadrangle
+      case 'Groups':
+        return paletteGroups;
       default: 
         return []
     }
