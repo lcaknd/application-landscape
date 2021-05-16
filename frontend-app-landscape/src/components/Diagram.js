@@ -13,9 +13,9 @@ import "./Diagram.css"
             allowHorizontalScroll: true,
             allowVerticalScroll: false,
             mouseDrop: function(e) { finishDrop(e, null); },
-            layout:  // Diagram has simple horizontal layout
-              $(go.GridLayout,
-                { wrappingWidth: Infinity, alignment: go.GridLayout.Position, cellSize: new go.Size(1, 1) }),
+            // layout:  // Diagram has simple horizontal layout
+            //   $(go.GridLayout,
+            //     { wrappingWidth: Infinity, alignment: go.GridLayout.Position, cellSize: new go.Size(1, 1) }),
             "commandHandler.archetypeGroupData": { isGroup: true, text: "Group", horiz: false },
             
             model: $(go.GraphLinksModel,
@@ -121,11 +121,11 @@ import "./Diagram.css"
           );
       function nodeStyle(name) {
         return [
-          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+          new go.Binding("location", "loc",new go.Binding("fill","fill"), go.Point.parse).makeTwoWay(go.Point.stringify),
           {
             locationSpot: go.Spot.Center,
-            resizable:true,
-            resizeObjectName: name,  // resize the Shape, not the Node
+            // resize the Shape, not the Node
+
             selectionObjectName: name
           }
         ];
@@ -483,12 +483,12 @@ import "./Diagram.css"
     
 
         function createShape(name){
-          myDiagram.nodeTemplateMap.add(name,  
+        myDiagram.nodeTemplateMap.add(name,  
         $(go.Node, "Auto",nodeStyle(name),
           $(go.Panel,  "Auto",
             $(go.Shape, name,
-              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2,portId: "", fromLinkable: true, toLinkable: true},
-              new go.Binding("figure", "figure")),
+              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2},
+              new go.Binding("figure", "figure"), new go.Binding("fill","fill")),
             $(go.TextBlock, textStyle(),
               {
                 margin: 8,
@@ -533,7 +533,10 @@ import "./Diagram.css"
       myDiagram.nodeTemplateMap.add("Comment",
         $(go.Node, "Auto", nodeStyle(),
           $(go.Shape, "File",
-            { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 }),
+            { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
+            new go.Binding("fill", "fill", function(sel) {
+              if (sel) return "cyan"; else return "lightgray";
+            }).ofObject("")),
           $(go.TextBlock, textStyle(),
             {
               margin: 8,
@@ -585,23 +588,22 @@ import "./Diagram.css"
           )
         );
 
+        var inspector = new Inspector('myInspector', myDiagram,
+          {
+            properties: {
+              // key would be automatically added for nodes, but we want to declare it read-only also:
+              "key": { readOnly: true, show: Inspector.showIfPresent },
+              // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
+              "fill": { show: Inspector.showIfPresent, type: 'color' },
+              "stroke": { show: Inspector.showIfPresent, type: 'color' }
+            }
+          });
+      
 
-      var inspector = new Inspector('myInspector', myDiagram,
-      {
-        // uncomment this line to only inspect the named properties below instead of all properties on each object:
-        // includesOwnProperties: false,
-        properties: {
-          // key would be automatically added for nodes, but we want to declare it read-only also:
-          "key": { readOnly: true, show: Inspector.showIfPresent },
-          // color would be automatically added for nodes, but we want to declare it a color also:
-          // Comments and LinkComments are not in any node or link data (yet), so we add them here:
-          "Comments": { show: Inspector.showIfNode  },
-          "LinkComments": { show: Inspector.showIfLink }
-
-        }
-      });
+    
 
     myDiagram.select(myDiagram.nodes.first())
+    console.log(myDiagram.nodes.first)
 
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
@@ -619,7 +621,7 @@ return(
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
           nodeDataArray = {[
-            { key:-1, loc:'175 0', text:'Start',figure:"MicroformProcessing"},
+            { key:-1, loc:'175 0', text:'Start',figure:"MicroformProcessing", fill:"grey"},
             {key:0, loc:'-5 75', text:'Initial node',figure:""},
             {key:1, isGroup:true, text:"Group 1", horiz:true},
             {key:2, isGroup:true, text:"Group 2", horiz:true},

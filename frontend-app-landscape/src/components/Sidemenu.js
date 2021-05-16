@@ -15,8 +15,7 @@ background: #cfeef5;
 height: 80px;
 width:100%;
 display: flex;
-position: fixed;
-justify-content: flex-start;
+position: relative;
 align-items: center;
 border-radius: 5px;
 margin-left: 5px;
@@ -25,16 +24,12 @@ margin-left: 5px;
 const SidebarNav = styled.nav`
 background: #cfeef5;
 width: 230px;
-height: 100vh;
-margin: 5px;
-border-radius: 5px;
+margin-left: 5px;
 display: flex; 
 justify-content: center;
-position: fixed;
-top: 80px;
+position: relative;
+margin-top: 0px;
 left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
-${'' /* transition: 350ms; */}
-${'' /* z-index: 10; */}
 
 `;
 const WholeDiv = styled.div`

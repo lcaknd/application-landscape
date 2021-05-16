@@ -2,11 +2,9 @@
   .myDiagramDiv {   
     background-color: #d9dedf;
     width: 1000px;
-    margin-left: 250px;
     border-radius: 5px;
-    top:95px;
     height: 100vh;
-    position: fixed;
+    position: relative;
   }   
   .myPaletteDiv {
       width: 230px;
@@ -42,7 +40,7 @@
     min-width: 213px;
   }
 
-  #myInfo {
+  .myInfo {
     width: 100%;
     overflow: hidden;
   }
