@@ -1,6 +1,16 @@
 import * as AiIcons from 'react-icons/ai'
 import * as  GrIcons  from "react-icons/gr";
+import * as FcIcons from "react-icons/fc";
 
+
+export const MenuItem_logo = [
+    {
+        title: 'Insert anything',
+        icon:<FcIcons.FcWorkflow />,
+        url: '/',
+        cName: 'nav-link'
+    }
+]
 
 export const MenuItem1 = [
     {

@@ -31,3 +31,18 @@
 
 
 }
+.nbar-logo {
+  font-family: arial;
+  text-decoration: none;
+    margin-left: 32px;
+    letter-spacing: 5px;
+    width: 100%;
+    
+    
+    
+}
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-family: sans-serif;
+}

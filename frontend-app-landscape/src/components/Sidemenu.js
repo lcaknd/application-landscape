@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
-import { MenuItem1, MenuItem2, MenuItem3, MenuItem4 } from "./MenuItems"
+import { MenuItem1, MenuItem2, MenuItem3, MenuItem4, MenuItem_logo } from "./MenuItems"
 import './Diagram.css'
 import {test} from './test.js'
 import reactCSS from 'reactcss'
@@ -183,6 +183,17 @@ const Sidemenu =()=> {
         <NavIcon>
         {sidebar ? <AiIcons.AiOutlineClose onClick={showSidebar} /> :<FaIcons.FaBars onClick={showSidebar}/>}
          </NavIcon>
+         <div>
+        <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}{item.title} 
+                                    </a>
+                               
+                            )
+                        })}</h1>
+                        </div>
          
          <div class="nbar">
           
