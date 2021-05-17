@@ -78,6 +78,7 @@ const navbar =()=> {
                     
         </Nav>
         <h1>This is Settings</h1>
+        <h1>As you can see, it's still just an empty page :D</h1>
         </>
     );
 };

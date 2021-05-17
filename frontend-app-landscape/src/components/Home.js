@@ -78,7 +78,9 @@ const navbar =()=> {
                         </div>
                     
         </Nav>
-        <h1>This is Home</h1>
+        <h1>This is Home. </h1>
+         <h1><a href="landscape">Click here </a>to start or continue working on the landscape.</h1>
+         <h1>Go to <a href="settings">Settings</a> or check out <a href="filter">Filter</a>.</h1>
         </>
     );
 };
