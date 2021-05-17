@@ -1,13 +1,28 @@
 
-  .myDiagramDiv {   
+  /* .myDiagramDiv {   
     background-color: #d9dedf;
-    width: 1000px;
-    margin-left: 250px;
+    width: 100%;
+    margin-left: -30px;
+    margin-right: 15px;
     border-radius: 5px;
     top:95px;
     height: 100vh;
+    position: ;
+  }    */
+  .myDiagramDiv {   
+    background-color: #d9dedf;
+    width: 100%;
+    height: 100vh;
     position: fixed;
-  }   
+    display: flex;
+    margin: 0 5px 0 0px;
+    /* margin-right: 5px; */
+    justify-content: flex-start;
+    border-radius: 5px;
+    top: 85px;
+    left: 5px;
+    right: 5px;
+  } 
   .myPaletteDiv {
       width: 230px;
       height: 100px;
