@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
-import { MenuItem1, MenuItem2, MenuItem3, MenuItem4 } from "./MenuItems"
+import { MenuItem1, MenuItem2, MenuItem3, MenuItem4, MenuItem5  } from "./MenuItems"
 import './Diagram.css'
 
 
@@ -112,6 +112,20 @@ const Sidemenu =()=> {
                             )
                         })}
                         </div>
+
+
+                        <div class="nbar">
+                        {MenuItem5.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}{item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+
                     
         </Nav>
         <WholeDiv>

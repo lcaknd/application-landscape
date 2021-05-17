@@ -1,6 +1,6 @@
 import * as AiIcons from 'react-icons/ai'
 import * as  GrIcons  from "react-icons/gr";
-
+import * as  CgIcons  from "react-icons/cg";
 
 export const MenuItem1 = [
     {
@@ -37,3 +37,10 @@ export const MenuItem4 = [
     }
     
 ]
+export const MenuItem5 = [
+    {
+        title: 'DarkMode',
+        icon:<CgIcons.CgDarkMode />,
+        url: 'DarkMode',
+        cName: 'nav-links'
+    }]

@@ -4,11 +4,23 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from "./components/Home";
 import Settings from "./components/Settings";
 import Filter from "./components/Filter";
-
+import React, { useState } from 'react';
+import { lightTheme, darkTheme } from './components/theme';
+import { GlobalStyles } from './components/global';
 
 
 
 function App() {
+
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
+
   return (
     <Router>
     <div className="App">
@@ -33,8 +45,20 @@ function App() {
          <Settings/>
          </Route>
          
+
+         <Route>
+         <DarkMode/>
+         <ThemeProvider theme={lightTheme}>
+      <>
+        <GlobalStyles />
+        <button>Toggle theme</button>
+        <footer>
+        </footer>
+      </>
+    </ThemeProvider> 
+    </Route>
        </Switch>
-    
+        
        </div>
     </div>
     </Router>

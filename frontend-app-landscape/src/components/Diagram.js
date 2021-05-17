@@ -586,20 +586,20 @@ import "./Diagram.css"
         );
 
 
-      var inspector = new Inspector('myInspector', myDiagram,
-      {
-        // uncomment this line to only inspect the named properties below instead of all properties on each object:
-        // includesOwnProperties: false,
-        properties: {
-          // key would be automatically added for nodes, but we want to declare it read-only also:
-          "key": { readOnly: true, show: Inspector.showIfPresent },
-          // color would be automatically added for nodes, but we want to declare it a color also:
-          // Comments and LinkComments are not in any node or link data (yet), so we add them here:
-          "Comments": { show: Inspector.showIfNode  },
-          "LinkComments": { show: Inspector.showIfLink }
+      // var inspector = new Inspector('myInspector', myDiagram,
+      // {
+      //   // uncomment this line to only inspect the named properties below instead of all properties on each object:
+      //   // includesOwnProperties: false,
+      //   properties: {
+      //     // key would be automatically added for nodes, but we want to declare it read-only also:
+      //     "key": { readOnly: true, show: Inspector.showIfPresent },
+      //     // color would be automatically added for nodes, but we want to declare it a color also:
+      //     // Comments and LinkComments are not in any node or link data (yet), so we add them here:
+      //     "Comments": { show: Inspector.showIfNode  },
+      //     "LinkComments": { show: Inspector.showIfLink }
 
-        }
-      });
+      //   }
+      // });
 
     myDiagram.select(myDiagram.nodes.first())
 
