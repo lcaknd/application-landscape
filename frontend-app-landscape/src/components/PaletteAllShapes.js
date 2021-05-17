@@ -1,6 +1,5 @@
 let paletteAllShapes = [{ key: 0, text: 'Hello1', fill: "#C0D7E9",category:"FivePointedStar" },
         { key: 1, text: 'Hello2',category:"Database",fill: "#C0D7E9"},
-        { key: 2, text: 'Hello3',category:"Comment",fill: "#C0D7E9"},
         { key: 3, text: 'Hello3',category:"RoundedRectangle",fill: "#C0D7E9" },
         { key: 4, text: 'Hello3',category:"Hexagon" ,fill: "#C0D7E9"},
         { key: 5, text: 'Hello3',category:"DataStorage",fill: "#C0D7E9" },

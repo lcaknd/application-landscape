@@ -1,11 +1,25 @@
 
-  .myDiagramDiv {   
+  /* .myDiagramDiv {   
     background-color: #d9dedf;
     width: 1000px;
     border-radius: 5px;
     height: 100vh;
     position: relative;
-  }   
+  }    */
+
+  .myDiagramDiv {   
+    background-color: #d9dedf;
+    width: 900px;
+    height: 100vh;
+    position: relative;
+    /* margin: 0 5px 0 0px; */
+    /* margin-right: 5px; */
+    border-radius: 5px;
+    top: 5px; 
+    left: 5px;
+    right: 5px;
+    /* position: relative; */
+  } 
   .myPaletteDiv {
       width: 230px;
       height: 100px;
@@ -17,7 +31,6 @@
   .myInspector {
     width: 250px;
    height: 100px;
-    display: inline-block;
     vertical-align: top;
     border: 4px solid #BBB;
     border-radius: 4px;

@@ -37,9 +37,7 @@ window.initPalette = function(){
         model: new go.GraphLinksModel([ 
           { category: "MicroformProcessing", text: "Start", },
           { text: "Step",category:"FivePointedStar" },
-          { category: "Conditional", text: "???" },
-          { category: "Comment", text: "Comment" },
-          { category: "", text: "RoundedRectangle" },
+          { category: "RoundedRectangle", text: "RoundedRectangle" },
           { category: "Hexagon", text: "Hexagon" },
           { category: "DataStorage", text: "DataStorage" },
           { category: "DiskStorage", text: "DiskStorage" },

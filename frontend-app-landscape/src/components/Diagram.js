@@ -163,26 +163,26 @@ import "./Diagram.css"
         }
       }
 
-      myDiagram.nodeTemplateMap.add("",  
-        $(go.Node,{ resizable: true },"Table", nodeStyle(),
-          $(go.Panel, "Auto",
-            $(go.Shape, "RoundedRectangle",
-              { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
-              new go.Binding("figure", "figure")),
-            $(go.TextBlock, textStyle(),
-              {
-                margin: 8,
-                maxSize: new go.Size(160, NaN),
-                wrap: go.TextBlock.WrapFit,
-                editable: true
-              },
-              new go.Binding("text").makeTwoWay())
-          ),
-          makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
-          makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
-          makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
-          makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
-        ));
+      // myDiagram.nodeTemplateMap.add("",  
+      //   $(go.Node,{ resizable: true },"Table", nodeStyle(),
+      //     $(go.Panel, "Auto",
+      //       $(go.Shape, "RoundedRectangle",
+      //         { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
+      //         new go.Binding("figure", "figure")),
+      //       $(go.TextBlock, textStyle(),
+      //         {
+      //           margin: 8,
+      //           maxSize: new go.Size(160, NaN),
+      //           wrap: go.TextBlock.WrapFit,
+      //           editable: true
+      //         },
+      //         new go.Binding("text").makeTwoWay())
+      //     ),
+      //     makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
+      //     makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
+      //     makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
+      //     makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
+      //   ));
         
         var _CachedArrays = [];
         function tempArray() {
@@ -506,7 +506,7 @@ import "./Diagram.css"
 
         }
 
-        let arrayOfShapes = ["Database","FivePointedStar","Hexagon","DataStorage","DiskStorage","ExternalOrganization","ExternalProcess","MicroformProcessing","Ellipse","Circle","Diamond"]
+        let arrayOfShapes = ["Database","RoundedRectangle","FivePointedStar","Hexagon","DataStorage","DiskStorage","ExternalOrganization","ExternalProcess","MicroformProcessing","Ellipse","Circle","Diamond"]
 
         var arrayLength = arrayOfShapes.length;
         for (var i = 0; i < arrayLength; i++) {
@@ -530,24 +530,24 @@ import "./Diagram.css"
         return geo;
       });
 
-      myDiagram.nodeTemplateMap.add("Comment",
-        $(go.Node, "Auto", nodeStyle(),
-          $(go.Shape, "File",
-            { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
-            new go.Binding("fill", "fill", function(sel) {
-              if (sel) return "cyan"; else return "lightgray";
-            }).ofObject("")),
-          $(go.TextBlock, textStyle(),
-            {
-              margin: 8,
-              maxSize: new go.Size(200, NaN),
-              wrap: go.TextBlock.WrapFit,
-              textAlign: "center",
-              editable: true
-            },
-            new go.Binding("text").makeTwoWay())
+      // myDiagram.nodeTemplateMap.add("Comment",
+      //   $(go.Node, "Auto", nodeStyle(),
+      //     $(go.Shape, "File",
+      //       { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
+      //       new go.Binding("fill", "fill", function(sel) {
+      //         if (sel) return "cyan"; else return "lightgray";
+      //       }).ofObject("")),
+      //     $(go.TextBlock, textStyle(),
+      //       {
+      //         margin: 8,
+      //         maxSize: new go.Size(200, NaN),
+      //         wrap: go.TextBlock.WrapFit,
+      //         textAlign: "center",
+      //         editable: true
+      //       },
+      //       new go.Binding("text").makeTwoWay())
           
-        ));
+      //   ));
 
       myDiagram.linkTemplate =
         $(go.Link,  
@@ -589,15 +589,19 @@ import "./Diagram.css"
         );
 
         var inspector = new Inspector('myInspector', myDiagram,
-          {
-            properties: {
-              // key would be automatically added for nodes, but we want to declare it read-only also:
-              "key": { readOnly: true, show: Inspector.showIfPresent },
-              // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
-              "fill": { show: Inspector.showIfPresent, type: 'color' },
-              "stroke": { show: Inspector.showIfPresent, type: 'color' }
-            }
-          });
+        {
+          properties: {
+            // key would be automatically added for nodes, but we want to declare it read-only also:
+            "key": { readOnly: true, show: Inspector.showIfPresent },
+            // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
+            "fill": { show: Inspector.showIfPresent, type: 'color' },
+            "stroke": { show: Inspector.showIfPresent, type: 'color' }
+          }
+        });
+
+        
+
+       
       
 
     
@@ -621,8 +625,7 @@ return(
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
           nodeDataArray = {[
-            { key:-1, loc:'175 0', text:'Start',figure:"MicroformProcessing", fill:"grey"},
-            {key:0, loc:'-5 75', text:'Initial node',figure:""},
+     
             {key:1, isGroup:true, text:"Group 1", horiz:true},
             {key:2, isGroup:true, text:"Group 2", horiz:true},
               // {"key":3, "isGroup":true, "text":"Group A", "group":1},
@@ -642,11 +645,10 @@ return(
 
         ]}
           linkDataArray={[
-            {from:-1, to:0, fromPort:"B", toPort:"T",category:"",arrow:"OpenTriangle"}
-           
+
         ]}
     />
-    <div id="myInspector"></div>
+    
 
     </div>
 </>
