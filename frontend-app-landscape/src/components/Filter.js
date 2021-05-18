@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components'
 import { MenuItem1, MenuItem2, MenuItem3, MenuItem4, MenuItem_logo } from "./MenuItems"
+import DarkMode from './DarkMode.js';
+import './DarkMode.css';
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -75,6 +77,7 @@ const navbar =()=> {
                             )
                         })}
                         </div>
+                        <DarkMode/>
                     
         </Nav>
         <h1>This is Filter</h1>

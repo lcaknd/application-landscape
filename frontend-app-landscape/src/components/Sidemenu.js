@@ -11,6 +11,8 @@ import {test} from './test.js'
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
 import SideSubMenuR from './SideSubMenuR.js';
+import DarkMode from './DarkMode.js';
+import './DarkMode.css';
 
 class SketchExample extends React.Component {
   state = {
@@ -137,6 +139,7 @@ const WholeDiv = styled.div`
 width: 100vw;
 height: 100vh;
 display: flex;
+
 `;
 
 
@@ -240,6 +243,7 @@ const Sidemenu =()=> {
                             )
                         })}
                         </div>
+                        <DarkMode/>
                     
          <NavRIcon>
          {sidebarR ? <AiIcons.AiOutlineClose onClick={showSidebarR} /> :<FaIcons.FaCodeBranch onClick={showSidebarR}/>}

@@ -5,6 +5,8 @@ import Home from "./components/Home";
 import Settings from "./components/Settings";
 import Filter from "./components/Filter";
 
+import './components/DarkMode.css';
+
 import Test from './components/test';
 
 

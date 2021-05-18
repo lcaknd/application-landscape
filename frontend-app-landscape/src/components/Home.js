@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components'
 import {MenuItem1, MenuItem2, MenuItem3, MenuItem4,MenuItem_logo } from "./MenuItems"
+import DarkMode from './DarkMode.js';
+import './DarkMode.css';
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -10,6 +12,8 @@ justify-content: flex-start;
 align-items: center;
 border-radius: 5px;
 `;
+
+
 
 const navbar =()=> {
     return (
@@ -76,11 +80,16 @@ const navbar =()=> {
                             )
                         })}
                         </div>
+                        <DarkMode/>
                     
         </Nav>
+        
         <h1>This is Home. </h1>
          <h1><a href="landscape">Click here </a>to start or continue working on the landscape.</h1>
          <h1>Go to <a href="settings">Settings</a> or check out <a href="filter">Filter</a>.</h1>
+         
+         
+         
         </>
     );
 };
