@@ -1,30 +1,16 @@
 
-/* .myDiagramDiv {   
-    background-color: #d9dedf;
-    width: 1000px;
-    border-radius: 5px;
-    height: 100vh;
-    position: relative;
-  }    */
 
   .myDiagramDiv {   
     background-color: #d9dedf;
     width: 900px;
     height: 100vh;
     position: relative;
-    /* margin: 0 5px 0 0px; */
-    /* margin-right: 5px; */
     border-radius: 5px;
-    top: 5px; 
-    left: 5px;
-    right: 5px;
-    /* position: relative; */
   } 
   .myPaletteDiv {
-      width: 230px;
+      width: 280px;
       height: 100px;
       background: #bbecf8;
-      
       
   }
 
@@ -68,6 +54,12 @@ with allowances for the title (top) and the resize handle (bottom)
     left: 0px;
     right: 0px;
     top: 14px;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
   }
 
   

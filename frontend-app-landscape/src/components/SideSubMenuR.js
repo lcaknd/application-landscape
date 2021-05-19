@@ -45,7 +45,6 @@ text-decoration: none;
                 {subNavR ? item.iconOpened:item.iconClosed}
             </div>
         </SidebarR>
-        {subNavR ? <Palette title= {item.title} /> : null}
         </>
     );
 };
