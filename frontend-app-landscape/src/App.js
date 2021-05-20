@@ -9,7 +9,7 @@ import DiagramScreen from './DiagramScreen';
 
 import './components/DarkMode.css';
 
-import Test from './components/test';
+
 
 
 

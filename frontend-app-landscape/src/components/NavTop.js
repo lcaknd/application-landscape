@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
+import { MenuItem_logo, MenuItem1, MenuItem2, MenuItem3, MenuItem4 } from "./MenuItems"
 import './Diagram.css'
+import DarkMode from './DarkMode.js';
+import './DarkMode.css';
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -18,43 +20,74 @@ ${'' /* right: 5px; */}
 
 const NavTop =()=> {
 
-       return (
-    <Nav >
-     <div class="nbar">
-      
-                    {MenuItem1.map((item) => {
-                        return(
-                                
-                                <a className={item.cName} href={item.url}>
-                                {item.icon}{item.title} 
-                                </a>
-                           
-                        )
-                    })}
-                    </div>
-                    <div class="nbar">
-                    {MenuItem2.map((item) => {
-                        return(
-                                
-                                <a className={item.cName} href={item.url}>
-                                {item.icon}{item.title} 
-                                </a>
-                           
-                        )
-                    })}
-                    </div>
-                    <div class="nbar">
-                    {MenuItem3.map((item) => {
-                        return(
-                                
-                                <a className={item.cName} href={item.url}>
-                                {item.icon}{item.title} 
-                                </a>
-                           
-                        )
-                    })}
-                    </div>
-    </Nav>
+    return (
+        <>
+        <Nav > 
+        <div>
+        <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}{item.title} 
+                                    </a>
+                               
+                            )
+                        })}</h1>
+                        </div>
+        
+          <div class="nbar">
+              
+                        {MenuItem1.map((item) => {
+                            
+                            return(
+                                    
+                                    <a  className={item.cName} href={item.url}>
+                                    {item.icon}  {item.title} 
+                                    </a>
+                               
+                            )
+                        
+                        })}
+                        
+                        </div>
+                        
+                        <div class="nbar">
+                        {MenuItem2.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}  {item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+                        <div class="nbar">
+                        {MenuItem3.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}  {item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+                        <div class="nbar">
+                        {MenuItem4.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}  {item.title} 
+                                    </a>
+                               
+                            )
+                        })}
+                        </div>
+                        <DarkMode/>
+                    
+        </Nav>
+        </>
     
     );
 
