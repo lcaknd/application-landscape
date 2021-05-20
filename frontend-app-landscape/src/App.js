@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from "./components/Home";
 import Settings from "./components/Settings";
 import Filter from "./components/Filter";
+import React, {useContext} from 'react'
+import DiagramScreen from './DiagramScreen';
 
 import './components/DarkMode.css';
 
@@ -27,7 +29,7 @@ function App() {
          </Route>
 
          <Route exact path="/landscape">
-         <Sidemenu />
+         <DiagramScreen/>
          </Route>
          
            
