@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import Palette from './Palette';
 
 
 const SidebarR = styled.div`
@@ -29,14 +28,14 @@ text-decoration: none;
   background: #FFFFFF
   `;
 
-  const SideSubMenuR = ({item}) => {
+  const SideSubMenuR = ({item},props) => {
 
     const [subNavR,setSubnavR] =  useState(false)
 
     const showSubnavR = () => setSubnavR(!subNavR)
     return (
         <>
-        <SidebarR onClick = {showSubnavR}>
+        <SidebarR onClick = {props.onClick}>
             <div>
                 {item.icon}
                 <SidebarLabelR>{item.title}</SidebarLabelR>

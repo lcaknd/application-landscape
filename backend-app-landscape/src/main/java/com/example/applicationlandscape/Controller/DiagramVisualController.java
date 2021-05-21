@@ -3,10 +3,7 @@ package com.example.applicationlandscape.Controller;
 import com.example.applicationlandscape.Entity.DiagramVisual;
 import com.example.applicationlandscape.Repository.DiagramVisualRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -19,6 +16,11 @@ public class DiagramVisualController {
     @GetMapping("diagramVisual")
     public Iterable<DiagramVisual> getDiagramVisualData(){
         return this.diagramVisualRepository.findAll();
+    }
+
+    @PostMapping("/diagramVisual")
+    public DiagramVisual createDiagramVisual(@RequestBody DiagramVisual diagramVisual) {
+        return diagramVisualRepository.save(diagramVisual);
     }
 
 }

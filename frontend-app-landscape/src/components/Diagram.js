@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext,useState } from 'react'
 import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
+import { Context, DiagramContext } from '../DiagramScreen';
 
 
   window.initDiagram =function() {
@@ -164,27 +165,6 @@ import "./Diagram.css"
           stroke: "#8696a3"
         }
       }
-
-      // myDiagram.nodeTemplateMap.add("",  
-      //   $(go.Node,{ resizable: true },"Table", nodeStyle(),
-      //     $(go.Panel, "Auto",
-      //       $(go.Shape, "RoundedRectangle",
-      //         { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
-      //         new go.Binding("figure", "figure")),
-      //       $(go.TextBlock, textStyle(),
-      //         {
-      //           margin: 8,
-      //           maxSize: new go.Size(160, NaN),
-      //           wrap: go.TextBlock.WrapFit,
-      //           editable: true
-      //         },
-      //         new go.Binding("text").makeTwoWay())
-      //     ),
-      //     makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
-      //     makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
-      //     makePort("R", go.Spot.Right, go.Spot.RightSide, true, true),
-      //     makePort("B", go.Spot.Bottom, go.Spot.BottomSide, true, false)
-      //   ));
         
         var _CachedArrays = [];
         function tempArray() {
@@ -601,12 +581,6 @@ import "./Diagram.css"
           }
         });
 
-        
-
-       
-      
-
-    
 
     myDiagram.select(myDiagram.nodes.first())
     console.log(myDiagram.nodes.first)
@@ -614,20 +588,28 @@ import "./Diagram.css"
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
 
+      myDiagram.addDiagramListener('ExternalObjectsDropped', function() {
+        console.log(myDiagram.model.toJson());
+      });
+      myDiagram.addDiagramListener('SelectionDeleted', function() {
+        console.log(myDiagram.model.toJson());
+      });
+
       return myDiagram
-
-    };
-
     
-const Diagram =()=>{
+      };  
+    
+const Diagram =(props)=>{
+
 return(
     <>
     <div>
     <ReactDiagram
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
+  
+          
           nodeDataArray = {[
-     
             {key:1, isGroup:true, text:"Group 1", horiz:true},
             {key:2, isGroup:true, text:"Group 2", horiz:true},
               // {"key":3, "isGroup":true, "text":"Group A", "group":1},
@@ -643,8 +625,6 @@ return(
             // {key:10, loc:'-33 18', text:'Initial node',figure:"Circle"},
             // {key:11, loc:'-89 33', text:'Initial node',figure:"Diamond"},
 
-
-
         ]}
           linkDataArray={[
 
@@ -655,6 +635,6 @@ return(
     </div>
 </>
 );
-}
+};
 
 export default Diagram;
