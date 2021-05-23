@@ -18,12 +18,12 @@ public class DiagramCapabilitiesController {
     private DiagramCapabilitiesRepository diagramCapabilitiesRepository;
 
     @GetMapping("businessCapabilities")
-    public Iterable<BusinessCapabilities> getDiagramVisualData(){
+    public Iterable<BusinessCapabilities> getCapabilities(){
         return this.diagramCapabilitiesRepository.findAll();
     }
 
     @PostMapping("/businessCapabilities")
-    public BusinessCapabilities createDiagramVisual(@RequestBody BusinessCapabilities businessCapabilities) {
+    public BusinessCapabilities createDiagramCapabilities(@RequestBody BusinessCapabilities businessCapabilities) {
         return diagramCapabilitiesRepository.save(businessCapabilities);
     }
     @PutMapping("/businessCapabilities/{id}")

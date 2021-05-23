@@ -27,7 +27,7 @@ public class LinkController {
     }
 
     @PutMapping("/link/{id}")
-    public ResponseEntity<Link> updateTheNode(@PathVariable Long id, @RequestBody Link link){
+    public ResponseEntity<Link> updateTheLink(@PathVariable Long id, @RequestBody Link link){
         Link linkNodes = linkRepository.findById(id).orElseThrow(null);
         linkNodes.setToNode(link.getToNode());
         Link updatedLink = linkRepository.save(link);
