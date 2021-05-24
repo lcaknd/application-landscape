@@ -7,8 +7,7 @@ import {SidemenuData} from './SidemenuData.js'
 import Diagram from './Diagram.js';
 import { MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
 import './Diagram.css'
-
-
+import PopupExample from './PopupExample'
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -101,6 +100,7 @@ const Sidemenu =()=> {
         <WholeDiv>
         <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
+        <PopupExample></PopupExample>
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
         })}
@@ -108,8 +108,6 @@ const Sidemenu =()=> {
         </SidebarNav>
         <Diagram></Diagram>
         </WholeDiv>
-        
-        
         </>
     );
 };

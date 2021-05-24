@@ -1,8 +1,20 @@
 import React from 'react'
-import go from 'gojs';
+import * as go from 'gojs';
+  import { ReactDiagram} from 'gojs-react';
+  import "./Diagram.css"
+  import {
+    Button,
+    Checkbox,
+    Grid,
+    Header,
+    Icon,
+    Image,
+    Menu,
+    Segment,
+    Sidebar,
+  } from 'semantic-ui-react'
+
 import Inspector from 'gojs/extensions/DataInspector';
-import { ReactDiagram} from 'gojs-react';
-import "./Diagram.css"
 
 
   window.initDiagram =function() {
