@@ -5,6 +5,10 @@ import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import './Diagram.css'
+import {test} from './test.js'
+import reactCSS from 'reactcss'
+import { SketchPicker } from 'react-color'
+import SideSubMenuR from './SideSubMenuR.js';
 
 const SidebarNav = styled.nav`
 background: #cfeef5;
@@ -16,7 +20,21 @@ margin-top: 0px;
 float: left;
 left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
 
-`;
+// const Sidebar2Nav = styled.nav`
+// background: #cfeef5;
+// width: 230px;
+// height: 100vh;
+// position: fixed;
+// // margin: 0 5px 0 1500px ;
+// border-radius: 5px;
+// display: flex-start; 
+// justify-content: center;
+// top: 85px;
+// right: 5px;
+// right: ${({ sidebarR }) => (sidebarR ? '0.5' : '100%')};
+// ${'' /* transition: 350ms; */}
+// ${'' /* z-index: 10; */}
+// `;
 
 const WholeDiv = styled.div`
 float: right;
@@ -35,6 +53,11 @@ const NavIcon = styled.div`
 const SidebarWrap = styled.div`
   width: 100%;
 `;
+const SidebarRWrap = styled.div`
+  width: 100%;
+
+`;
+
 
 const Box = styled.div`
 background:#cfeef5;
@@ -47,6 +70,10 @@ const Sidemenu =()=> {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+    const [sidebarR, setSidebarR] = useState(false);
+
+    const showSidebarR = () => setSidebarR(!sidebarR);
 
     return (
         <>
