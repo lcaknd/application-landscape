@@ -17,6 +17,12 @@ export const test = [
       icon:<FaIcons.FaCloud />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />
+   },
+   {
+      title: 'Inspector',
+      icon:<FaIcons.FaBlog />,
+      iconClosed: <RiIcons.RiArrowDownSFill />,
+      iconOpened: <RiIcons.RiArrowUpSFill />
    }
 
 ]
