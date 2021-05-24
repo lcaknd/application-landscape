@@ -5,6 +5,18 @@ import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import './Diagram.css'
+import PopupExample from './PopupExample'
+
+const Nav = styled.div`
+background: #cfeef5;
+height: 80px;
+width:100%;
+display: flex;
+position: relative;
+align-items: center;
+border-radius: 5px;
+margin-left: 5px;
+`;
 
 const SidebarNav = styled.nav`
 background: #cfeef5;
@@ -58,14 +70,13 @@ const Sidemenu =()=> {
      </Box>
         <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
+        <PopupExample></PopupExample>
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
         })}
         </SidebarWrap>
         </SidebarNav>
         </WholeDiv>
- 
-   
         </>
     );
 };

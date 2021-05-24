@@ -1,9 +1,22 @@
+
 import React, { useContext,useState } from 'react'
 import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
 import { Context, DiagramContext } from '../DiagramScreen';
+  import {
+    Button,
+    Checkbox,
+    Grid,
+    Header,
+    Icon,
+    Image,
+    Menu,
+    Segment,
+    Sidebar,
+  } from 'semantic-ui-react'
+
 
 
   window.initDiagram =function() {
