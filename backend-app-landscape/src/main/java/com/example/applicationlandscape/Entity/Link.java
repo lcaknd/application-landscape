@@ -11,6 +11,10 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public Link(){
+
+    };
+
     private String fromNode;
 
     public String getFromNode() {
