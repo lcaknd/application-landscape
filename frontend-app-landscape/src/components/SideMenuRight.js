@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import styled from 'styled-components'
 import './Diagram.css'
 import SideSubMenuR from './SideSubMenuR.js';
 import { test } from './test'
+import { Context } from '../DiagramScreen'
 
 
 
@@ -40,7 +41,7 @@ background:#cfeef5;
 width:265px;
 `;
 
-const SideMenuRight =()=> {
+const SideMenuRight =(props)=> {
 
   const [sidebarR, setSidebarR] = useState(false);
 
