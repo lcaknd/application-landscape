@@ -13,7 +13,7 @@ import { SketchPicker } from 'react-color'
 import SideSubMenuR from './SideSubMenuR.js';
 import DarkMode from './DarkMode.js';
 import './DarkMode.css';
-import PopupExample from './PopupExample'
+
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -101,7 +101,7 @@ const Sidemenu =()=> {
      </Box>
         <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
-        <PopupExample></PopupExample>
+        
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
         })}
