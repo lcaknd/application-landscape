@@ -1,25 +1,4 @@
 
-body.dark {
-  --background-color: var(--blue);
-  --text-color: var(--white);
-  
-  
-}
-
-body.light {
-  --background-color: var(--white);
-  --text-color: var(--blue);
-  --font-weight: 400;
-  
-}
-
-
-
-.App {
-  text-align: center;
-  /* background-color: black; */
-}
-
 
 .diagram-component {
   width: 400px;
@@ -65,3 +44,74 @@ body.light {
   color: black;
   font-family: sans-serif;
 }
+
+
+/* :root {
+  --blue: rgb(26, 57, 87);
+  --white: rgb(236, 236, 236);
+}  */
+
+
+
+
+.App {
+  /* background: var(--background-color);
+  color: var(--text-color);
+  font-weight: var(--font-weight); */
+  
+  height: 2000px;
+  text-align: center;
+} 
+
+/* body.dark {
+--background-color: var(--blue);
+--text-color: var(--white);
+
+
+
+
+} */
+body.dark{
+  background-color: rgb(26, 57, 87);
+  color: rgb(236, 236, 236);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+body.light {
+background-color: rgb(236, 236, 236);
+color: rgb(26, 57, 87);
+transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+font-weight: 400;
+
+
+}
+
+.darkModeIcon {
+  
+  font-size: 20px;
+
+}
+
+.sun{
+color: yellow;
+}
+
+
+.moon {
+  color: white;
+}
+
+
+
+.nav{
+ background: #cfeef5;
+height: 80px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+border-radius: 5px;
+}
+
+
+
+
