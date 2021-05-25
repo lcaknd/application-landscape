@@ -4,6 +4,7 @@ import { MenuItem_logo, MenuItem1, MenuItem2, MenuItem3, MenuItem4 } from "./Men
 import './Diagram.css'
 import DarkMode from './DarkMode.js';
 import './DarkMode.css';
+import * as FiIcons  from "react-icons/fi";
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -83,6 +84,14 @@ const NavTop =()=> {
                                
                             )
                         })}
+                        </div>
+                        <div class="darkModeIcon">
+                        <div class="sun">
+                        <FiIcons.FiSun />
+                        </div>
+                        <div class="moon">
+                        <FiIcons.FiMoon />
+                        </div>
                         </div>
                         <DarkMode/>
                     
