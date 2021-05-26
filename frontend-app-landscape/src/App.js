@@ -1,10 +1,9 @@
 import './App.css';
-import Sidemenu from './components/Sidemenu';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from "./components/Home";
 import Settings from "./components/Settings";
 import Filter from "./components/Filter";
-import React, {useContext} from 'react'
+import React from 'react'
 import DiagramScreen from './DiagramScreen';
 
 import './components/DarkMode.css';
