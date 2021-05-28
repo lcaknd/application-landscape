@@ -1,6 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
-import { MenuItem1, MenuItem2, MenuItem3, MenuItem4 } from "./MenuItems"
+import { MenuItem1, MenuItem2, MenuItem3, MenuItem4, MenuItem_logo } from "./MenuItems"
+import DarkMode from './DarkMode.js';
+import './DarkMode.css';
+import * as FiIcons  from "react-icons/fi";
 
 const Nav = styled.div`
 background: #cfeef5;
@@ -15,7 +18,17 @@ const navbar =()=> {
     return (
         <>
         <Nav > 
-        
+        <div>
+        <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
+                            return(
+                                    
+                                    <a className={item.cName} href={item.url}>
+                                    {item.icon}{item.title} 
+                                    </a>
+                               
+                            )
+                        })}</h1>
+                        </div>
           <div class="nbar">
               
                         {MenuItem1.map((item) => {
@@ -66,8 +79,19 @@ const navbar =()=> {
                         })}
                         </div>
                        
+                        <div class="darkModeIcon">
+                        <div class="sun">
+                        <FiIcons.FiSun />
+                        </div>
+                        <div class="moon">
+                        <FiIcons.FiMoon />
+                        </div>
+                        </div>
+                        <DarkMode/>
+                    
         </Nav>
         <h1>This is Filter</h1>
+        <h1>Even I don't know what's my purpose</h1>
         </>
     );
 };

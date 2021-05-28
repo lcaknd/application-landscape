@@ -15,6 +15,10 @@ public class DiagramVisual {
         private String color;
         private String location;
 
+    public DiagramVisual(){
+
+    };
+
 
     public DiagramVisual(String color, String location) {
         this.color = color;

@@ -9,6 +9,11 @@ import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/theme';
 import { GlobalStyles } from './components/global';
+import React from 'react'
+import DiagramScreen from './DiagramScreen';
+
+import './components/DarkMode.css';
+
 
 import DiagramScreen from './DiagramScreen';
 
@@ -18,11 +23,33 @@ function App() {
 
 
   return (
-     
+    <Router>
     <div className="App">
-     <DiagramScreen />
+     
+     <div className="content">
+       <Switch>
+       <Route exact path="/">
+           <Home/>
+           </Route>
+
+           <Route exact path="/filter">
+         <Filter/>
+         </Route>
+
+         <Route exact path="/landscape">
+         <DiagramScreen/>
+         </Route>
+         
+           
+         <Route exact path="/settings">
+         <Settings/>
+         </Route>
+         
+       </Switch>
+    
+       </div>
     </div>
-  
+    </Router>
   );
 }
 
