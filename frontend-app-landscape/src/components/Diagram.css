@@ -1,25 +1,22 @@
 
+
   .myDiagramDiv {   
     background-color: #d9dedf;
-    width: 1000px;
-    margin-left: 250px;
-    border-radius: 5px;
-    top:95px;
+    width: 900px;
     height: 100vh;
-    position: fixed;
-  }   
+    position: relative;
+    border-radius: 5px;
+  } 
   .myPaletteDiv {
-      width: 230px;
+      width: 280px;
       height: 100px;
       background: #bbecf8;
-      
       
   }
 
   .myInspector {
     width: 250px;
    height: 100px;
-    display: inline-block;
     vertical-align: top;
     border: 4px solid #BBB;
     border-radius: 4px;
@@ -42,7 +39,7 @@
     min-width: 213px;
   }
 
-  #myInfo {
+  .myInfo {
     width: 100%;
     overflow: hidden;
   }
@@ -57,6 +54,12 @@ with allowances for the title (top) and the resize handle (bottom)
     left: 0px;
     right: 0px;
     top: 14px;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
   }
 
   
