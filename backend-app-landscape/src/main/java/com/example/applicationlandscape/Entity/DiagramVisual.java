@@ -14,6 +14,7 @@ public class DiagramVisual {
 
         private String color;
         private String location;
+        
 
     public DiagramVisual(){
 

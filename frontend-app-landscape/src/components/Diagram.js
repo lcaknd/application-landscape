@@ -16,6 +16,7 @@ import { Context, DiagramContext } from '../DiagramScreen';
     Segment,
     Sidebar,
   } from 'semantic-ui-react'
+import DiagramVisualService from './ApiService/DiagramVisualService';
 
 
 
@@ -92,7 +93,7 @@ import { Context, DiagramContext } from '../DiagramScreen';
           $(go.Group, "Auto",
             {
               background: "transparent",
-              ungroupable: true,
+              ungroupable: false,
               // highlight when dragging into the Group
               mouseDragEnter: function(e, grp, prev) { highlightGroup(e, grp, true); },
               mouseDragLeave: function(e, grp, next) { highlightGroup(e, grp, false); },
@@ -600,11 +601,26 @@ import { Context, DiagramContext } from '../DiagramScreen';
 
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
-
+      var array = []
       myDiagram.addDiagramListener('ExternalObjectsDropped', function() {
+        
+        array = JSON.parse(myDiagram.model.toJson())
         console.log(myDiagram.model.toJson());
+        
+        let color = array.nodeDataArray.fill
+        let loc = array.nodeDataArray.loc
+        
+       
+        let diagram = { color, loc}
+        console.log(diagram)
+        DiagramVisualService.createDiagramVisual(diagram)
+        console.log(array.nodeDataArray);
       });
       myDiagram.addDiagramListener('SelectionDeleted', function() {
+        console.log(myDiagram.model.toJson());
+      });
+      myDiagram.addDiagramListener('SelectionMoved', function() {
+       
         console.log(myDiagram.model.toJson());
       });
 

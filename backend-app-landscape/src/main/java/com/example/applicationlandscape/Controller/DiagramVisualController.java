@@ -20,7 +20,7 @@ public class DiagramVisualController {
         return this.diagramVisualRepository.findAll();
     }
 
-    @PostMapping("/diagramVisual")
+    @PostMapping("diagramVisual")
     public DiagramVisual createDiagramVisual(@RequestBody DiagramVisual diagramVisual) {
         return diagramVisualRepository.save(diagramVisual);
     }
