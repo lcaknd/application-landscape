@@ -3,7 +3,29 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './Try.css'
 
-export default () => (
+export default class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      frontend: true,
+      backend: false,
+      user: 55,
+      date: "2021-01-01"
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value    });
+  }
+ render(){
+  var person = {Frontend: this.state.frontend, Backend: this.state.backend,
+  User: this.state.user, Date: this.state.date}
+  console.log(person);
+  return(
     <Popup
       trigger={<button className="popup-content"> Open Modal </button>}
       modal
@@ -20,7 +42,9 @@ export default () => (
             <label>
               Frontend:
               <input
-                name="Frontend" type="checkbox"
+                name="frontend" type="checkbox"
+                checked={this.state.frontend}
+                onChange={this.handleInputChange}
               />
             </label>
           </form>
@@ -28,7 +52,9 @@ export default () => (
           <label>
               Backend:
               <input
-                name="Backend"            type="checkbox"
+                name="backend"            type="checkbox"
+                checked={this.state.backend}
+                onChange={this.handleInputChange}
             />
             </label>
           </form>
@@ -36,8 +62,21 @@ export default () => (
           <label>
               Number of users: 
               <input style={{width: '75px'}}
-                name="Frontend"            type="number"
+                name="user"            type="number"
+                value={this.state.user}
+                onChange={this.handleInputChange}
             />
+            </label>
+          </form>
+          <form>
+            <label>
+              Date of creation:
+              <input
+              name="date" type="Date"
+              value={this.state.date}
+              onChange={this.handleInputChange}
+              />
+              
             </label>
           </form>
   </div>
@@ -55,6 +94,9 @@ export default () => (
         </div>
       )}
     </Popup>
-  );
+  )
+ }
+}
+  
 
   
