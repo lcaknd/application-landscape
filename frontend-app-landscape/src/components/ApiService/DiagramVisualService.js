@@ -9,7 +9,7 @@ class DiagramVisualService {
       }
     
       createDiagramVisual(diagram) {
-        return axios.post(DIAGRAM_REST_API_URL, diagram);
+        return axios.post(DIAGRAM_REST_API_URL, + 'diagramVisual'+ diagram);
       }
 
 }
