@@ -7,6 +7,18 @@ import { DataContext, SaveDiagram } from '../DiagramScreen';
 import BusinessCapabilityService from './ApiService/BusinessCapabilityService';
 import DiagramVisualService from './ApiService/DiagramVisualService';
 import DiagramService from './ApiService/DiagramService';
+import { Context, DiagramContext } from '../DiagramScreen';
+  import {
+    Button,
+    Checkbox,
+    Grid,
+    Header,
+    Icon,
+    Image,
+    Menu,
+    Segment,
+    Sidebar,
+  } from 'semantic-ui-react'
     
 const Diagram = React.memo((props)=>{
 
@@ -33,6 +45,7 @@ const Diagram = React.memo((props)=>{
   const [links, setLinks]= useState([])
   const linksRef = useRef();
   linksRef.current = links;
+
 
 
 
