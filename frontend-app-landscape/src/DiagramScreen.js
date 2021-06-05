@@ -3,47 +3,71 @@ import NavTop from "./components/NavTop";
 import Sidemenu from "./components/Sidemenu";
 import './components/Diagram.css'
 import SideMenuRight from "./components/SideMenuRight";
-import React,{useState} from "react"
+import React,{createContext,useState,useEffect} from "react"
+
+export const DataContext = createContext({
+    nameOfDiagram: 'null',
+    // dataBusinessCapabilities: null,
+    // links: null,
+    setNameOfDiagram:() => {},
+    // setDataBusinessCapabilities:()=>{},
+    // setLinks:()=>{}
+});
+
+export const SaveDiagram = createContext({
+    saved: false,
+    setSaved: () =>{}
+})
+
+const DiagramScreen= React.memo(()=> {
+
+    const [nameOfDiagram,setNameOfDiagram] = useState('null')
+    const [saved,setSaved] = useState(false)
+
+    const updateName = (property, value) =>
+    setNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    const updateSaved = (property, value) =>
+    setSaved(prevInfo => ({ ...prevInfo, [property]: value }));
 
 
+    useEffect(()=>{
+        console.log(nameOfDiagram)
+        console.log(saved)
+    });
 
-const DiagramScreen=()=> {
-
-    const aCallback = () => {
-        
-        setName(myDiagram.model.toJson());
-        myDiagram.isModified = false;
-        console.log(name)
-        
-      };
     
-      const [name, setName] = useState(null);
-      const [myDiagram,setMyDiagram] = useState(null);
 
-      function setDataInDiagram(data){
-          setMyDiagram(data)
-      }
-    
+//     function updateDataBusinessCapabilities(data){
+//         setDataBusinessCapabilities(data)
+//     }
+//     function updateLinks(data){
+//         setLinks(data)
+//     }
+//    ;
 
-    
     return (
-        
-       
+         
+        <SaveDiagram.Provider value = {{saved, updateSaved}}>
+        <DataContext.Provider value= {{nameOfDiagram,updateName}}>
         <div className="App">
         <div>
             <NavTop />
         </div>
         <div className="container">
         
-       <Sidemenu />
-       <Diagram myDiagram = {myDiagram} />
+       <Sidemenu  />
+       <Diagram nameOfDiagram={nameOfDiagram}/>
        <SideMenuRight />
        </div>
        </div>
+       </DataContext.Provider>
+       </SaveDiagram.Provider>
+       
       
     
   
     );
-  }
+  });
 
   export default DiagramScreen;

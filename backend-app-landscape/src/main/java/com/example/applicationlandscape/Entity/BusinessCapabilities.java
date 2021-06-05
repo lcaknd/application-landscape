@@ -5,9 +5,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "diagram_business_capabilities")
 public class BusinessCapabilities {
+
+    public BusinessCapabilities(){
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
 
     public boolean isSelfDeveloped() {
         return selfDeveloped;

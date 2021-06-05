@@ -1,9 +1,41 @@
-import React, { useContext,useState } from 'react'
+import React, { useContext,useState,useEffect,useRef } from 'react'
 import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
-import { Context, DiagramContext } from '../DiagramScreen';
+import { DataContext, SaveDiagram } from '../DiagramScreen';
+import BusinessCapabilityService from './ApiService/BusinessCapabilityService';
+import DiagramVisualService from './ApiService/DiagramVisualService';
+import DiagramService from './ApiService/DiagramService';
+    
+const Diagram = React.memo((props)=>{
+
+  const {nameOfDiagram} = useContext(
+    DataContext
+  );
+
+  const {saved} = useContext(SaveDiagram)
+
+  const [save, setSaved] = useState(false);
+  const saveRef = useRef();
+  saveRef.current = save;
+
+
+
+  const [diagramName, setDiagramName] = useState("hej");
+  const stateRef = useRef();
+  stateRef.current = diagramName;
+
+  const [diagram, setDiagram] = useState([]);
+  const diagramRef = useRef();
+  diagramRef.current = diagram;
+
+  const [links, setLinks]= useState([])
+  const linksRef = useRef();
+  linksRef.current = links;
+
+
+
 
 
   window.initDiagram =function() {
@@ -21,9 +53,12 @@ import { Context, DiagramContext } from '../DiagramScreen';
             
             model: $(go.GraphLinksModel,
                   {
-                    linkKeyProperty: 'key',
-                    linkCategoryProperty:'category' 
+                    linkKeyProperty: 'keyOfLink',
+                    linkCategoryProperty:'category'
+                    
                   }),
+
+
             layout: $(go.TreeLayout, {isOngoing: false })
 
           });
@@ -124,7 +159,8 @@ import { Context, DiagramContext } from '../DiagramScreen';
           );
       function nodeStyle(name) {
         return [
-          new go.Binding("location", "loc",new go.Binding("fill","fill"), go.Point.parse).makeTwoWay(go.Point.stringify),
+          new go.Binding("location", "loc",new go.Binding("fill","fill")
+          , go.Point.parse).makeTwoWay(go.Point.stringify),
           {
             locationSpot: go.Spot.Center,
             // resize the Shape, not the Node
@@ -478,7 +514,8 @@ import { Context, DiagramContext } from '../DiagramScreen';
                 wrap: go.TextBlock.WrapFit,
                 editable: true
               },
-              new go.Binding("text").makeTwoWay())
+              new go.Binding("text").makeTwoWay(),
+              )
           ),
           makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
           makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
@@ -511,25 +548,6 @@ import { Context, DiagramContext } from '../DiagramScreen';
         geo.spot2 = go.Spot.BottomRight;
         return geo;
       });
-
-      // myDiagram.nodeTemplateMap.add("Comment",
-      //   $(go.Node, "Auto", nodeStyle(),
-      //     $(go.Shape, "File",
-      //       { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
-      //       new go.Binding("fill", "fill", function(sel) {
-      //         if (sel) return "cyan"; else return "lightgray";
-      //       }).ofObject("")),
-      //     $(go.TextBlock, textStyle(),
-      //       {
-      //         margin: 8,
-      //         maxSize: new go.Size(200, NaN),
-      //         wrap: go.TextBlock.WrapFit,
-      //         textAlign: "center",
-      //         editable: true
-      //       },
-      //       new go.Binding("text").makeTwoWay())
-          
-      //   ));
 
       myDiagram.linkTemplate =
         $(go.Link,  
@@ -569,12 +587,13 @@ import { Context, DiagramContext } from '../DiagramScreen';
               new go.Binding("text").makeTwoWay())
           )
         );
+       
 
         var inspector = new Inspector('myInspector', myDiagram,
         {
           properties: {
             // key would be automatically added for nodes, but we want to declare it read-only also:
-            "key": { readOnly: true, show: Inspector.showIfPresent },
+            // "key": { readOnly: true, show: Inspector.showIfPresent },
             // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
             "fill": { show: Inspector.showIfPresent, type: 'color' },
             "stroke": { show: Inspector.showIfPresent, type: 'color' }
@@ -588,53 +607,124 @@ import { Context, DiagramContext } from '../DiagramScreen';
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
 
-      myDiagram.addDiagramListener('ExternalObjectsDropped', function() {
-        console.log(myDiagram.model.toJson());
+      var array = []
+
+      function arrayToList(array) {
+        let list = null;
+        for (let i = array.length - 1; i >= 0; i--) {
+            list = { value: array[i], rest: list };
+        }
+        return list;
+    }
+
+
+      myDiagram.addDiagramListener('Modified', function() {
+      
+        array = JSON.parse(myDiagram.model.toJson())
+        // const last = array.nodeDataArray
+        // const lastNode = last[last.length-1]
+        // //lastNode["name"] = stateRef.current.nameOfDiagram;
+
+        // // DiagramVisualService.createDiagramVisual(lastNode)
+
+        // let listOfNodes = arrayToList(array.nodeDataArray)
+        // let listOfLinks = arrayToList(array.linkDataArray)
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+        let diagram = {
+          name: stateRef.current.nameOfDiagram,
+          links: null,
+          diagramVisuals: array.nodeDataArray,
+          businessCapabilities: null
+        }
+
+        // DiagramService.createDiagram(diagram
+        // //updateDataVisual(array.nodeDataArray)
+        // //updateLinks(array.linkDataArray) 
+      
+        
+        // BusinessCapabilityService.getBusinessCapabilities().then(res=>{
+        // })
+      });
+      myDiagram.addDiagramListener('ExternalObjectsDropped',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+      });
+      myDiagram.addDiagramListener('LinkDrawn',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+      });
+      myDiagram.addDiagramListener('LinkRelinked',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+      });
+      myDiagram.addDiagramListener('TextEdited',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
       });
       myDiagram.addDiagramListener('SelectionDeleted', function() {
-        console.log(myDiagram.model.toJson());
+
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+      
+
+        
+      });
+
+      myDiagram.addDiagramListener('ChangedSelection', function() {
+
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+      
+
+        
       });
 
       return myDiagram
     
-      };  
-    
-const Diagram =(props)=>{
+      };
 
-return(
+
+      useEffect(()=>{
+        setDiagramName(nameOfDiagram)
+        console.log(saved.saved)
+        setSaved(saved.saved)
+        if(saveRef.current){
+          console.log("true")
+          setSaved(false)
+        }
+        
+    },[nameOfDiagram,saved]);
+
+
+  
+return (
+
+  
     <>
     <div>
     <ReactDiagram
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
-  
-          
-          nodeDataArray = {[
-            {key:1, isGroup:true, text:"Group 1", horiz:true},
-            {key:2, isGroup:true, text:"Group 2", horiz:true},
-              // {"key":3, "isGroup":true, "text":"Group A", "group":1},
-            // {key:1, loc:'-0 75', text:'Initial node',figure:"Database"},
-            // {key:2, loc:'-3 56', text:'Initial node',figure:"FivePointedStar"},
-            // {key:3, loc:'-3 7', text:'Initial node',figure:"Hexagon"},
-            // {key:4, loc:'-89 23', text:'Initial node',figure:"DataStorage"},
-            // {key:5, loc:'-23 34', text:'Initial node',figure:"DiskStorage"},
-            // {key:6, loc:'-2 33', text:'Initial node',figure:"ExternalOrganization"},
-            // {key:7, loc:'-33 33', text:'Initial node',figure:"ExternalProcess"},
-            // {key:8, loc:'-1 33', text:'Initial node',figure:"MicroformProcessing"},
-            // {key:9, loc:'-18 33', text:'Initial node',figure:"Ellipse"},
-            // {key:10, loc:'-33 18', text:'Initial node',figure:"Circle"},
-            // {key:11, loc:'-89 33', text:'Initial node',figure:"Diamond"},
-
-        ]}
-          linkDataArray={[
-
-        ]}
+          nodeDataArray = {diagramRef.current.diagram}
+          linkDataArray={linksRef.current.links}
     />
     
 
     </div>
 </>
 );
-};
+});
 
-export default Diagram;
+export default React.memo(Diagram);

@@ -5,43 +5,101 @@ package com.example.applicationlandscape.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "diagram_visual")
+@Table(name = "diagramVisual")
 public class DiagramVisual {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
+    public DiagramVisual(){
 
-        private String color;
-        private String location;
-
-
-    public DiagramVisual(String color, String location) {
-        this.color = color;
-        this.location = location;
     }
 
-    public long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getColor() {
-        return color;
+    @Id
+    @Column(name="name")
+    private String name;
+
+
+    public DiagramVisual(String name,int key, String fill, String loc, String text, boolean isGroup, boolean horizontal, String category) {
+        this.key= key;
+        this.fill = fill;
+        this.loc = loc;
+        this.text = text;
+        this.isGroup = isGroup;
+        this.horizontal = horizontal;
+        this.category = category;
+        this.name = name;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+        @Column(name="key_nr")
+        private int key;
+        private String fill;
+        private String loc;
+        private String text;
+        private boolean isGroup;
+        private boolean horizontal;
+        private  String category;
+
+
+    public int getKey() {
+        return key;
     }
 
-    public String getLocation() {
-        return location;
+    public void setKey(int keyLOL) {
+        this.key = keyLOL;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public String getFill() {
+        return fill;
     }
+
+    public void setFill(String fill) {
+        this.fill = fill;
+    }
+
+    public String getLoc() {
+        return loc;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public boolean isGroup() {
+        return isGroup;
+    }
+
+    public void setGroup(boolean group) {
+        isGroup = group;
+    }
+
+    public boolean isHorizontal() {
+        return horizontal;
+    }
+
+    public void setHorizontal(boolean horizontal) {
+        this.horizontal = horizontal;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }
