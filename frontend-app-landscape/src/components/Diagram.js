@@ -1,26 +1,49 @@
-import React, { useContext,useState,useEffect,useRef } from 'react'
+import React, {useState,useEffect,useRef,createContext,useContext } from 'react'
 import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
 import { DataContext, SaveDiagram } from '../DiagramScreen';
-import BusinessCapabilityService from './ApiService/BusinessCapabilityService';
-import DiagramVisualService from './ApiService/DiagramVisualService';
 import DiagramService from './ApiService/DiagramService';
-import { Context, DiagramContext } from '../DiagramScreen';
-  import {
-    Button,
-    Checkbox,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    Menu,
-    Segment,
-    Sidebar,
-  } from 'semantic-ui-react'
+
+import PopupExample from './PopupExample';
+import swal from 'sweetalert';
+
+
+export const OpenPopup = createContext({
+  open: false,
+  setOpen: () =>{}
+});
+
+export const BusinessCapabilities = createContext({
+  
+    frontend: true,
+    backend: false,
+    user: 55,
+    date: "2021-01-01",
+    setBusiness:()=>{}
+})
+
     
 const Diagram = React.memo((props)=>{
+
+  const [modalContent, setModalContent] = React.useState(false);
+  const modelRef = useRef()
+  modelRef.current = modalContent
+
+  const [business, setBusinessModel] = React.useState(null)
+  const businessRef = useRef()
+  businessRef.current = business
+
+
+
+  const updateOpen = (property, value) =>
+    setModalContent(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    const updateBusiness = (property, value) =>
+    setBusinessModel(prevInfo => ({ ...prevInfo, [property]: value }));
+
+
 
   const {nameOfDiagram} = useContext(
     DataContext
@@ -41,6 +64,10 @@ const Diagram = React.memo((props)=>{
   const [diagram, setDiagram] = useState([]);
   const diagramRef = useRef();
   diagramRef.current = diagram;
+
+  const [mydiagram, setMyDiagram] = useState();
+  const mydiagramRef = useRef();
+  mydiagramRef.current = mydiagram;
 
   const [links, setLinks]= useState([])
   const linksRef = useRef();
@@ -515,7 +542,7 @@ const Diagram = React.memo((props)=>{
 
         function createShape(name){
         myDiagram.nodeTemplateMap.add(name,  
-        $(go.Node, "Auto",nodeStyle(name),
+        $(go.Node, "Auto",nodeStyle(name), new go.Binding("hello"),
           $(go.Panel,  "Auto",
             $(go.Shape, name,
               { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2},
@@ -609,7 +636,10 @@ const Diagram = React.memo((props)=>{
             // "key": { readOnly: true, show: Inspector.showIfPresent },
             // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
             "fill": { show: Inspector.showIfPresent, type: 'color' },
-            "stroke": { show: Inspector.showIfPresent, type: 'color' }
+            "stroke": { show: Inspector.showIfPresent, type: 'color' },
+            "backend": {show: Inspector.showIfPresent,type: 'boolean'},
+            "users": {show: Inspector.showIfPresent,type: 'number'},
+
           }
         });
 
@@ -634,6 +664,7 @@ const Diagram = React.memo((props)=>{
       myDiagram.addDiagramListener('Modified', function() {
       
         array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
         // const last = array.nodeDataArray
         // const lastNode = last[last.length-1]
         // //lastNode["name"] = stateRef.current.nameOfDiagram;
@@ -642,7 +673,7 @@ const Diagram = React.memo((props)=>{
 
         // let listOfNodes = arrayToList(array.nodeDataArray)
         // let listOfLinks = arrayToList(array.linkDataArray)
-        setDiagram(array.nodeDataArray)
+        
         setLinks(array.linkDataArray)
 
         let diagram = {
@@ -661,9 +692,25 @@ const Diagram = React.memo((props)=>{
         // })
       });
       myDiagram.addDiagramListener('ExternalObjectsDropped',function(){
+        for (var it = myDiagram.selection.iterator; it.next(); ) {
+          var part = it.value;  // part is now a Node or a Group or a Link or maybe a simple Part
+          if (part instanceof go.Node) {
+            
+          
+        }
+          else if (part instanceof go.Link) {  }
+        }
+       
+        
+       
+
+        
         array = JSON.parse(myDiagram.model.toJson())
+        console.log(array)
         setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
+        setModalContent(true)
+       
 
       });
       myDiagram.addDiagramListener('LinkDrawn',function(){
@@ -699,10 +746,45 @@ const Diagram = React.memo((props)=>{
         array = JSON.parse(myDiagram.model.toJson())
         setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
+
+       
+
       
 
         
       });
+      myDiagram.addDiagramListener('ChangingSelection', function(e) {
+
+        myDiagram.selection.each( function(part){
+        console.log(part.data)
+
+           // part is now a Node or a Group or a Link or maybe a simple Part
+          if (part instanceof go.Node) {
+            myDiagram.model.startTransaction();
+            myDiagram.model.setDataProperty(part.data, "frontend", businessRef.current.frontend);
+            myDiagram.model.setDataProperty(part.data,"backend",businessRef.current.backend);
+            myDiagram.model.setDataProperty(part.data,"users",businessRef.current.user);
+            myDiagram.model.setDataProperty(part.data,"date",businessRef.current.date);
+            myDiagram.model.commitTransaction("modified properties");
+        
+            array = JSON.parse(myDiagram.model.toJson())
+
+            console.log(array.nodeDataArray)
+
+
+          
+        }
+          else if (part instanceof go.Link) {  }
+      });
+        
+
+        console.log(array.nodeDataArray)
+
+        console.log("changed")
+        
+
+      });
+
 
       return myDiagram
     
@@ -710,15 +792,45 @@ const Diagram = React.memo((props)=>{
 
 
       useEffect(()=>{
+
         setDiagramName(nameOfDiagram)
         console.log(saved.saved)
         setSaved(saved.saved)
-        if(saveRef.current){
-          console.log("true")
+        if(saved){
+          console.log("printsaved")
+          console.log(nameOfDiagram.nameOfDiagram)
+          console.log(diagramRef.current)
+
+          var diagramNodes ={
+            name: nameOfDiagram.nameOfDiagram,
+            diagramVisuals: diagramRef.current,
+            links:linksRef.current,
+            businessCapabilities:null
+          }
+          console.log(diagramNodes)
+
+
+          DiagramService.createDiagram(diagramNodes).then((res) => {
+            if (res.status === 200) {
+              swal("Success", "Your data is saved", "success");
+            } else {
+              swal("Failure", "Your data is not saved, try again", "error");
+            }
+          }).catch(err => {
+            if (err) {
+              swal("Oh noes!", "Something  wrong happened with your data!", "error");
+            } else {
+              swal.stopLoading();
+              swal.close();
+            }
+          })
+          
           setSaved(false)
         }
         
-    },[nameOfDiagram,saved]);
+    
+        
+    },[nameOfDiagram,saved,business]);
 
 
   
@@ -726,16 +838,20 @@ return (
 
   
     <>
+    <BusinessCapabilities.Provider value = {{business,updateBusiness}}>
+    <OpenPopup.Provider value = {{modalContent,updateOpen}}>
     <div>
     <ReactDiagram
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
           nodeDataArray = {diagramRef.current.diagram}
-          linkDataArray={linksRef.current.links}
-    />
+          linkDataArray={linksRef.current.links}/>
+          {modelRef.current ? <PopupExample open = {modelRef.current} /> : null }
     
 
     </div>
+    </OpenPopup.Provider>
+    </BusinessCapabilities.Provider>
 </>
 );
 });

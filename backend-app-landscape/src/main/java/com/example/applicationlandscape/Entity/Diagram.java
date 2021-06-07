@@ -13,7 +13,7 @@ public class Diagram {
     @Column(name="name")
     private String name;
 
-    @ElementCollection(targetClass=Link.class)
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Link> links;
     @ElementCollection(targetClass=BusinessCapabilities.class)
     private List<BusinessCapabilities> businessCapabilities;
@@ -51,7 +51,6 @@ public class Diagram {
     }
 
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
-    @JoinColumn(name="name")
     private List<DiagramVisual> diagramVisuals;
 
 

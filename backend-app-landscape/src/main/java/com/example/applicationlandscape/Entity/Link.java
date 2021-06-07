@@ -16,6 +16,9 @@ public class Link {
     private int keyOfLink;
     private String fromNode;
     private String toNode;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private Double [] points;
 
     public int getKey() {

@@ -1,41 +1,56 @@
-import React from 'react';
+import React,{useState,useContext,useRef} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { BusinessCapabilities, OpenPopup } from './Diagram';
 import './Try.css'
 
-export default class Reservation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      frontend: true,
-      backend: false,
-      user: 55,
-      date: "2021-01-01"
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-  handleInputChange(event) {
+ const PopupExample =(props)=> {
+
+  const {updateOpen} = useContext(OpenPopup)
+  const {updateBusiness}=useContext(BusinessCapabilities)
+  
+  const [state,setState] = useState({
+    frontend: null,
+    backend: null,
+    user: 0,
+    date: "",
+    modelOpen:props.open
+  })
+  const stateRef = useRef();
+  stateRef.current = state;
+
+
+  
+  function handleInputChange(event){
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.setState({
-      [name]: value    });
+    setState({
+      name: value  });
+      updateBusiness(`${name}`, value)
+
   }
- render(){
-  var person = {Frontend: this.state.frontend, Backend: this.state.backend,
-  User: this.state.user, Date: this.state.date}
-  console.log(person);
+
+  function popUpClosed(){
+    // setState({modelOpen: false});
+    updateOpen('open',false)
+    console.log(state.modelOpen)
+  }
+
+  var person = {Frontend: state.frontend, Backend: state.backend,
+    User: state.user, Date: state.date,Open: state.modelOpen}
+    console.log(person);
+
+  
   return(
+    <>
     <Popup
-      trigger={<button className="popup-content"> Open Modal </button>}
-      modal
-      nested
+      open={props.open}
+      onClose={popUpClosed}
+      // modal
+      // nested
     >
-      {close => (
         <div className="popup-content">
-          <button className="close" onClick={close}>
-            &times;
-          </button>
           <div className="header"> Modal Title </div>
           <div className="menu">
           <form>
@@ -43,8 +58,8 @@ export default class Reservation extends React.Component {
               Frontend:
               <input
                 name="frontend" type="checkbox"
-                checked={this.state.frontend}
-                onChange={this.handleInputChange}
+                checked={stateRef.current.frontend}
+                onChange={handleInputChange}
               />
             </label>
           </form>
@@ -53,8 +68,8 @@ export default class Reservation extends React.Component {
               Backend:
               <input
                 name="backend"            type="checkbox"
-                checked={this.state.backend}
-                onChange={this.handleInputChange}
+                checked={stateRef.current.backend}
+                onChange={handleInputChange}
             />
             </label>
           </form>
@@ -63,8 +78,8 @@ export default class Reservation extends React.Component {
               Number of users: 
               <input style={{width: '75px'}}
                 name="user"            type="number"
-                value={this.state.user}
-                onChange={this.handleInputChange}
+                value={stateRef.current.user}
+                onChange={handleInputChange}
             />
             </label>
           </form>
@@ -73,30 +88,19 @@ export default class Reservation extends React.Component {
               Date of creation:
               <input
               name="date" type="Date"
-              value={this.state.date}
-              onChange={this.handleInputChange}
+              value={stateRef.current.date}
+              onChange={handleInputChange}
               />
               
             </label>
           </form>
-  </div>
-          <div className="actions">
-            <button
-              className="button"
-              onClick={() => {
-                console.log('modal closed ');
-                close();
-              }}
-            >
-              Close
-            </button>
-          </div>
+      </div>
         </div>
-      )}
+      
     </Popup>
-  )
- }
-}
+    </>
+  );
+ 
+};
   
-
-  
+export default PopupExample;

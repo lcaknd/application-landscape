@@ -12,20 +12,21 @@ public class DiagramVisual {
 
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(int name) {
         this.name = name;
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="name")
-    private String name;
+    private int name;
 
 
-    public DiagramVisual(String name,int key, String fill, String loc, String text, boolean isGroup, boolean horizontal, String category) {
+    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horizontal, String category, String users, boolean frontend, boolean backend, String date) {
         this.key= key;
         this.fill = fill;
         this.loc = loc;
@@ -34,6 +35,10 @@ public class DiagramVisual {
         this.horizontal = horizontal;
         this.category = category;
         this.name = name;
+        this.users = users;
+        this.frontend = frontend;
+        this.backend = backend;
+        this.date = date;
     }
 
         @Column(name="key_nr")
@@ -44,7 +49,42 @@ public class DiagramVisual {
         private boolean isGroup;
         private boolean horizontal;
         private  String category;
+        private String users;
+        private boolean frontend;
+        private boolean backend;
+        private String date;
 
+    public String getUsers() {
+        return users;
+    }
+
+    public void setUsers(String users) {
+        this.users = users;
+    }
+
+    public boolean isFrontend() {
+        return frontend;
+    }
+
+    public void setFrontend(boolean frontend) {
+        this.frontend = frontend;
+    }
+
+    public boolean isBackend() {
+        return backend;
+    }
+
+    public void setBackend(boolean backend) {
+        this.backend = backend;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getKey() {
         return key;

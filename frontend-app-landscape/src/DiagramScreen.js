@@ -50,7 +50,7 @@ const DiagramScreen= React.memo(()=> {
          
         <SaveDiagram.Provider value = {{saved, updateSaved}}>
         <DataContext.Provider value= {{nameOfDiagram,updateName}}>
-        <div className="App">
+        <div id='diagram' className="App">
         <div>
             <NavTop />
         </div>

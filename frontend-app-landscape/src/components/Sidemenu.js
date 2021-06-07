@@ -70,7 +70,7 @@ const Sidemenu =()=> {
      </Box>
         <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
-        <PopupExample></PopupExample>
+       
         {SidemenuData.map((item,index)=> {
             return <SideSubMenu item ={item} key = {index} />
         })}
