@@ -1,5 +1,4 @@
-
-import React, { useContext,useState } from 'react'
+import React, {useState,useEffect,useRef,createContext,useContext } from 'react'
 import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
@@ -17,6 +16,78 @@ import { Context, DiagramContext } from '../DiagramScreen';
     Sidebar,
   } from 'semantic-ui-react'
 import DiagramVisualService from './ApiService/DiagramVisualService';
+import { DataContext, SaveDiagram } from '../DiagramScreen';
+import DiagramService from './ApiService/DiagramService';
+
+import PopupExample from './PopupExample';
+import swal from 'sweetalert';
+
+
+export const OpenPopup = createContext({
+  open: false,
+  setOpen: () =>{}
+});
+
+export const BusinessCapabilities = createContext({
+  
+    frontend: true,
+    backend: false,
+    user: 55,
+    date: "2021-01-01",
+    setBusiness:()=>{}
+})
+
+    
+const Diagram = React.memo((props)=>{
+
+  const [modalContent, setModalContent] = React.useState(false);
+  const modelRef = useRef()
+  modelRef.current = modalContent
+
+  const [business, setBusinessModel] = React.useState(null)
+  const businessRef = useRef()
+  businessRef.current = business
+
+
+
+  const updateOpen = (property, value) =>
+    setModalContent(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    const updateBusiness = (property, value) =>
+    setBusinessModel(prevInfo => ({ ...prevInfo, [property]: value }));
+
+
+
+  const {nameOfDiagram} = useContext(
+    DataContext
+  );
+
+  const {saved} = useContext(SaveDiagram)
+
+  const [save, setSaved] = useState(false);
+  const saveRef = useRef();
+  saveRef.current = save;
+
+
+
+  const [diagramName, setDiagramName] = useState("hej");
+  const stateRef = useRef();
+  stateRef.current = diagramName;
+
+  const [diagram, setDiagram] = useState([]);
+  const diagramRef = useRef();
+  diagramRef.current = diagram;
+
+  const [mydiagram, setMyDiagram] = useState();
+  const mydiagramRef = useRef();
+  mydiagramRef.current = mydiagram;
+
+  const [links, setLinks]= useState([])
+  const linksRef = useRef();
+  linksRef.current = links;
+
+
+
 
 
 
@@ -35,9 +106,12 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
             
             model: $(go.GraphLinksModel,
                   {
-                    linkKeyProperty: 'key',
-                    linkCategoryProperty:'category' 
+                    linkKeyProperty: 'keyOfLink',
+                    linkCategoryProperty:'category'
+                    
                   }),
+
+
             layout: $(go.TreeLayout, {isOngoing: false })
 
           });
@@ -138,7 +212,8 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
           );
       function nodeStyle(name) {
         return [
-          new go.Binding("location", "loc",new go.Binding("fill","fill"), go.Point.parse).makeTwoWay(go.Point.stringify),
+          new go.Binding("location", "loc",new go.Binding("fill","fill")
+          , go.Point.parse).makeTwoWay(go.Point.stringify),
           {
             locationSpot: go.Spot.Center,
             // resize the Shape, not the Node
@@ -480,7 +555,7 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
 
         function createShape(name){
         myDiagram.nodeTemplateMap.add(name,  
-        $(go.Node, "Auto",nodeStyle(name),
+        $(go.Node, "Auto",nodeStyle(name), new go.Binding("hello"),
           $(go.Panel,  "Auto",
             $(go.Shape, name,
               { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2},
@@ -492,7 +567,8 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
                 wrap: go.TextBlock.WrapFit,
                 editable: true
               },
-              new go.Binding("text").makeTwoWay())
+              new go.Binding("text").makeTwoWay(),
+              )
           ),
           makePort("T", go.Spot.Top, go.Spot.TopSide, false, true),
           makePort("L", go.Spot.Left, go.Spot.LeftSide, true, true),
@@ -525,25 +601,6 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
         geo.spot2 = go.Spot.BottomRight;
         return geo;
       });
-
-      // myDiagram.nodeTemplateMap.add("Comment",
-      //   $(go.Node, "Auto", nodeStyle(),
-      //     $(go.Shape, "File",
-      //       { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2 },
-      //       new go.Binding("fill", "fill", function(sel) {
-      //         if (sel) return "cyan"; else return "lightgray";
-      //       }).ofObject("")),
-      //     $(go.TextBlock, textStyle(),
-      //       {
-      //         margin: 8,
-      //         maxSize: new go.Size(200, NaN),
-      //         wrap: go.TextBlock.WrapFit,
-      //         textAlign: "center",
-      //         editable: true
-      //       },
-      //       new go.Binding("text").makeTwoWay())
-          
-      //   ));
 
       myDiagram.linkTemplate =
         $(go.Link,  
@@ -583,15 +640,19 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
               new go.Binding("text").makeTwoWay())
           )
         );
+       
 
         var inspector = new Inspector('myInspector', myDiagram,
         {
           properties: {
             // key would be automatically added for nodes, but we want to declare it read-only also:
-            "key": { readOnly: true, show: Inspector.showIfPresent },
+            // "key": { readOnly: true, show: Inspector.showIfPresent },
             // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
             "fill": { show: Inspector.showIfPresent, type: 'color' },
-            "stroke": { show: Inspector.showIfPresent, type: 'color' }
+            "stroke": { show: Inspector.showIfPresent, type: 'color' },
+            "backend": {show: Inspector.showIfPresent,type: 'boolean'},
+            "users": {show: Inspector.showIfPresent,type: 'number'},
+
           }
         });
 
@@ -601,69 +662,215 @@ import DiagramVisualService from './ApiService/DiagramVisualService';
 
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
+
       var array = []
-      myDiagram.addDiagramListener('ExternalObjectsDropped', function() {
-        
+
+      function arrayToList(array) {
+        let list = null;
+        for (let i = array.length - 1; i >= 0; i--) {
+            list = { value: array[i], rest: list };
+        }
+        return list;
+    }
+
+
+      myDiagram.addDiagramListener('Modified', function() {
+      
         array = JSON.parse(myDiagram.model.toJson())
-        console.log(myDiagram.model.toJson());
+        setDiagram(array.nodeDataArray)
+        // const last = array.nodeDataArray
+        // const lastNode = last[last.length-1]
+        // //lastNode["name"] = stateRef.current.nameOfDiagram;
+
+        // // DiagramVisualService.createDiagramVisual(lastNode)
+
+        // let listOfNodes = arrayToList(array.nodeDataArray)
+        // let listOfLinks = arrayToList(array.linkDataArray)
         
-        let color = array.nodeDataArray.fill
-        let loc = array.nodeDataArray.loc
+        setLinks(array.linkDataArray)
+
+        let diagram = {
+          name: stateRef.current.nameOfDiagram,
+          links: null,
+          diagramVisuals: array.nodeDataArray,
+          businessCapabilities: null
+        }
+
+        // DiagramService.createDiagram(diagram
+        // //updateDataVisual(array.nodeDataArray)
+        // //updateLinks(array.linkDataArray) 
+      
+        
+        // BusinessCapabilityService.getBusinessCapabilities().then(res=>{
+        // })
+      });
+      myDiagram.addDiagramListener('ExternalObjectsDropped',function(){
+        for (var it = myDiagram.selection.iterator; it.next(); ) {
+          var part = it.value;  // part is now a Node or a Group or a Link or maybe a simple Part
+          if (part instanceof go.Node) {
+            
+          
+        }
+          else if (part instanceof go.Link) {  }
+        }
+       
         
        
-        let diagram = { color, loc}
-        console.log(diagram)
-        DiagramVisualService.createDiagramVisual(diagram)
-        console.log(array.nodeDataArray);
+
+        
+        array = JSON.parse(myDiagram.model.toJson())
+        console.log(array)
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+        setModalContent(true)
+       
+
+      });
+      myDiagram.addDiagramListener('LinkDrawn',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+      });
+      myDiagram.addDiagramListener('LinkRelinked',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+      });
+      myDiagram.addDiagramListener('TextEdited',function(){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
       });
       myDiagram.addDiagramListener('SelectionDeleted', function() {
-        console.log(myDiagram.model.toJson());
+
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+      
+
+        
+      });
+
+      myDiagram.addDiagramListener('ChangedSelection', function() {
+
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+
+       
+
+      
+
+        
+      });
+      myDiagram.addDiagramListener('ChangingSelection', function(e) {
+
+        myDiagram.selection.each( function(part){
+        console.log(part.data)
+
+           // part is now a Node or a Group or a Link or maybe a simple Part
+          if (part instanceof go.Node) {
+            myDiagram.model.startTransaction();
+            myDiagram.model.setDataProperty(part.data, "frontend", businessRef.current.frontend);
+            myDiagram.model.setDataProperty(part.data,"backend",businessRef.current.backend);
+            myDiagram.model.setDataProperty(part.data,"users",businessRef.current.user);
+            myDiagram.model.setDataProperty(part.data,"date",businessRef.current.date);
+            myDiagram.model.commitTransaction("modified properties");
+        
+            array = JSON.parse(myDiagram.model.toJson())
+
+            console.log(array.nodeDataArray)
+
+
+          
+        }
+          else if (part instanceof go.Link) {  }
+      });
+        
+
+        console.log(array.nodeDataArray)
+
+        console.log("changed")
+        
+
       });
       myDiagram.addDiagramListener('SelectionMoved', function() {
        
         console.log(myDiagram.model.toJson());
       });
 
+
       return myDiagram
     
-      };  
-    
-const Diagram =(props)=>{
+      };
 
-return(
+
+      useEffect(()=>{
+
+        setDiagramName(nameOfDiagram)
+        console.log(saved.saved)
+        setSaved(saved.saved)
+        if(saved){
+          console.log("printsaved")
+          console.log(nameOfDiagram.nameOfDiagram)
+          console.log(diagramRef.current)
+
+          var diagramNodes ={
+            name: nameOfDiagram.nameOfDiagram,
+            diagramVisuals: diagramRef.current,
+            links:linksRef.current,
+            businessCapabilities:null
+          }
+          console.log(diagramNodes)
+
+
+          DiagramService.createDiagram(diagramNodes).then((res) => {
+            if (res.status === 200) {
+              swal("Success", "Your data is saved", "success");
+            } else {
+              swal("Failure", "Your data is not saved, try again", "error");
+            }
+          }).catch(err => {
+            if (err) {
+              swal("Oh noes!", "Something  wrong happened with your data!", "error");
+            } else {
+              swal.stopLoading();
+              swal.close();
+            }
+          })
+          
+          setSaved(false)
+        }
+        
+    
+        
+    },[nameOfDiagram,saved,business]);
+
+
+  
+return (
+
+  
     <>
+    <BusinessCapabilities.Provider value = {{business,updateBusiness}}>
+    <OpenPopup.Provider value = {{modalContent,updateOpen}}>
     <div>
     <ReactDiagram
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
-  
-          
-          nodeDataArray = {[
-            {key:1, isGroup:true, text:"Group 1", horiz:true},
-            {key:2, isGroup:true, text:"Group 2", horiz:true},
-              // {"key":3, "isGroup":true, "text":"Group A", "group":1},
-            // {key:1, loc:'-0 75', text:'Initial node',figure:"Database"},
-            // {key:2, loc:'-3 56', text:'Initial node',figure:"FivePointedStar"},
-            // {key:3, loc:'-3 7', text:'Initial node',figure:"Hexagon"},
-            // {key:4, loc:'-89 23', text:'Initial node',figure:"DataStorage"},
-            // {key:5, loc:'-23 34', text:'Initial node',figure:"DiskStorage"},
-            // {key:6, loc:'-2 33', text:'Initial node',figure:"ExternalOrganization"},
-            // {key:7, loc:'-33 33', text:'Initial node',figure:"ExternalProcess"},
-            // {key:8, loc:'-1 33', text:'Initial node',figure:"MicroformProcessing"},
-            // {key:9, loc:'-18 33', text:'Initial node',figure:"Ellipse"},
-            // {key:10, loc:'-33 18', text:'Initial node',figure:"Circle"},
-            // {key:11, loc:'-89 33', text:'Initial node',figure:"Diamond"},
-
-        ]}
-          linkDataArray={[
-
-        ]}
-    />
+          nodeDataArray = {diagramRef.current.diagram}
+          linkDataArray={linksRef.current.links}/>
+          {modelRef.current ? <PopupExample open = {modelRef.current} /> : null }
     
 
     </div>
+    </OpenPopup.Provider>
+    </BusinessCapabilities.Provider>
 </>
 );
-};
+});
 
-export default Diagram;
+export default React.memo(Diagram);

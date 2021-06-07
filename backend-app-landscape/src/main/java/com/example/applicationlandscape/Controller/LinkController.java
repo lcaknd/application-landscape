@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="*")
 public class LinkController {
 
     @Autowired
@@ -21,12 +21,12 @@ public class LinkController {
         return this.linkRepository.findAll();
     }
 
-    @PostMapping("/link")
+    @PostMapping("link")
     public Link createLink(@RequestBody Link link) {
         return linkRepository.save(link);
     }
 
-    @PutMapping("/link/{id}")
+    @PutMapping("link/{id}")
     public ResponseEntity<Link> updateTheLink(@PathVariable Long id, @RequestBody Link link){
         Link linkNodes = linkRepository.findById(id).orElseThrow(null);
         linkNodes.setToNode(link.getToNode());
@@ -34,7 +34,7 @@ public class LinkController {
         return ResponseEntity.ok(updatedLink);
     }
 
-    @DeleteMapping("/link/delete/{id}")
+    @DeleteMapping("link/delete/{id}")
     public void delete(@PathVariable long id) {
         Link link = linkRepository.findById(id).orElseThrow(null);;
         linkRepository.delete(link);

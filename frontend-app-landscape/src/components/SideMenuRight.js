@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import './Diagram.css'
 import SideSubMenuR from './SideSubMenuR.js';
 import { test } from './test'
-import { Context } from '../DiagramScreen'
+import { DataContext, SaveDiagram } from '../DiagramScreen'
+import swal from "sweetalert";
 
 
 
@@ -43,9 +44,51 @@ width:265px;
 
 const SideMenuRight =(props)=> {
 
+  const {updateName} = useContext(DataContext)
+  const {updateSaved} = useContext(SaveDiagram);
+
   const [sidebarR, setSidebarR] = useState(false);
 
   const showSidebarR = () => setSidebarR(!sidebarR);
+
+  const update=(name)=>{
+    
+
+    switch(name){
+      case "Create Diagram":
+        swal({
+          text: 'Please create the name of diagram!',
+          content: "input",
+          button: {
+            text: "OK!",
+            closeModal: false,
+          },
+        })
+          .then(name => {
+            updateName('nameOfDiagram',name)
+            swal.stopLoading();
+            swal.close();
+            
+            
+          })
+          break;
+          case "Save":
+            console.log("save pressed")
+            updateSaved('saved', true)
+            break;
+          case "Upload":
+              console.log("upload")
+              break;
+
+    }
+
+    
+    }
+
+    const buttonRef = React.useRef({ update: (e) => update(e) });
+
+
+
     
 
     return (
@@ -59,7 +102,7 @@ const SideMenuRight =(props)=> {
         <Sidebar2Nav sidebarR={sidebarR}>
         <SidebarRWrap>
         {test.map((item,index)=> {
-            return <SideSubMenuR item ={item} key = {index} />
+            return <SideSubMenuR ref= {buttonRef} item ={item} key = {index} />
         })} 
         <div id="myInspector"></div>
         </SidebarRWrap>

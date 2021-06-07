@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin("*")
 public class DiagramCapabilitiesController {
 
     @Autowired
