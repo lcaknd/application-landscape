@@ -797,10 +797,10 @@ const Diagram = React.memo((props)=>{
         
 
       });
-      myDiagram.addDiagramListener('SelectionMoved', function() {
+      // myDiagram.addDiagramListener('SelectionMoved', function() {
        
-        console.log(myDiagram.model.toJson());
-      });
+      //   console.log(myDiagram.model.toJson());
+      // });
 
 
       return myDiagram
