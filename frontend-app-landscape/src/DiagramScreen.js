@@ -10,6 +10,7 @@ export const DataContext = createContext({
     // dataBusinessCapabilities: null,
     // links: null,
     setNameOfDiagram:() => {},
+    getNameOfDiagram:() => {},
     // setDataBusinessCapabilities:()=>{},
     // setLinks:()=>{}
 });
@@ -23,9 +24,14 @@ const DiagramScreen= React.memo(()=> {
 
     const [nameOfDiagram,setNameOfDiagram] = useState('null')
     const [saved,setSaved] = useState(false)
+    const [NameOfDiagram,getNameOfDiagram] = useState('null')
 
     const updateName = (property, value) =>
     setNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    const getName = (property, value) =>
+    getNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }))
+    
 
     const updateSaved = (property, value) =>
     setSaved(prevInfo => ({ ...prevInfo, [property]: value }));
@@ -34,6 +40,7 @@ const DiagramScreen= React.memo(()=> {
     useEffect(()=>{
         console.log(nameOfDiagram)
         console.log(saved)
+        console.log(NameOfDiagram)
     });
 
     
@@ -48,8 +55,9 @@ const DiagramScreen= React.memo(()=> {
 
     return (
          
-        <SaveDiagram.Provider value = {{saved, updateSaved}}>
+        <SaveDiagram.Provider value = {{saved, updateSaved, NameOfDiagram, getName}}>
         <DataContext.Provider value= {{nameOfDiagram,updateName}}>
+        
         <div id='diagram' className="App">
         <div>
             <NavTop />
@@ -61,8 +69,10 @@ const DiagramScreen= React.memo(()=> {
        <SideMenuRight />
        </div>
        </div>
+       
        </DataContext.Provider>
        </SaveDiagram.Provider>
+       
        
       
     
