@@ -21,6 +21,10 @@ export const test = [
    {
       title: 'Inspector',
       icon:<FaIcons.FaBlog />,
+   },
+   {
+      title: 'Create Diagram',
+      icon:<FaIcons.FaCloud />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />
    }

@@ -28,24 +28,25 @@ text-decoration: none;
   background: #FFFFFF
   `;
 
-  const SideSubMenuR = ({item},props) => {
+  const SideSubMenuR = React.forwardRef((props, ref)=> {
+
 
     const [subNavR,setSubnavR] =  useState(false)
 
     const showSubnavR = () => setSubnavR(!subNavR)
     return (
         <>
-        <SidebarR onClick = {props.onClick}>
+        <SidebarR onClick = {()=>ref.current.update(props.item.title)} >
             <div>
-                {item.icon}
-                <SidebarLabelR>{item.title}</SidebarLabelR>
+                {props.item.icon}
+                <SidebarLabelR >{props.item.title}</SidebarLabelR>
             </div>
             <div>
-                {subNavR ? item.iconOpened:item.iconClosed}
+                {subNavR ? props.item.iconOpened:props.item.iconClosed}
             </div>
         </SidebarR>
         </>
     );
-};
+});
 
 export default SideSubMenuR;
