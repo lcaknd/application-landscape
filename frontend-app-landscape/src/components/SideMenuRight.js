@@ -7,6 +7,8 @@ import SideSubMenuR from './SideSubMenuR.js';
 import { test } from './test'
 import { DataContext, SaveDiagram } from '../DiagramScreen'
 import swal from "sweetalert";
+import PopupExample from './PopupExample'
+import Diagram from './Diagram';
 
 
 
@@ -46,6 +48,8 @@ const SideMenuRight =(props)=> {
 
   const {updateName} = useContext(DataContext)
   const {updateSaved} = useContext(SaveDiagram);
+  const {getName} = useContext(SaveDiagram);
+
 
   const [sidebarR, setSidebarR] = useState(false);
 
@@ -73,11 +77,62 @@ const SideMenuRight =(props)=> {
           })
           break;
           case "Save":
+           
             console.log("save pressed")
+            
             updateSaved('saved', true)
+            
             break;
           case "Upload":
               console.log("upload")
+              break;
+          case "Search":
+            swal({
+              
+              closeOnClickOutside: false,
+              title: 'Diagram Filter',
+              text: 'Enter a name for a diagram',
+              content : "input" ,
+              buttons:[true,"Search!" ] 
+               ,
+            })
+            .then(name => {
+              getName('NameOfDiagram',name)
+              swal.stopLoading();
+            swal.close();
+              if (!name) throw null;
+              
+              return fetch(`http://localhost:8080/api/diagram`);
+            })
+            .then(results => {
+              return results.json();
+            })
+            .then(json => {
+              const diagram = json.results[0];
+             
+              if (!diagram) {
+                return swal("No diagram was found!");
+              }
+             
+              const name = diagram.name;
+              
+             
+              swal({
+                title: "Diagram",
+                text: name
+                
+              });
+            })
+            .catch(err => {
+              if (err) {
+                swal("Oh noes!", "The AJAX request failed!", "error");
+              } else {
+                swal.stopLoading();
+                swal.close();
+              }
+            });
+
+              console.log("Searching")
               break;
 
     }
