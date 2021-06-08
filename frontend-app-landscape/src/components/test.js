@@ -8,21 +8,25 @@ import * as BsIcons from 'react-icons/bs'
 export const test = [
     {
         title: 'Save',
-        icon:<FaIcons.FaSave />,
-        iconClosed: <RiIcons.RiArrowDownSFill />,
-        iconOpened: <RiIcons.RiArrowUpSFill />
+        icon:<FaIcons.FaSave />
+      //   iconClosed: <RiIcons.RiArrowDownSFill />,
+      //   iconOpened: <RiIcons.RiArrowUpSFill />
      },
      {
       title: 'Upload',
-      icon:<FaIcons.FaCloud />,
-      iconClosed: <RiIcons.RiArrowDownSFill />,
-      iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<FaIcons.FaCloud />
+      // iconClosed: <RiIcons.RiArrowDownSFill />,
+      // iconOpened: <RiIcons.RiArrowUpSFill />
    },
    {
       title: 'Create Diagram',
-      icon:<FaIcons.FaCloud />,
-      iconClosed: <RiIcons.RiArrowDownSFill />,
-      iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<FaIcons.FaCloud />
+      // iconClosed: <RiIcons.RiArrowDownSFill />,
+      // iconOpened: <RiIcons.RiArrowUpSFill />
+   },
+   {
+      title: 'Search',
+      icon:<FaIcons.FaSearch />
    }
 
 ]
