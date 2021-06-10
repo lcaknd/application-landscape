@@ -9,6 +9,9 @@ import { DataContext, SaveDiagram } from '../DiagramScreen'
 import swal from "sweetalert";
 import PopupExample from './PopupExample'
 import Diagram from './Diagram';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 
 
@@ -45,10 +48,11 @@ width:265px;
 `;
 
 const SideMenuRight =(props)=> {
+ 
 
   const {updateName} = useContext(DataContext)
   const {updateSaved} = useContext(SaveDiagram);
-  const {getName} = useContext(SaveDiagram);
+  
 
 
   const [sidebarR, setSidebarR] = useState(false);
@@ -86,53 +90,33 @@ const SideMenuRight =(props)=> {
           case "Upload":
               console.log("upload")
               break;
-          case "Search":
-            swal({
-              
-              closeOnClickOutside: false,
-              title: 'Diagram Filter',
-              text: 'Enter a name for a diagram',
-              content : "input" ,
-              buttons:[true,"Search!" ] 
-               ,
-            })
-            .then(name => {
-              getName('NameOfDiagram',name)
-              swal.stopLoading();
-            swal.close();
-              if (!name) throw null;
-              
-              return fetch(`http://localhost:8080/api/diagram`);
-            })
-            .then(results => {
-              return results.json();
-            })
-            .then(json => {
-              const diagram = json.results[0];
-             
-              if (!diagram) {
-                return swal("No diagram was found!");
-              }
-             
-              const name = diagram.name;
+          case "Filter":
+            Swal.fire({
+              title: 'Filter',
+              html: '<h3>Front end <input type="checkbox" id="frontend"  /></h3><p/>' +
+                '<h3>Back end <input type="checkbox" id="backend"  /></h3>'+ '<h3>Users <input type="number" id="user"  /></h3><p/>' + '<h3>Date of creation <input type="date" id="date"  /></h3><p/>',
+                stopKeydownPropagation: false,
+                preConfirm: () => {
+                  
+                  var frontend = Swal.getPopup().querySelector('#frontend').checked
+                  var backend = Swal.getPopup().querySelector('#backend').checked
+                  var user = Swal.getPopup().querySelector('#user').value
+                  var date = Swal.getPopup().querySelector('#date').value
+                  console.log("Frontend = " + frontend + " Backend = "+ backend + " User = "+ user + " Date = "+ date)
+      
+      
+                  return {frontend: frontend, backend: backend, user: user, date: date}
+                }
+              }).then((result) => {
+                Swal.fire("Frontend: "+`${result.value.frontend}`+" and Backend: "+`${result.value.backend}` +" and Number of User: "+`${result.value.user}` +" and Date of creation: "+`${result.value.date}`);
+              })
               
              
-              swal({
-                title: "Diagram",
-                text: name
-                
-              });
-            })
-            .catch(err => {
-              if (err) {
-                swal("Oh noes!", "The AJAX request failed!", "error");
-              } else {
-                swal.stopLoading();
-                swal.close();
-              }
-            });
+            
+            
+            
 
-              console.log("Searching")
+         
               break;
 
     }

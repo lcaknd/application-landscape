@@ -25,7 +25,7 @@ export const test = [
       // iconOpened: <RiIcons.RiArrowUpSFill />
    },
    {
-      title: 'Search',
+      title: 'Filter',
       icon:<FaIcons.FaSearch />
    }
 
