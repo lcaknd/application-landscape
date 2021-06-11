@@ -10,6 +10,11 @@ class DiagramVisualService {
     
       createDiagramVisual(diagram) {
         return axios.post(DIAGRAM_REST_API_URL, + 'diagramVisual'+ diagram);
+        return axios.post(DIAGRAM_REST_API_URL +"diagramVisual", diagram);
+      }
+
+      updateDiagramVisualById(id,diagram){
+        return axios.put()
       }
 
 }

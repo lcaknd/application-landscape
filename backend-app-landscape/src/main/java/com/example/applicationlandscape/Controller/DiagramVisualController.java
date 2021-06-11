@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin("*")
 public class DiagramVisualController {
     @Autowired
     private DiagramVisualRepository diagramVisualRepository;
@@ -24,10 +24,11 @@ public class DiagramVisualController {
     public DiagramVisual createDiagramVisual(@RequestBody DiagramVisual diagramVisual) {
         return diagramVisualRepository.save(diagramVisual);
     }
+
     @PutMapping("/diagramVisual/{id}")
     public ResponseEntity<DiagramVisual> updateTheNode(@PathVariable Long id, @RequestBody DiagramVisual diagramVisual){
         DiagramVisual diagramVisualNode = diagramVisualRepository.findById(id).orElseThrow(null);
-        diagramVisualNode.setColor(diagramVisual.getColor());
+
         DiagramVisual updatedDiagramVisual = diagramVisualRepository.save(diagramVisual);
         return ResponseEntity.ok(updatedDiagramVisual);
     }
