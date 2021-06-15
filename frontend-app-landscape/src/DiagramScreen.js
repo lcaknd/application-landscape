@@ -3,10 +3,12 @@ import NavTop from "./components/NavTop";
 import Sidemenu from "./components/Sidemenu";
 import './components/Diagram.css'
 import SideMenuRight from "./components/SideMenuRight";
-import React,{createContext,useState,useEffect} from "react"
+import React,{createContext,useState,useEffect,useRef} from "react"
+import "./components/Diagram.css"
 
 export const DataContext = createContext({
     nameOfDiagram: 'null',
+    
     // dataBusinessCapabilities: null,
     // links: null,
     setNameOfDiagram:() => {},
@@ -17,14 +19,18 @@ export const DataContext = createContext({
 
 export const SaveDiagram = createContext({
     saved: false,
+    upload: false,
     setSaved: () =>{}
 })
 
-const DiagramScreen= React.memo(()=> {
 
-    const [nameOfDiagram,setNameOfDiagram] = useState('null')
+
+const DiagramScreen= ()=> {
+
+    const [nameOfDiagram,setNameOfDiagram] = useState(null)
     const [saved,setSaved] = useState(false)
-    const [NameOfDiagram,getNameOfDiagram] = useState('null')
+    const [diagram,setDiagram]=useState([{key:1, text: 'Madzia',loc:"124 125",category:"Hexagon" ,fill: "#C0D7E9"},{key:3, text: 'Hello3',loc:"124 200",category:"Database" ,fill: "#C0D7E9"}])
+ 
 
     const updateName = (property, value) =>
     setNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }));
@@ -36,12 +42,15 @@ const DiagramScreen= React.memo(()=> {
     const updateSaved = (property, value) =>
     setSaved(prevInfo => ({ ...prevInfo, [property]: value }));
 
+    
+
 
     useEffect(()=>{
         console.log(nameOfDiagram)
-        console.log(saved)
-        console.log(NameOfDiagram)
-    });
+        console.log(saved.upload)
+    
+
+    }, [nameOfDiagram]);
 
     
 
@@ -54,8 +63,8 @@ const DiagramScreen= React.memo(()=> {
 //    ;
 
     return (
-         
-        <SaveDiagram.Provider value = {{saved, updateSaved, NameOfDiagram, getName}}>
+       
+        <SaveDiagram.Provider value = {{saved, updateSaved}}>
         <DataContext.Provider value= {{nameOfDiagram,updateName}}>
         
         <div id='diagram' className="App">
@@ -65,19 +74,20 @@ const DiagramScreen= React.memo(()=> {
         <div className="container">
         
        <Sidemenu  />
-       <Diagram nameOfDiagram={nameOfDiagram}/>
+        <Diagram nameOfDiagram={nameOfDiagram} diagram={diagram}/>
        <SideMenuRight />
        </div>
        </div>
        
        </DataContext.Provider>
        </SaveDiagram.Provider>
+      
        
        
       
     
   
     );
-  });
+  };
 
   export default DiagramScreen;

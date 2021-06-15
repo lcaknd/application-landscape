@@ -5,7 +5,7 @@ const DIAGRAM_REST_API_URL = "http://localhost:8080/api/";
 class DiagramService {
 
     getDiagramByName(name) {
-        return axios.get(DIAGRAM_REST_API_URL+'diagram');
+        return axios.get(DIAGRAM_REST_API_URL+'diagram/'+name);
       }
     
       createDiagram(diagram) {

@@ -55,6 +55,7 @@ const SideMenuRight =(props)=> {
   
 
 
+
   const [sidebarR, setSidebarR] = useState(false);
 
   const showSidebarR = () => setSidebarR(!sidebarR);
@@ -81,14 +82,28 @@ const SideMenuRight =(props)=> {
           })
           break;
           case "Save":
-           
-            console.log("save pressed")
-            
+          
             updateSaved('saved', true)
             
             break;
           case "Upload":
-              console.log("upload")
+            swal({
+              text: 'Please type the name of diagram which you want to see!',
+              content: "input",
+              button: {
+                text: "OK!",
+                closeModal: false,
+              },
+            })
+              .then(name => {
+                updateName('nameOfDiagram',name)
+                updateSaved('upload',true)
+                swal.stopLoading();
+                swal.close();
+                
+                
+              })
+          
               break;
           case "Filter":
             Swal.fire({
