@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
-import {MenuItem1, MenuItem2, MenuItem3, MenuItem4,MenuItem_logo } from "./MenuItems"
+import {MenuItem1, MenuItem2, MenuItem3, MenuItem_logo } from "./MenuItems"
 import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
@@ -67,17 +67,7 @@ const navbar =()=> {
                             )
                         })}
                         </div>
-                        <div class="nbar">
-                        {MenuItem4.map((item) => {
-                            return(
-                                    
-                                    <a className={item.cName} href={item.url}>
-                                    {item.icon}  {item.title} 
-                                    </a>
-                               
-                            )
-                        })}
-                        </div>
+                        
                     <div class="darkModeIcon">
                         <div class="sun">
                         <FiIcons.FiSun />

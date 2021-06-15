@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MenuItem_logo, MenuItem1, MenuItem2, MenuItem3, MenuItem4 } from "./MenuItems"
+import { MenuItem_logo, MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
 import './Diagram.css'
 import DarkMode from './DarkMode.js';
 import './DarkMode.css';
@@ -74,17 +74,7 @@ const NavTop =()=> {
                             )
                         })}
                         </div>
-                        <div class="nbar">
-                        {MenuItem4.map((item) => {
-                            return(
-                                    
-                                    <a className={item.cName} href={item.url}>
-                                    {item.icon}  {item.title} 
-                                    </a>
-                               
-                            )
-                        })}
-                        </div>
+                        
                         <div class="darkModeIcon">
                         <div class="sun">
                         <FiIcons.FiSun />

@@ -35,8 +35,7 @@ const DiagramScreen= ()=> {
     const updateName = (property, value) =>
     setNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }));
 
-    const getName = (property, value) =>
-    getNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }))
+    
     
 
     const updateSaved = (property, value) =>

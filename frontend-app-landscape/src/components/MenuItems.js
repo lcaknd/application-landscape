@@ -21,16 +21,8 @@ export const MenuItem1 = [
     }
 ]
 
+
 export const MenuItem2 = [
-    {
-        title: 'Filter',
-        icon:<AiIcons.AiFillFilter />,
-        url: 'filter',
-        cName: 'nav-links'
-    }
-    
-]
-export const MenuItem3 = [
     {
         title: 'Landscape',
         icon:<GrIcons.GrStackOverflow />,
@@ -38,11 +30,11 @@ export const MenuItem3 = [
         cName: 'nav-links'
     } 
 ]
-export const MenuItem4 = [
+export const MenuItem3 = [
     {
         title: 'Settings',
         icon:<AiIcons.AiFillSetting />,
-        url: 'settings',
+        
         cName: 'nav-links'
     }
     

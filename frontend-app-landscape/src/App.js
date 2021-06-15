@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from "./components/Home";
 import Settings from "./components/Settings";
-import Filter from "./components/Filter";
+
 import React from 'react'
 import DiagramScreen from './DiagramScreen';
 
@@ -23,18 +23,14 @@ function App() {
            <Home/>
            </Route>
 
-           <Route exact path="/filter">
-         <Filter/>
-         </Route>
+           
 
          <Route exact path="/landscape">
          <DiagramScreen/>
          </Route>
          
            
-         <Route exact path="/settings">
-         <Settings/>
-         </Route>
+         
          
        </Switch>
     
