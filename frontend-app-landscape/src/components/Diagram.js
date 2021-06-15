@@ -860,7 +860,7 @@ const Diagram = (props)=>{
               
               for (var i=0; i<node.length;i++){
 
-                diagram.push({key:node[i].key,frontend:node[i].frontend,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,loc:node[i].loc,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,dateOfTermination:node[i].dateOfTermination,creator:node[i].creator})
+                diagram.push({key:node[i].key,frontend:node[i].frontend,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,loc:node[i].loc,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,termination:node[i].termination,creator:node[i].creator})
               }
 
               var links = []
