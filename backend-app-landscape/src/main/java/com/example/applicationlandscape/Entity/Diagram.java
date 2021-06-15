@@ -13,8 +13,9 @@ public class Diagram {
     @Column(name="name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Link> links;
+
     @ElementCollection(targetClass=BusinessCapabilities.class)
     private List<BusinessCapabilities> businessCapabilities;
 

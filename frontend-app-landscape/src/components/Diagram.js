@@ -1,11 +1,10 @@
-import React, {useState,useEffect,useRef,createContext,useContext } from 'react'
+import React, {useState,useEffect,createRef,useRef,createContext,useContext } from 'react'
 import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
 import { DataContext, SaveDiagram } from '../DiagramScreen';
 import DiagramService from './ApiService/DiagramService';
-
 import PopupExample from './PopupExample';
 import swal from 'sweetalert';
 
@@ -17,15 +16,23 @@ export const OpenPopup = createContext({
 
 export const BusinessCapabilities = createContext({
   
-    frontend: true,
-    backend: false,
-    user: 55,
+    frontend: null,
+    backend: null,
+    user: null,
     date: "2021-01-01",
+    services:[],
+    departments:[],
+    termination:"",
+    license:"",
+    version:"",
+    creator:"",
     setBusiness:()=>{}
 })
 
+
+
     
-const Diagram = React.memo((props)=>{
+const Diagram = (props)=>{
 
   const [modalContent, setModalContent] = React.useState(false);
   const modelRef = useRef()
@@ -44,12 +51,11 @@ const Diagram = React.memo((props)=>{
     setBusinessModel(prevInfo => ({ ...prevInfo, [property]: value }));
 
 
-
-  const {nameOfDiagram} = useContext(
+  const {nameOfDiagram, updateNameOfDiagram} = useContext(
     DataContext
   );
 
-  const {saved} = useContext(SaveDiagram)
+  const {saved,updateSaved} = useContext(SaveDiagram)
 
   const [save, setSaved] = useState(false);
   const saveRef = useRef();
@@ -57,34 +63,31 @@ const Diagram = React.memo((props)=>{
 
 
 
-  const [diagramName, setDiagramName] = useState("hej");
+  const [diagramName, setDiagramName] = useState("");
   const stateRef = useRef();
   stateRef.current = diagramName;
+ 
 
-  const [diagram, setDiagram] = useState([]);
-  const diagramRef = useRef();
-  diagramRef.current = diagram;
+  const [mydiagram, setDiagram] = useState([])
+  let diagramRef = createRef();
+  
 
-  const [mydiagram, setMyDiagram] = useState();
-  const mydiagramRef = useRef();
-  mydiagramRef.current = mydiagram;
+
+  
+
 
   const [links, setLinks]= useState([])
-  const linksRef = useRef();
-  linksRef.current = links;
+  const linksRef = createRef();
+  
 
-
-
-
-
-
-  window.initDiagram =function() {
+  window.initDiagram=function(){
     const $ = go.GraphObject.make;  
     const myDiagram =
         $(go.Diagram, 
           { "undoManager.isEnabled": true,
             allowHorizontalScroll: true,
             allowVerticalScroll: false,
+          
             mouseDrop: function(e) { finishDrop(e, null); },
             // layout:  // Diagram has simple horizontal layout
             //   $(go.GridLayout,
@@ -94,12 +97,20 @@ const Diagram = React.memo((props)=>{
             model: $(go.GraphLinksModel,
                   {
                     linkKeyProperty: 'keyOfLink',
-                    linkCategoryProperty:'category'
+                    linkCategoryProperty:'category',
+                    makeUniqueKeyFunction: (m ,data) => {
+                      let k = data.key || 1;
+                      while (m.findNodeDataForKey(k)) k++;
+                      data.key = k;
+                      return k;
+                    }
+                    
                     
                   }),
 
 
-            layout: $(go.TreeLayout, {isOngoing: false })
+
+            // layout: $(go.TreeLayout, {isOngoing: false })
 
           });
 
@@ -164,7 +175,7 @@ const Diagram = React.memo((props)=>{
               mouseDrop: finishDrop,
               handlesDragDropForMembers: true,  // don't need to define handlers on member Nodes and Links
               // Groups containing Groups lay out their members horizontally
-              layout: makeLayout(false)
+              // layout: makeLayout(false)
             },
             new go.Binding("layout", "horiz", makeLayout),
             new go.Binding("background", "isHighlighted", function(h) {
@@ -199,8 +210,8 @@ const Diagram = React.memo((props)=>{
           );
       function nodeStyle(name) {
         return [
-          new go.Binding("location", "loc",new go.Binding("fill","fill")
-          , go.Point.parse).makeTwoWay(go.Point.stringify),
+          new go.Binding("location", "loc"
+          ,go.Point.parse).makeTwoWay(go.Point.stringify),
           {
             locationSpot: go.Spot.Center,
             // resize the Shape, not the Node
@@ -590,7 +601,7 @@ const Diagram = React.memo((props)=>{
       });
 
       myDiagram.linkTemplate =
-        $(go.Link,  
+        $(go.Link,
           {
             routing: go.Link.AvoidsNodes,
             curve: go.Link.JumpOver,
@@ -599,18 +610,23 @@ const Diagram = React.memo((props)=>{
             relinkableTo: true,
             reshapable: true,
             resegmentable: true,
-            mouseEnter: function(e, link) { link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)"; },
-            mouseLeave: function(e, link) { link.findObject("HIGHLIGHT").stroke = "transparent"; },
+            mouseEnter: function(e, link) { link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)"; link.findObject("HIGHLIGHT").strokeWidth = 4;},
+            mouseLeave: function(e, link) { link.findObject("HIGHLIGHT").stroke = "transparent"; link.findObject("HIGHLIGHT").strokeWidth = 1; },
             selectionAdorned: false
           },
           new go.Binding("points").makeTwoWay(),
+         
           $(go.Shape, 
-            { isPanelMain: true, strokeWidth: 8, stroke: "transparent", name: "HIGHLIGHT",portId: "", fromLinkable: true, toLinkable: true }),
+            { isPanelMain: true, stroke: "transparent", name: "HIGHLIGHT",portId: "", fromLinkable: true, toLinkable: true }),
           $(go.Shape,  
-            { isPanelMain: true, stroke: "gray", strokeWidth: 2,portId: "", fromLinkable: true, toLinkable: true },
-            new go.Binding("stroke", "isSelected", function(sel) { return sel ? "dodgerblue" : "gray"; }).ofObject()),
+            { isPanelMain: true, stroke: "gray",portId: "", fromLinkable: true, toLinkable: true },
+            new go.Binding("stroke", "isSelected", function(sel) { return sel ? "dodgerblue" : "gray"; }).ofObject(),
+            new go.Binding("strokeWidth").makeTwoWay(),
+            ),
+           
+
           $(go.Shape,  
-            { toArrow: "Standard", strokeWidth: 0, fill: "gray",portId: "", fromLinkable: true, toLinkable: true }, new go.Binding("toArrow","arrow").makeTwoWay()
+            { toArrow: "Standard",  fill: "gray",portId: "", fromLinkable: true, toLinkable: true }, new go.Binding("toArrow","arrow").makeTwoWay()
             ),
           $(go.Panel, "Auto",  
             { visible: false, name: "LABEL", segmentIndex: 2, segmentFraction: 0.5 },
@@ -629,112 +645,71 @@ const Diagram = React.memo((props)=>{
         );
        
 
-        var inspector = new Inspector('myInspector', myDiagram,
-        {
-          properties: {
-            // key would be automatically added for nodes, but we want to declare it read-only also:
-            // "key": { readOnly: true, show: Inspector.showIfPresent },
-            // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
-            "fill": { show: Inspector.showIfPresent, type: 'color' },
-            "stroke": { show: Inspector.showIfPresent, type: 'color' },
-            "backend": {show: Inspector.showIfPresent,type: 'boolean'},
-            "users": {show: Inspector.showIfPresent,type: 'number'},
-
-          }
-        });
+        
 
 
     myDiagram.select(myDiagram.nodes.first())
-    console.log(myDiagram.nodes.first)
+    
 
       myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
       myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
 
       var array = []
 
-      function arrayToList(array) {
-        let list = null;
-        for (let i = array.length - 1; i >= 0; i--) {
-            list = { value: array[i], rest: list };
-        }
-        return list;
-    }
+   
 
 
       myDiagram.addDiagramListener('Modified', function() {
-      
-        array = JSON.parse(myDiagram.model.toJson())
-        setDiagram(array.nodeDataArray)
-        // const last = array.nodeDataArray
-        // const lastNode = last[last.length-1]
-        // //lastNode["name"] = stateRef.current.nameOfDiagram;
 
-        // // DiagramVisualService.createDiagramVisual(lastNode)
-
-        // let listOfNodes = arrayToList(array.nodeDataArray)
-        // let listOfLinks = arrayToList(array.linkDataArray)
         
-        setLinks(array.linkDataArray)
-
-        let diagram = {
-          name: stateRef.current.nameOfDiagram,
-          links: null,
-          diagramVisuals: array.nodeDataArray,
-          businessCapabilities: null
-        }
-
-        // DiagramService.createDiagram(diagram
-        // //updateDataVisual(array.nodeDataArray)
-        // //updateLinks(array.linkDataArray) 
       
-        
-        // BusinessCapabilityService.getBusinessCapabilities().then(res=>{
-        // })
       });
-      myDiagram.addDiagramListener('ExternalObjectsDropped',function(){
-        for (var it = myDiagram.selection.iterator; it.next(); ) {
-          var part = it.value;  // part is now a Node or a Group or a Link or maybe a simple Part
-          if (part instanceof go.Node) {
-            
-          
-        }
-          else if (part instanceof go.Link) {  }
-        }
-       
-        
-       
+      myDiagram.addDiagramListener('ExternalObjectsDropped',function(e){
 
         
-        array = JSON.parse(myDiagram.model.toJson())
-        console.log(array)
-        setDiagram(array.nodeDataArray)
-        setLinks(array.linkDataArray)
-        setModalContent(true)
-       
+         array = JSON.parse(myDiagram.model.toJson())
+         setDiagram(array.nodeDataArray)
+         setModalContent(true)
+
 
       });
+     
       myDiagram.addDiagramListener('LinkDrawn',function(){
         array = JSON.parse(myDiagram.model.toJson())
-        setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
+       
+
+        myDiagram.selection.each( function(part){
+  
+            if (part instanceof go.Node) {
+
+          }
+            else if (part instanceof go.Link) { 
+            myDiagram.model.startTransaction();
+            myDiagram.model.setDataProperty(part.data,"strokeWidth",10);
+            myDiagram.model.commitTransaction("modified properties");
+              
+             }
+        });
+
 
       });
       myDiagram.addDiagramListener('LinkRelinked',function(){
         array = JSON.parse(myDiagram.model.toJson())
-        setDiagram(array.nodeDataArray)
+        // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
 
       });
       myDiagram.addDiagramListener('TextEdited',function(){
         array = JSON.parse(myDiagram.model.toJson())
-        setDiagram(array.nodeDataArray)
+        // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
 
       });
       myDiagram.addDiagramListener('SelectionDeleted', function() {
 
         array = JSON.parse(myDiagram.model.toJson())
-        setDiagram(array.nodeDataArray)
+        // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
       
 
@@ -744,8 +719,13 @@ const Diagram = React.memo((props)=>{
       myDiagram.addDiagramListener('ChangedSelection', function() {
 
         array = JSON.parse(myDiagram.model.toJson())
-        setDiagram(array.nodeDataArray)
+        // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
+
+      
+     
+     
+    
 
        
 
@@ -755,61 +735,103 @@ const Diagram = React.memo((props)=>{
       });
       myDiagram.addDiagramListener('ChangingSelection', function(e) {
 
-        myDiagram.selection.each( function(part){
-        console.log(part.data)
 
-           // part is now a Node or a Group or a Link or maybe a simple Part
-          if (part instanceof go.Node) {
-            myDiagram.model.startTransaction();
-            myDiagram.model.setDataProperty(part.data, "frontend", businessRef.current.frontend);
-            myDiagram.model.setDataProperty(part.data,"backend",businessRef.current.backend);
-            myDiagram.model.setDataProperty(part.data,"users",businessRef.current.user);
-            myDiagram.model.setDataProperty(part.data,"date",businessRef.current.date);
-            myDiagram.model.commitTransaction("modified properties");
-        
-            array = JSON.parse(myDiagram.model.toJson())
-
-            console.log(array.nodeDataArray)
-
-
+        if(modelRef.current.open===false){
           
+
+        myDiagram.selection.each( function(part){
+
+
+         if (part instanceof go.Node) {
+
+         
+           myDiagram.model.startTransaction();
+           myDiagram.model.setDataProperty(part.data, "frontend", businessRef.current.frontend);
+           myDiagram.model.setDataProperty(part.data,"backend",businessRef.current.backend);
+           myDiagram.model.setDataProperty(part.data,"users",businessRef.current.user);
+           myDiagram.model.setDataProperty(part.data,"date",businessRef.current.date);
+           myDiagram.model.setDataProperty(part.data,"services",businessRef.current.services);
+           myDiagram.model.setDataProperty(part.data,"departments",businessRef.current.departments);
+           myDiagram.model.setDataProperty(part.data,"termination",businessRef.current.termination);
+           myDiagram.model.setDataProperty(part.data,"license",businessRef.current.license);
+           myDiagram.model.setDataProperty(part.data,"version",businessRef.current.version);
+           myDiagram.model.setDataProperty(part.data,"creator",businessRef.current.creator);
+           myDiagram.model.commitTransaction("modified properties");
+       
+           array = JSON.parse(myDiagram.model.toJson())
+
+           
+           setModalContent(false)
+           setDiagram(array.nodeDataArray)
+           setLinks(array.linkDataArray)
+         
+       }
+         else if (part instanceof go.Link) {  }
+     });
+    }
+
+    array = JSON.parse(myDiagram.model.toJson())
+    setDiagram(array.nodeDataArray)
+    setLinks(array.linkDataArray)
+    
+
+    
+        
+
+      });
+
+      var inspector = new Inspector('myInspector', myDiagram,
+      {  
+        showAllProperties: true,
+        properties: {
+          // key would be automatically added for nodes, but we want to declare it read-only also:
+          "key": { readOnly: true, show: Inspector.showIfPresent },
+          // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
+          "fill": { show: Inspector.showIfPresent, type: 'color' },
+          "stroke": { show: Inspector.showIfPresent, type: 'color' },
+          "backend": {show: Inspector.showIfPresent,type: 'checkbox'},
+          "frontend":{show: Inspector.showIfPresent,type: 'checkbox'},
+          
+          
+
         }
-          else if (part instanceof go.Link) {  }
       });
-        
-
-        console.log(array.nodeDataArray)
-
-        console.log("changed")
-        
-
-      });
-
 
       return myDiagram
-    
-      };
+
+    }
+
+     
+
+
+      
+    useEffect(()=>{
+      diagramRef.current = mydiagram;
+    },[mydiagram])
+
+    useEffect(()=>{
+      linksRef.current = links;
+
+    },[links])
+      
 
 
       useEffect(()=>{
 
+
         setDiagramName(nameOfDiagram)
-        console.log(saved.saved)
-        setSaved(saved.saved)
-        if(saved){
-          console.log("printsaved")
-          console.log(nameOfDiagram.nameOfDiagram)
-          console.log(diagramRef.current)
+    
+ 
+        if(saved.saved){
+         
 
           var diagramNodes ={
             name: nameOfDiagram.nameOfDiagram,
-            diagramVisuals: diagramRef.current,
-            links:linksRef.current,
+            diagramVisuals: mydiagram,
+            links:links,
             businessCapabilities:null
           }
-          console.log(diagramNodes)
-
-
+          
           DiagramService.createDiagram(diagramNodes).then((res) => {
             if (res.status === 200) {
               swal("Success", "Your data is saved", "success");
@@ -827,33 +849,78 @@ const Diagram = React.memo((props)=>{
           
           setSaved(false)
         }
-        
-    
-        
-    },[nameOfDiagram,saved,business]);
+        if(saved.upload){
+
+          DiagramService.getDiagramByName(nameOfDiagram.nameOfDiagram).then((res)=>{
+            if (res.status ===200){
+              var diagram = []
+
+              var node = res.data.diagramVisuals
+              var link = res.data.links
+              
+              for (var i=0; i<node.length;i++){
+
+                diagram.push({key:node[i].key,frontend:node[i].frontend,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,loc:node[i].loc,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,dateOfTermination:node[i].dateOfTermination,creator:node[i].creator})
+              }
+
+              var links = []
 
 
-  
+              for(var i=0;i<link.length;i++){
+                links.push({keyOfLink:link[i].keyOfLink,from:link[i].from,to:link[i].to,points:link[i].points})
+
+              }
+
+
+
+
+
+              setDiagram(diagram)
+              setLinks(links)
+              updateSaved('upload',false)
+             
+              
+              
+            }
+
+
+          }).catch(err => {
+            if (err) {
+              swal("Oh noes!", "Something  wrong happened with your data!", "error");
+            } else {
+              swal.stopLoading();
+              swal.close();
+            }
+          })
+          
+          
+        }
+        
+        
+    },[nameOfDiagram,saved,business,mydiagram,links]);
+
 return (
 
-  
     <>
     <BusinessCapabilities.Provider value = {{business,updateBusiness}}>
     <OpenPopup.Provider value = {{modalContent,updateOpen}}>
-    <div>
+    <div >
     <ReactDiagram
           initDiagram={window.initDiagram}
           divClassName='myDiagramDiv'
-          nodeDataArray = {diagramRef.current.diagram}
-          linkDataArray={linksRef.current.links}/>
+          nodeDataArray = {mydiagram}
+          
+          linkDataArray={links} />
+          
           {modelRef.current ? <PopupExample open = {modelRef.current} /> : null }
     
 
-    </div>
+          </div>
     </OpenPopup.Provider>
     </BusinessCapabilities.Provider>
+    
 </>
 );
-});
+};
 
-export default React.memo(Diagram);
+export default Diagram;
