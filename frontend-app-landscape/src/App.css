@@ -7,7 +7,7 @@
   background-color: white;
 }
 .nbar {
-  
+
     font-family: arial;
     margin-left: 50px;
     letter-spacing: 5px;
@@ -17,11 +17,11 @@
 .nav-links {
   margin-top: -20px;
   color: white;
-  width: 920px;
-    font: italic 250% arial, sans-serif;
+
+    font: italic 200% arial, sans-serif;
     letter-spacing: -2px;
-  
-  
+
+
 }
 
 .nav-links:hover {
@@ -38,9 +38,9 @@
     margin-left: 55px;
     letter-spacing: 5px;
     width: 100%;
-    
-    
-    
+
+
+
 }
 .nav-link {
   text-decoration: none;
@@ -62,10 +62,10 @@
   /* background: var(--background-color);
   color: var(--text-color);
   font-weight: var(--font-weight); */
-  
+
   height: 2000px;
   text-align: center;
-} 
+}
 
 /* body.dark {
 --background-color: var(--blue);
@@ -92,7 +92,7 @@ font-weight: 400;
 }
 
 .darkModeIcon {
-  
+
   font-size: 20px;
 
 }
@@ -125,11 +125,20 @@ display: flex;
 .site_heading{
   font: bold 175% arial, sans-serif;
   color: #E91741;
-  padding: 5px 0 10px 0;
-  
+  margin-top: 50px;
+
 
 }
 
+.click{
+  width: 100px;
+  height: 30px;
+  background:white;
+}
+
+.icon{
+  font-size: 50px;
+}
 
 
 
