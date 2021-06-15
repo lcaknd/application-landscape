@@ -1,17 +1,18 @@
 
 
   .myDiagramDiv {   
-    background-color: #d9dedf;
+    /* background-color: #d9dedf; */
     width: 900px;
-    height: 100vh;
+    height: 120vh;
     position: relative;
     border-radius: 5px;
+    border:dashed;
   } 
   
   .myPaletteDiv {
       width: 280px;
       height: 100px;
-      background: #bbecf8;
+      background: -webkit-linear-gradient(#5E5757, #F63039);
       
   }
 

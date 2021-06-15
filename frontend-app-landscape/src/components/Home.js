@@ -14,15 +14,18 @@ const Nav = styled.div`;
 const navbar =()=> {
     return (
         <>
-        
-        <Nav > 
+        <div class="site_heading">
+        <h1>Welcome to our Application Landscape</h1>
+        </div>
+      <Nav > 
+            
         <div class="nav">
         <div>
         <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
-                                    {item.icon}{item.title} 
+                                    {item.icon}
                                     </a>
                                
                             )
@@ -56,7 +59,7 @@ const navbar =()=> {
                             )
                         })}
                         </div>
-                        <div class="nbar">
+                        {/* <div class="nbar">
                         {MenuItem3.map((item) => {
                             return(
                                     
@@ -66,25 +69,19 @@ const navbar =()=> {
                                
                             )
                         })}
-                        </div>
+                        </div> */}
                         
-                    <div class="darkModeIcon">
-                        <div class="sun">
-                        <FiIcons.FiSun />
-                        </div>
-                        <div class="moon">
-                        <FiIcons.FiMoon />
-                        </div>
-                        </div>
+                   
                         
                         <DarkMode/>
                         </div>     
         </Nav>
+       
         
         
         <h1>This is Home. </h1>
          <h1><a href="landscape">Click here </a>to start or continue working on the landscape.</h1>
-         <h1>Go to <a href="settings">Settings</a> or check out <a href="filter">Filter</a>.</h1>
+        
          
          
          

@@ -7,16 +7,7 @@ import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
 
 const Nav = styled.div`
-background: #cfeef5;
-height: 80px;
-width:100vw;
-display: flex;
-position: relative;
-${'' /* justify-content: flex-start; */}
-align-items: center;
-border-radius: 5px;
-margin-left: 5px;
-${'' /* right: 5px; */}
+
 `;
 
 const NavTop =()=> {
@@ -24,12 +15,14 @@ const NavTop =()=> {
     return (
         <>
         <Nav > 
+            <div class="nav">
         <div>
         <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
-                                    {item.icon}{item.title} 
+                                    {item.icon}
+                                    {/* {item.title} */}
                                     </a>
                                
                             )
@@ -63,7 +56,7 @@ const NavTop =()=> {
                             )
                         })}
                         </div>
-                        <div class="nbar">
+                        {/* <div class="nbar">
                         {MenuItem3.map((item) => {
                             return(
                                     
@@ -73,17 +66,11 @@ const NavTop =()=> {
                                
                             )
                         })}
-                        </div>
+                        </div> */}
                         
-                        <div class="darkModeIcon">
-                        <div class="sun">
-                        <FiIcons.FiSun />
-                        </div>
-                        <div class="moon">
-                        <FiIcons.FiMoon />
-                        </div>
-                        </div>
+                       
                         <DarkMode/>
+                        </div>
                     
         </Nav>
         </>

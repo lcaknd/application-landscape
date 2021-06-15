@@ -1,5 +1,6 @@
 import React from "react"
 import "./DarkMode.css"
+import * as FiIcons  from "react-icons/fi";
 
 const DarkMode = () => {
     let clickedClass = "clicked"
@@ -37,7 +38,7 @@ const DarkMode = () => {
         className={theme === "dark" ? clickedClass : ""}
         id="darkMode"
         onClick={e => switchTheme(e)}
-      ></button>
+      ><div class="darkModeIcon"><div class="sun"><FiIcons.FiSun /></div><div class="moon"><FiIcons.FiMoon /></div></div></button>
     )
   }
   

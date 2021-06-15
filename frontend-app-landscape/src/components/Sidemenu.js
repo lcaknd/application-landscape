@@ -15,24 +15,15 @@ import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 
 
-const Nav = styled.div`
-background: #cfeef5;
-height: 80px;
-width:100%;
-display: flex;
-position: relative;
-align-items: center;
-border-radius: 5px;
-margin-left: 5px;
-`;
+
 
 const SidebarNav = styled.nav`
-background: #cfeef5;
+background: -webkit-linear-gradient(#5E5757, #F63039);
 width: 280px;
 display: flex; 
 justify-content: center;
 position: relative;
-margin-top: 0px;
+margin-top: -15px;
 float: left;
 left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
 
@@ -54,6 +45,7 @@ left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
 
 const WholeDiv = styled.div`
 float: right;
+
 `;
 
 const NavIcon = styled.div`
@@ -63,6 +55,7 @@ const NavIcon = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top:-65px;
 `;
 
 
@@ -75,10 +68,7 @@ const SidebarRWrap = styled.div`
 `;
 
 
-const Box = styled.div`
-background:#cfeef5;
-width:100%
-`;
+
 
 
 const Sidemenu =()=> {
@@ -87,18 +77,18 @@ const Sidemenu =()=> {
 
   const showSidebar = () => setSidebar(!sidebar);
 
-    const [sidebarR, setSidebarR] = useState(false);
+    // const [sidebarR, setSidebarR] = useState(false);
 
-    const showSidebarR = () => setSidebarR(!sidebarR);
+    
 
     return (
         <>
         <WholeDiv>
-        <Box>
+        
         <NavIcon>
         {sidebar ? <AiIcons.AiOutlineClose onClick={showSidebar} /> :<FaIcons.FaBars onClick={showSidebar}/>}
        </NavIcon>
-     </Box>
+     
         <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
         

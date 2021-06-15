@@ -5,7 +5,7 @@ import * as FcIcons from "react-icons/fc";
 
 export const MenuItem_logo = [
     {
-        title: 'Insert anything',
+        title: 'Application Landscape',
         icon:<FcIcons.FcWorkflow />,
         url: '/',
         cName: 'nav-link'

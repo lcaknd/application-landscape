@@ -16,21 +16,28 @@ import withReactContent from 'sweetalert2-react-content'
 
 
 const Sidebar2Nav = styled.nav`
-background: #cfeef5;
-width: 265px;
-position: relative;
+background: -webkit-linear-gradient(#5E5757, #F63039);;
+width: 280px;
 display: flex; 
 justify-content: center;
+position: relative;
+margin-top: -15px;
+float:left;
+
+
+
 display: ${({ sidebarR }) => (sidebarR ? 'flex' : 'none')};
 `;
 
 const NavRIcon = styled.div`
-  margin-left: 2rem;
+  margin-left: 220px;
+  margin-top:-65px;
   font-size: 2rem;
   height: 80px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  
 `;
 
 
@@ -38,14 +45,10 @@ const SidebarRWrap = styled.div`
   width: 100%;
 `;
 const WholeDiv = styled.div`
-float: left;
+float: right;
 
 `;
-const Box = styled.div`
-display: flex;
-background:#cfeef5;
-width:265px;
-`;
+
 
 const SideMenuRight =(props)=> {
  
@@ -148,11 +151,11 @@ const SideMenuRight =(props)=> {
     return (
         <>
         <WholeDiv>
-        <Box>
+        
         <NavRIcon>
      {sidebarR ? <AiIcons.AiOutlineClose onClick={showSidebarR} /> :<FaIcons.FaCodeBranch onClick={showSidebarR}/>}
      </NavRIcon>
-     </Box>
+     
         <Sidebar2Nav sidebarR={sidebarR}>
         <SidebarRWrap>
         {test.map((item,index)=> {
