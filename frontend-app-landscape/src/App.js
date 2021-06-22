@@ -7,6 +7,11 @@ import React from 'react'
 import DiagramScreen from './DiagramScreen';
 
 import './components/DarkMode.css';
+{/* <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+</head>
+</html> */}
 
 
 

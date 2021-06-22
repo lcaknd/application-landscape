@@ -1,18 +1,28 @@
 
 #darkMode {
-    background-color: black;
-    background-size: 30px 30px;
-    margin-right: 80px;
-    margin-bottom: 10px;
-    width: 100px;
-    height: 45px;
+    background-color: -webkit-linear-gradient(#5E5757, #F63039);
+    /* background-size: 30px 30px; */
+    /* margin-right: 80px;
+    margin-bottom: 10px; */
+    width: 280px;
+    height: 50px;
+    background:none;
+   border:none;
+   margin-left: -35px;
+    /* justify-content: left; */
+    /* transition: background-color 0.3s ease-in-out, filter 0.3s ease-in-out; */
     
-    border: none;
-    border-radius: 50%;
-    transition: background-color 0.3s ease-in-out, filter 0.3s ease-in-out;
     
     
   }
+  .darkModeIcon{
+    text-align: left;
+    font-size:17px;
+    margin-left: 15px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+  
   
   #darkMode:hover,
   #darkMode:focus {

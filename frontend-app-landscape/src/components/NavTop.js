@@ -6,6 +6,12 @@ import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
 
+
+
+import SideMenuRight from "./SideMenuRight";
+
+import "./Diagram.css"
+
 const Nav = styled.div`
 
 `;
@@ -68,11 +74,14 @@ const NavTop =()=> {
                         })}
                         </div> */}
                         
+                       {/* <div>
+                        <DarkMode/></div> */}
                        
-                        <DarkMode/>
                         </div>
                     
         </Nav>
+        <div class="wrapR">
+                        <SideMenuRight/></div>
         </>
     
     );

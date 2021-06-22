@@ -73,8 +73,9 @@ const DiagramScreen= ()=> {
         <div className="container">
         
        <Sidemenu  />
+       {/* <SideMenuRight/> */}
         <Diagram nameOfDiagram={nameOfDiagram} diagram={diagram}/>
-       <SideMenuRight />
+       
        </div>
        </div>
        

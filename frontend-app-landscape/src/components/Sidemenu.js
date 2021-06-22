@@ -23,9 +23,10 @@ width: 280px;
 display: flex; 
 justify-content: center;
 position: relative;
-margin-top: -15px;
+margin-top: -19px;
 float: left;
 left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
+z-index:3;
 
 // const Sidebar2Nav = styled.nav`
 // background: #cfeef5;
@@ -55,7 +56,7 @@ const NavIcon = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top:-65px;
+  margin-top:-75px;
 `;
 
 

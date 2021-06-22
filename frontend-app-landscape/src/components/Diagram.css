@@ -2,11 +2,14 @@
 
   .myDiagramDiv {   
     /* background-color: #d9dedf; */
-    width: 900px;
+    width: 100%;
     height: 120vh;
-    position: relative;
+    position: absolute;
     border-radius: 5px;
     border:dashed;
+    z-index:2;
+    margin-left: -275px;
+    margin-top:-10px;
   } 
   
   .myPaletteDiv {
@@ -26,7 +29,7 @@
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 500;
+    /* z-index: 500; */
   }
 
   .handle {
@@ -50,18 +53,18 @@
 One simple way of making a div fill its space,
 with allowances for the title (top) and the resize handle (bottom)
 */
-  #paletteContainer {
+  /* #paletteContainer {
     position: absolute;
     bottom: 14px;
     left: 0px;
     right: 0px;
     top: 14px;
-  }
+  } */
   .container {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
-
+    
   }
 
   
