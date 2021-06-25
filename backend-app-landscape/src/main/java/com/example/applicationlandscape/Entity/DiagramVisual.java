@@ -26,7 +26,7 @@ public class DiagramVisual {
     private int name;
 
 
-    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horizontal, String category, String users, boolean frontend, boolean backend, String date) {
+    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horizontal, String category, String users, boolean frontend, boolean backend, String date, String[] services, String[] departments, String version, String license, String termination, String creator) {
         this.key= key;
         this.fill = fill;
         this.loc = loc;
@@ -39,6 +39,12 @@ public class DiagramVisual {
         this.frontend = frontend;
         this.backend = backend;
         this.date = date;
+        this.services = services;
+        this.departments = departments;
+        this.version = version;
+        this.license = license;
+        this.termination = termination;
+        this.creator = creator;
     }
 
         @Column(name="key_nr")
@@ -53,6 +59,68 @@ public class DiagramVisual {
         private boolean frontend;
         private boolean backend;
         private String date;
+
+    public String[] getServices() {
+        return services;
+    }
+
+    public void setServices(String[] services) {
+        this.services = services;
+    }
+
+    public String[] getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(String[] departments) {
+        this.departments = departments;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public String getTermination() {
+        return termination;
+    }
+
+    public void setTermination(String termination) {
+        this.termination = termination;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+
+    private String [] services;
+
+
+    private String [] departments;
+
+    private String version;
+    private String license;
+    private String termination;
+    private String creator;
+
+
+
 
     public String getUsers() {
         return users;

@@ -8,25 +8,26 @@ import javax.persistence.*;
 public class Link {
 
     @Id
+    @Column(name="name")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-
+    private int name;
 
     private int keyOfLink;
-    private String fromNode;
-    private String toNode;
+    @Column(name="from_Node")
+    private int from;
+    @Column(name="to_Node")
+    private int to;
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private Double [] points;
 
-    public int getKey() {
+    public int getKeyOfLink() {
         return keyOfLink;
     }
 
-    public void setKey(int key) {
-        this.keyOfLink = key;
+    public void setKeyOfLink(int keyOfLink) {
+        this.keyOfLink = keyOfLink;
     }
 
     public Double[] getPoints() {
@@ -37,31 +38,31 @@ public class Link {
         this.points = points;
     }
 
-    public String getFromNode() {
-        return fromNode;
+    public int getFrom() {
+        return from;
     }
 
-    public void setFromNode(String fromNode) {
-        this.fromNode = fromNode;
+    public void setFrom(int from) {
+        this.from = from;
     }
 
-    public String getToNode() {
-        return toNode;
+    public int getTo() {
+        return to;
     }
 
-    public void setToNode(String toNode) {
-        this.toNode = toNode;
+    public void setTo(int to) {
+        this.to = to;
     }
 
     public Link(){
 
     }
 
-    public Link(long id, int key, String fromNode, String toNode, Double[] points) {
-        this.id = id;
-        this.keyOfLink = key;
-        this.fromNode = fromNode;
-        this.toNode = toNode;
+    public Link(int id, int keyOfLink, int from, int to, Double[] points) {
+        this.name = id;
+        this.keyOfLink = keyOfLink;
+        this.from = from;
+        this.to = to;
         this.points = points;
     }
 }
