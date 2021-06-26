@@ -12,6 +12,7 @@ export const DataContext = createContext({
     // dataBusinessCapabilities: null,
     // links: null,
     setNameOfDiagram:() => {},
+    getNameOfDiagram:() => {},
     // setDataBusinessCapabilities:()=>{},
     // setLinks:()=>{}
 });
@@ -33,6 +34,9 @@ const DiagramScreen= ()=> {
 
     const updateName = (property, value) =>
     setNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    
+    
 
     const updateSaved = (property, value) =>
     setSaved(prevInfo => ({ ...prevInfo, [property]: value }));
@@ -61,6 +65,7 @@ const DiagramScreen= ()=> {
        
         <SaveDiagram.Provider value = {{saved, updateSaved}}>
         <DataContext.Provider value= {{nameOfDiagram,updateName}}>
+        
         <div id='diagram' className="App">
         <div>
             <NavTop />
@@ -68,13 +73,16 @@ const DiagramScreen= ()=> {
         <div className="container">
         
        <Sidemenu  />
+       {/* <SideMenuRight/> */}
         <Diagram nameOfDiagram={nameOfDiagram} diagram={diagram}/>
-       <SideMenuRight />
+       
        </div>
        </div>
+       
        </DataContext.Provider>
        </SaveDiagram.Provider>
       
+       
        
       
     

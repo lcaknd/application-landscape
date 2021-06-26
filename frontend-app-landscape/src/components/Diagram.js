@@ -3,6 +3,19 @@ import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
+import { Context, DiagramContext } from '../DiagramScreen';
+  import {
+    Button,
+    Checkbox,
+    Grid,
+    Header,
+    Icon,
+    Image,
+    Menu,
+    Segment,
+    Sidebar,
+  } from 'semantic-ui-react'
+import DiagramVisualService from './ApiService/DiagramVisualService';
 import { DataContext, SaveDiagram } from '../DiagramScreen';
 import DiagramService from './ApiService/DiagramService';
 import PopupExample from './PopupExample';

@@ -117,16 +117,21 @@ if (index !== -1) {
           <div className="header"> Modal Title </div>
           <div className="menu">
           <form>
-            <label>
+            <div class="test">
+            <label >
               Frontend:
               <input
                 name="frontend" type="checkbox"
                 checked={stateRef.current.frontend}
                 onChange={handleInputChange}
               />
+              
             </label>
+            </div>
+            
           </form>
           <form>
+          <div class="test">
           <label>
               Backend:
               <input
@@ -135,8 +140,10 @@ if (index !== -1) {
                 onChange={handleInputChange}
             />
             </label>
+            </div>
           </form>
           <form>
+          <div class="test">
           <label>
               Number of users: 
               <input style={{width: '75px'}}
@@ -145,6 +152,45 @@ if (index !== -1) {
                 onChange={handleInputChange}
             />
             </label>
+            </div>
+          </form>
+          <form>
+          <div class="test">
+          <label>
+              Creator:
+              <input style={{width: '75px'}}
+                name="creator" type="text"
+                value={stateRef.current.creator}
+                onChange={handleInputChange}
+            />
+            </label>
+            </div>
+          </form>
+          <form>
+          <div class="test">
+            <label>
+              Date of creation:
+              <input
+              name="date" type="Date"
+              value={stateRef.current.date}
+              onChange={handleInputChange}
+              />
+              
+            </label>
+            </div>
+          </form>
+          <form>
+          <div class="test">
+            <label>
+              Date of termination:
+              <input
+              name="termination" type="Date"
+              value={stateRef.current.termination}
+              onChange={handleInputChange}
+              />
+              
+            </label>
+            </div>
           </form>
           <form>
           <label>
@@ -179,6 +225,7 @@ if (index !== -1) {
             </label>
           </form>
           <form>
+          <div class="test">
             <label>
               License:
               <select name="license" id="license" value= {stateRef.current.license} onChange={handleInputChange}>
@@ -190,6 +237,10 @@ if (index !== -1) {
             </label>
           </form>
           <form>
+            </div>
+          </form>
+          <form>
+          <div class="test">
             <label>
               Version:
               <select name="version" id="version" value= {stateRef.current.version} onChange={handleInputChange}>
@@ -201,6 +252,12 @@ if (index !== -1) {
             </label>
           </form>
           <form method="post" onChange={handleInputServices} >
+            </div>
+            
+          </form>
+          
+          <form method="post" onChange={handleInputServices} >
+          <div class="test">
             <fieldset><legend>Services</legend>
               <label> Data
               <input name="Data" type="checkbox" id="version" value= "data"/>
@@ -232,6 +289,13 @@ if (index !== -1) {
               </fieldset>
           </form>
           <form method="post" onChange={handleInputDepartments}>
+              </div>
+
+              
+          </form>
+          
+          <form method="post" onChange={handleInputDepartments}>
+          <div class="test">
             <fieldset><legend>Departments</legend>
               <label> Finance
               <input name="Finance" type="checkbox"  value= "finance"/>
@@ -263,6 +327,7 @@ if (index !== -1) {
 
 
               </fieldset>
+              </div>
           </form>
       </div>
         </div>

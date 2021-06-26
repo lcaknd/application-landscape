@@ -9,10 +9,17 @@ import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/theme';
 import { GlobalStyles } from './components/global';
+import Joke from "./components/Joke"
+
 import React from 'react'
 import DiagramScreen from './DiagramScreen';
 
 import './components/DarkMode.css';
+{/* <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+</head>
+</html> */}
 
 
 import DiagramScreen from './DiagramScreen';
@@ -32,18 +39,17 @@ function App() {
            <Home/>
            </Route>
 
-           <Route exact path="/filter">
-         <Filter/>
-         </Route>
+           
 
          <Route exact path="/landscape">
          <DiagramScreen/>
          </Route>
+         <Route exact path="/joke">
+           <Joke/>
+         </Route>
          
            
-         <Route exact path="/settings">
-         <Settings/>
-         </Route>
+         
          
        </Switch>
     
