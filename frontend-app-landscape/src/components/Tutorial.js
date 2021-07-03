@@ -5,6 +5,10 @@ import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
 import * as AiIcons from 'react-icons/ai'
+import  GIF1 from '../GIF/Node_connect.gif'
+import  GIF2 from '../GIF/Change_text.gif'
+import  GIF3 from '../GIF/Change_color.gif'
+
 
 
 const Nav = styled.div`;
@@ -77,20 +81,15 @@ const navbar =()=> {
                         </div>     
         </Nav>
        
-        
-        <div class="site_heading">
-        <h1>Welcome to our Application Landscape</h1>
+        <h1>Tutorials</h1>
+        <div>
+        <img src={GIF1} alt="loading..."/>
+        <h2>Connecting a Node</h2>
         </div>
-        <h1>This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
-         <h1>To start or continue working on the landscape</h1>
-         <button class="click"><a href="landscape">Click here </a></button>
-         <h1>You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial">Tutorials</a>  </h1>
-         <h1>For further Information, contact us at</h1>
-         <div class="icon">
-         <AiIcons.AiOutlineArrowDown/>
-         </div>
-         <h1> <a href="joke">thisemaildoesnotexist@justaproject.com</a></h1>
-         
+        <div><img src={GIF2} alt="loading..."/>
+        <h2>Change the text of a node</h2></div>
+        <div><img src={GIF3} alt="loading..."/>
+        <h2>Change the color of a node</h2></div>
         
          
          

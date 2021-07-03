@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from "./components/Home";
 import Joke from "./components/Joke"
-
+import Tutorial from "./components/Tutorial"
 import React from 'react'
 import DiagramScreen from './DiagramScreen';
 
@@ -35,6 +35,9 @@ function App() {
          </Route>
          <Route exact path="/joke">
            <Joke/>
+         </Route>
+         <Route exact path="/tutorial">
+           <Tutorial/>
          </Route>
          
            
