@@ -20,6 +20,7 @@ export const DataContext = createContext({
 export const SaveDiagram = createContext({
     saved: false,
     upload: false,
+    layout: "ForceDirectedLayout",
     setSaved: () =>{}
 })
 
@@ -27,9 +28,9 @@ export const SaveDiagram = createContext({
 
 const DiagramScreen= ()=> {
 
-    const [nameOfDiagram,setNameOfDiagram] = useState(null)
-    const [saved,setSaved] = useState(false)
-    const [diagram,setDiagram]=useState([{key:1, text: 'Madzia',loc:"124 125",category:"Hexagon" ,fill: "#C0D7E9"},{key:3, text: 'Hello3',loc:"124 200",category:"Database" ,fill: "#C0D7E9"}])
+    const [nameOfDiagram,setNameOfDiagram] = useState("")
+    const [saved,setSaved] = useState({layout:"ForceDirectedLayout",saved:false,upload:false})
+    
  
 
     const updateName = (property, value) =>
@@ -45,11 +46,10 @@ const DiagramScreen= ()=> {
 
 
     useEffect(()=>{
-        console.log(nameOfDiagram)
-        console.log(saved.upload)
     
+    console.log(saved.layout)
 
-    }, [nameOfDiagram]);
+    }, [nameOfDiagram,saved]);
 
     
 

@@ -3,8 +3,6 @@ import * as go from 'gojs';
 import {  ReactPalette } from 'gojs-react';
 import "./Diagram.css"
 import paletteAllShapes from './PaletteAllShapes';
-import paletteOvalShapes from './PaletteOvalShapes';
-import paletteQuadrangle from './PaletteQuadrangle';
 import paletteGroups from './PaletteGroups';
 
 
@@ -67,10 +65,6 @@ const Palette =(props)=>{
     switch (name) {
       case 'All Shapes':
         return paletteAllShapes
-      case 'Oval Shapes':
-        return paletteOvalShapes
-      case 'Quadrangle':
-        return paletteQuadrangle
       case 'Groups':
         return paletteGroups;
       default: 

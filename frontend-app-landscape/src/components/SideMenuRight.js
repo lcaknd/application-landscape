@@ -137,6 +137,18 @@ const SideMenuRight =(props)=> {
               })
  break;
 
+              case "ForceDirectedLayout":
+                updateSaved('layout',"ForceDirectedLayout")
+                break;
+              case "LayeredDiagramLayout":
+                updateSaved('layout',"LayeredDiagramLayout")
+              break;
+              case "TreeLayout":
+                updateSaved('layout',"TreeLayout")
+              break;
+
+
+
     }
 
 

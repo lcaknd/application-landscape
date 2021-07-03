@@ -26,13 +26,14 @@ public class DiagramVisual {
     private int name;
 
 
-    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horizontal, String category, String users, boolean frontend, boolean backend, String date, String[] services, String[] departments, String version, String license, String termination, String creator) {
+    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horiz, String category, String users, boolean frontend, boolean backend, String date, String[] services, String[] departments, String version, String license, String termination, String creator,int groupNumber) {
         this.key= key;
+        this.groupNumber = groupNumber;
         this.fill = fill;
         this.loc = loc;
         this.text = text;
         this.isGroup = isGroup;
-        this.horizontal = horizontal;
+        this.horiz = horiz;
         this.category = category;
         this.name = name;
         this.users = users;
@@ -53,12 +54,24 @@ public class DiagramVisual {
         private String loc;
         private String text;
         private boolean isGroup;
-        private boolean horizontal;
+        private boolean horiz;
         private  String category;
         private String users;
         private boolean frontend;
         private boolean backend;
         private String date;
+
+        @Column(name="group_diagram")
+        private int groupNumber;
+
+
+    public int getGroupNumber() {
+        return groupNumber;
+    }
+
+    public void setGroupNumber(int groupNumber) {
+        this.groupNumber = groupNumber;
+    }
 
     public String[] getServices() {
         return services;
@@ -110,16 +123,12 @@ public class DiagramVisual {
 
 
     private String [] services;
-
-
     private String [] departments;
 
     private String version;
     private String license;
     private String termination;
     private String creator;
-
-
 
 
     public String getUsers() {
@@ -186,20 +195,20 @@ public class DiagramVisual {
         this.text = text;
     }
 
-    public boolean isGroup() {
+    public boolean isIsGroup() {
         return isGroup;
     }
 
-    public void setGroup(boolean group) {
+    public void setIsGroup(boolean group) {
         isGroup = group;
     }
 
-    public boolean isHorizontal() {
-        return horizontal;
+    public boolean isHoriz() {
+        return horiz;
     }
 
-    public void setHorizontal(boolean horizontal) {
-        this.horizontal = horizontal;
+    public void setHoriz(boolean horiz) {
+        this.horiz = horiz;
     }
 
     public String getCategory() {
