@@ -14,18 +14,6 @@ export const SidemenuData = [
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />
      },
-    {
-        title: 'Quadrangle',
-        icon:<BiIcons.BiRectangle />,
-        iconClosed: <RiIcons.RiArrowDownSFill />,
-        iconOpened: <RiIcons.RiArrowUpSFill />
-    },
-     {
-        title: 'Oval Shapes',
-        icon:<BsIcons.BsCircle />,
-        iconClosed: <RiIcons.RiArrowDownSFill />,
-        iconOpened: <RiIcons.RiArrowUpSFill />
-     },
      {
         title: 'Groups',
         icon:<AiIcons.AiOutlineArrowsAlt />,

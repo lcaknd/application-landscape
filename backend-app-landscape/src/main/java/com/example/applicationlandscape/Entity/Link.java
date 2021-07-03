@@ -18,6 +18,36 @@ public class Link {
     @Column(name="to_Node")
     private int to;
 
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+    private int strokeWidth;
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    public int getBandwidth() {
+        return bandwidth;
+    }
+
+    public void setBandwidth(int bandwidth) {
+        this.bandwidth = bandwidth;
+    }
+
+    private int frequency;
+    private int bandwidth;
+
+
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private Double [] points;
@@ -58,11 +88,14 @@ public class Link {
 
     }
 
-    public Link(int id, int keyOfLink, int from, int to, Double[] points) {
+    public Link(int id, int keyOfLink, int from, int to, int strokeWidth, int frequency, int bandwidth, Double[] points) {
         this.name = id;
         this.keyOfLink = keyOfLink;
         this.from = from;
         this.to = to;
+        this.strokeWidth = strokeWidth;
+        this.frequency = frequency;
+        this.bandwidth = bandwidth;
         this.points = points;
     }
 }

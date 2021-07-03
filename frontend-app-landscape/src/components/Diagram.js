@@ -6,11 +6,12 @@ import "./Diagram.css"
 import { DataContext, SaveDiagram } from '../DiagramScreen';
 import DiagramService from './ApiService/DiagramService';
 import PopupExample from './PopupExample';
+import PopUpLink from './PopUpLink';
 import swal from 'sweetalert';
-
 
 export const OpenPopup = createContext({
   open: false,
+  openLink:false,
   setOpen: () =>{}
 });
 
@@ -29,9 +30,15 @@ export const BusinessCapabilities = createContext({
     setBusiness:()=>{}
 })
 
+export const LinkBusinessCapabilities = createContext({
+  
+  
+  frequency: null,
+  bandwidth:null,
+  setBusiness:()=>{}
+})
 
 
-    
 const Diagram = (props)=>{
 
   const [modalContent, setModalContent] = React.useState(false);
@@ -42,6 +49,17 @@ const Diagram = (props)=>{
   const businessRef = useRef()
   businessRef.current = business
 
+  const [layout,setLayout] = React.useState("ForceDirectedLayout")
+  const layoutRef = useRef();
+  layoutRef.current = layout;
+
+  const [field,setField] = React.useState(null)
+  const fieldRef = useRef();
+  fieldRef.current = field;
+
+  const [linkBusiness, setBusinessLinkModel] = React.useState(null)
+  const businessLinkRef = useRef()
+  businessLinkRef.current = linkBusiness
 
 
   const updateOpen = (property, value) =>
@@ -49,6 +67,9 @@ const Diagram = (props)=>{
 
     const updateBusiness = (property, value) =>
     setBusinessModel(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    const updateLink = (property, value) =>
+    setBusinessLinkModel(prevInfo => ({ ...prevInfo, [property]: value }));
 
 
   const {nameOfDiagram, updateNameOfDiagram} = useContext(
@@ -62,7 +83,6 @@ const Diagram = (props)=>{
   saveRef.current = save;
 
 
-
   const [diagramName, setDiagramName] = useState("");
   const stateRef = useRef();
   stateRef.current = diagramName;
@@ -71,16 +91,13 @@ const Diagram = (props)=>{
   const [mydiagram, setDiagram] = useState([])
   let diagramRef = createRef();
   
-
-
-  
-
-
   const [links, setLinks]= useState([])
   const linksRef = createRef();
-  
+ 
 
   window.initDiagram=function(){
+
+
     const $ = go.GraphObject.make;  
     const myDiagram =
         $(go.Diagram, 
@@ -98,6 +115,7 @@ const Diagram = (props)=>{
                   {
                     linkKeyProperty: 'keyOfLink',
                     linkCategoryProperty:'category',
+                    nodeGroupKeyProperty:"groupNumber",
                     makeUniqueKeyFunction: (m ,data) => {
                       let k = data.key || 1;
                       while (m.findNodeDataForKey(k)) k++;
@@ -107,12 +125,65 @@ const Diagram = (props)=>{
                     
                     
                   }),
-
-
-
-            // layout: $(go.TreeLayout, {isOngoing: false })
+                  
+                  // layout: makeLayoutForced(layoutRef.current),
+                  "InitialLayoutCompleted": function(e) {
+                    if (!e.diagram.nodes.all(n => n.location.isReal())) {
+                      e.diagram.layoutDiagram(true);
+                    }
+                  },
 
           });
+
+          
+
+      //     function makeLayoutForced(pressedLayout){
+      // 
+            
+      // if (pressedLayout==="LayeredDiagramLayout") {return   $(go.LayeredDigraphLayout,  // this will be discussed in a later section
+      // { columnSpacing: 5,
+      //  setsPortSpots: false });}
+      //  else if (pressedLayout==="ForceDirectedLayout"){
+      //       return $(go.ForceDirectedLayout, {
+      //         maxIterations:100,
+      //         epsilonDistance:100,
+      //         infinityDistance:20,
+      //         arrangementSpacing:new go.Size(100,100),
+      //         defaultGravitationalMass:100,
+      //         defaultSpringStiffness:100,
+      //         defaultSpringLength:100,
+      //         defaultElectricalCharge: 100,
+      //         // isInitial: true,
+      //         // isOngoing: false, 
+      //         setsPortSpots: false
+               
+        
+
+      //        })
+      //       } else if(pressedLayout==="TreeLayout"){
+      //         return $(go.TreeLayout, {
+      //           // angle:90,
+      //           layerSpacing:20,
+      //           nodeSpacing:100,
+      //           setsChildPortSpot: false,
+      //           alignment:go.TreeLayout.AlignmentStart,
+      //           sorting: go.TreeLayout.SortingAscending,
+      //           comparer: function(a,b){
+      //             a = a.node; b=b.node;
+      //             if(a.data.key < b.data.key) return -1;
+      //             if(a.data.key > b.data.key) return 1;
+      //             return 0;
+      //           },
+      //            treeStyle: go.TreeLayout.PathDefault,
+      //           // alternateAngle:0,
+      //           setsPortSpot: false,
+      //           // isOngoing: false
+      //         }
+      //         )
+
+      //       }
+            
+      //     }
 
           function makeLayout(horiz) {  // a Binding conversion function
             if (horiz) {
@@ -211,8 +282,10 @@ const Diagram = (props)=>{
       function nodeStyle(name) {
         return [
           new go.Binding("location", "loc"
-          ,go.Point.parse).makeTwoWay(go.Point.stringify),
-          {
+          ,go.Point.parse).makeTwoWay(go.Point.stringify), new go.Binding("group","groupNumber").makeTwoWay(),
+           {
+           //  fromSpot: go.Spot.Right,  // coming out from middle-right
+          //   toSpot: go.Spot.Left ,
             locationSpot: go.Spot.Center,
             // resize the Shape, not the Node
 
@@ -232,9 +305,9 @@ const Diagram = (props)=>{
             alignment: align,  
             stretch: (horizontal ? go.GraphObject.Horizontal : go.GraphObject.Vertical),
             portId: name,  
-            fromSpot: spot,  
+            // fromSpot: spot,  
             fromLinkable: output,  
-            toSpot: spot,  
+            // toSpot: spot,  
             toLinkable: input,  
             cursor: "pointer", 
             mouseEnter: function(e, port) { 
@@ -248,6 +321,7 @@ const Diagram = (props)=>{
 
       function textStyle() {
         return {
+          name: "TEXTBLOCK",
           font: "bold 11pt Lato, Helvetica, Arial, sans-serif",
           stroke: "#8696a3"
         }
@@ -553,7 +627,7 @@ const Diagram = (props)=>{
 
         function createShape(name){
         myDiagram.nodeTemplateMap.add(name,  
-        $(go.Node, "Auto",nodeStyle(name), new go.Binding("hello"),
+        $(go.Node, "Auto",nodeStyle(name),
           $(go.Panel,  "Auto",
             $(go.Shape, name,
               { fill: "#C0D7E9", stroke: "#8696a3", strokeWidth: 2},
@@ -603,16 +677,16 @@ const Diagram = (props)=>{
       myDiagram.linkTemplate =
         $(go.Link,
           {
-            routing: go.Link.AvoidsNodes,
+            // routing: go.Link.Orthogonal,
             curve: go.Link.JumpOver,
             corner: 5, toShortLength: 4,
-            relinkableFrom: true,
-            relinkableTo: true,
+            // relinkableFrom: true,
+            // relinkableTo: true,
             reshapable: true,
             resegmentable: true,
             mouseEnter: function(e, link) { link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)"; link.findObject("HIGHLIGHT").strokeWidth = 4;},
             mouseLeave: function(e, link) { link.findObject("HIGHLIGHT").stroke = "transparent"; link.findObject("HIGHLIGHT").strokeWidth = 1; },
-            selectionAdorned: false
+            selectionAdorned: true
           },
           new go.Binding("points").makeTwoWay(),
          
@@ -660,23 +734,51 @@ const Diagram = (props)=>{
 
 
       myDiagram.addDiagramListener('Modified', function() {
+        // myDiagram.layout = makeLayoutForced(layoutRef.current)
 
-        
       
       });
       myDiagram.addDiagramListener('ExternalObjectsDropped',function(e){
 
+        e.diagram.layoutDiagram(true)
+
+        
+        
+        
+       
+        console.log(layoutRef.current)
+
+
+        e.subject.each(function(p) {
+          if (p instanceof go.Group) {
+            setModalContent(false)} else{
+              setModalContent({open:true})}
+            
+        })
+        
+
         
          array = JSON.parse(myDiagram.model.toJson())
          setDiagram(array.nodeDataArray)
-         setModalContent(true)
+         console.log(array.nodeDataArray)
+         
 
 
       });
+
+      // $(go.ForceDirectedLayout,{
+      //   defaultElectricalCharge: 50,
+      //   defaultGravitationalMass: 1,
+      //   defaultSpringLength:150,
+      //   defaultSpringStiffness: .05, // default 0.05
+      //   maxIterations :10000});
+
      
-      myDiagram.addDiagramListener('LinkDrawn',function(){
+      myDiagram.addDiagramListener('LinkDrawn',function(e){
         array = JSON.parse(myDiagram.model.toJson())
         setLinks(array.linkDataArray)
+        setModalContent({openLink:true})
+        myDiagram.select(myDiagram.findLinkForKey(e.subject.data.keyOfLink));
        
 
         myDiagram.selection.each( function(part){
@@ -685,15 +787,21 @@ const Diagram = (props)=>{
 
           }
             else if (part instanceof go.Link) { 
-            myDiagram.model.startTransaction();
-            myDiagram.model.setDataProperty(part.data,"strokeWidth",10);
-            myDiagram.model.commitTransaction("modified properties");
+
+            
+
               
              }
         });
 
 
       });
+
+      myDiagram.addDiagramListener('LayoutCompleted',function(e){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+      })
       myDiagram.addDiagramListener('LinkRelinked',function(){
         array = JSON.parse(myDiagram.model.toJson())
         // setDiagram(array.nodeDataArray)
@@ -722,14 +830,6 @@ const Diagram = (props)=>{
         // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
 
-      
-     
-     
-    
-
-       
-
-      
 
         
       });
@@ -737,12 +837,14 @@ const Diagram = (props)=>{
 
 
         if(modelRef.current.open===false){
+         
           
 
         myDiagram.selection.each( function(part){
 
 
          if (part instanceof go.Node) {
+           
 
          
            myDiagram.model.startTransaction();
@@ -756,6 +858,7 @@ const Diagram = (props)=>{
            myDiagram.model.setDataProperty(part.data,"license",businessRef.current.license);
            myDiagram.model.setDataProperty(part.data,"version",businessRef.current.version);
            myDiagram.model.setDataProperty(part.data,"creator",businessRef.current.creator);
+
            myDiagram.model.commitTransaction("modified properties");
        
            array = JSON.parse(myDiagram.model.toJson())
@@ -766,8 +869,37 @@ const Diagram = (props)=>{
            setLinks(array.linkDataArray)
          
        }
-         else if (part instanceof go.Link) {  }
+        else if (part instanceof go.Link)  {
+
+          
+            array = JSON.parse(myDiagram.model.toJson())
+            setLinks(array.linkDataArray)
+            setModalContent(false)
+          }
      });
+    }
+
+    if(modelRef.current.openLink===false){
+
+      myDiagram.selection.each( function(part){
+
+
+        if (part instanceof go.Link) {
+          var percentage = businessLinkRef.current.frequency/250
+          var stroke = percentage*5
+            myDiagram.model.startTransaction();
+            myDiagram.model.setDataProperty(part.data,"strokeWidth",stroke);
+            myDiagram.model.setDataProperty(part.data,"frequency",businessLinkRef.current.frequency);
+            myDiagram.model.setDataProperty(part.data,"bandwidth",businessLinkRef.current.bandwidth);
+            myDiagram.model.commitTransaction("modified properties");
+           setLinks(array.linkDataArray)
+        
+      }
+        
+          
+         
+    });
+
     }
 
     array = JSON.parse(myDiagram.model.toJson())
@@ -797,12 +929,67 @@ const Diagram = (props)=>{
         }
       });
 
+      setField(myDiagram)
+
       return myDiagram
 
     }
 
-     
+    function makeLayoutForced(pressedLayout){
+      
+      const $ = go.GraphObject.make;  
+      
+if (pressedLayout==="LayeredDiagramLayout") {
+  
+  return   $(go.LayeredDigraphLayout,  // this will be discussed in a later section
+{ columnSpacing: 40,
+ setsPortSpots: false,isInitial:true,
+ isOngoing: true });}
+ else if (pressedLayout==="ForceDirectedLayout"){
+  
+      return $(go.ForceDirectedLayout, {
+        maxIterations:100,
+        epsilonDistance:100,
+        infinityDistance:20,
+        arrangementSpacing:new go.Size(100,100),
+        defaultGravitationalMass:100,
+        defaultSpringStiffness:100,
+        defaultSpringLength:100,
+        defaultElectricalCharge: 100,
+        isInitial:true,
+        isOngoing: true, 
+        setsPortSpots: false
+         
+       })
+      }
+      else if(pressedLayout==="TreeLayout"){
+        
+        return $(go.TreeLayout, {
+          // angle:90,
+          layerSpacing:50,
+          nodeSpacing:100,
+          setsChildPortSpot: false,
+          alignment:go.TreeLayout.AlignmentStart,
+          sorting: go.TreeLayout.SortingAscending,
+          comparer: function(a,b){
+            a = a.node; b=b.node;
+            if(a.data.key < b.data.key) return -1;
+            if(a.data.key > b.data.key) return 1;
+            return 0;
+          },
+           treeStyle: go.TreeLayout.PathDefault,
+          
 
+        isOngoing: true, 
+        isInitial:true,
+          setsPortSpot: false,
+          
+        }
+        )
+      }
+      return null;
+      
+    }
 
       
     useEffect(()=>{
@@ -813,6 +1000,25 @@ const Diagram = (props)=>{
       linksRef.current = links;
 
     },[links])
+
+    useEffect(()=>{
+      layoutRef.current = layout;
+      
+      if (fieldRef.current != null){
+        
+      fieldRef.current.layout = makeLayoutForced(layoutRef.current)
+      
+      }
+      
+
+    },[layout])
+
+    useEffect(()=>{
+    
+    setLayout(saved.layout)
+    
+
+    },[saved.layout])
       
 
 
@@ -858,29 +1064,30 @@ const Diagram = (props)=>{
               var node = res.data.diagramVisuals
               var link = res.data.links
               
+              
               for (var i=0; i<node.length;i++){
 
-                diagram.push({key:node[i].key,frontend:node[i].frontend,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,loc:node[i].loc,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,termination:node[i].termination,creator:node[i].creator})
+                if (node[i].isGroup===false){
+
+                diagram.push({key:node[i].key,frontend:node[i].frontend,loc:node[i].loc,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,termination:node[i].termination,creator:node[i].creator,groupNumber:node[i].groupNumber}) }
+                else {
+                diagram.push({key:node[i].key,isGroup:node[i].isGroup,text:node[i].text,horiz:node[i].horiz})
+                }
+                
               }
 
               var links = []
 
 
               for(var i=0;i<link.length;i++){
-                links.push({keyOfLink:link[i].keyOfLink,from:link[i].from,to:link[i].to,points:link[i].points})
+                links.push({keyOfLink:link[i].keyOfLink,from:link[i].from,to:link[i].to,points:link[i].points,strokeWidth:link[i].strokeWidth,frequency:link[i].frequency,bandwidth:link[i].bandwidth})
 
               }
-
-
-
-
 
               setDiagram(diagram)
               setLinks(links)
               updateSaved('upload',false)
-             
-              
-              
+     
             }
 
 
@@ -902,6 +1109,7 @@ const Diagram = (props)=>{
 return (
 
     <>
+    <LinkBusinessCapabilities.Provider value = {{linkBusiness,updateLink}}>
     <BusinessCapabilities.Provider value = {{business,updateBusiness}}>
     <OpenPopup.Provider value = {{modalContent,updateOpen}}>
     <div >
@@ -912,12 +1120,15 @@ return (
           
           linkDataArray={links} />
           
-          {modelRef.current ? <PopupExample open = {modelRef.current} /> : null }
-    
+          {modelRef.current.open ? <PopupExample open = {modelRef.current.open} /> : null }
+          {modelRef.current.openLink ? <PopUpLink openLink = {modelRef.current.openLink} /> : null }
+
+  
 
           </div>
     </OpenPopup.Provider>
     </BusinessCapabilities.Provider>
+    </LinkBusinessCapabilities.Provider>
     
 </>
 );

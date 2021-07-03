@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import SideSubMenu from './SideSubMenu.js';
 import {SidemenuData} from './SidemenuData.js'
 import './Diagram.css'
-import PopupExample from './PopupExample'
 
 const Nav = styled.div`
 background: #cfeef5;
