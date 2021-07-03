@@ -21,6 +21,7 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-minimal-side-navigation": "^1.8.0",
+    "react-profile-card": "^0.1.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-test-renderer": "^17.0.2",
