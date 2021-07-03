@@ -8,6 +8,8 @@ import * as AiIcons from 'react-icons/ai'
 import  GIF1 from '../GIF/Node_connect.gif'
 import  GIF2 from '../GIF/Change_text.gif'
 import  GIF3 from '../GIF/Change_color.gif'
+import  GIF4 from '../GIF/Drag_and_drop.gif'
+
 
 
 
@@ -90,6 +92,9 @@ const navbar =()=> {
         <h2>Change the text of a node</h2></div>
         <div><img src={GIF3} alt="loading..."/>
         <h2>Change the color of a node</h2></div>
+        <div><img src={GIF4} alt="loading..."/>
+        <h2>Drag and drop a node</h2></div>
+        
         
          
          

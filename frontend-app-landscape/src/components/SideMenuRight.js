@@ -146,7 +146,7 @@ const SideMenuRight =(props)=> {
               case "TreeLayout":
                 updateSaved('layout',"TreeLayout")
               break;
-
+             
 
 
     }

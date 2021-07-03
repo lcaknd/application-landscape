@@ -22,18 +22,18 @@ const NavTop =()=> {
         <>
         <Nav > 
             <div class="nav">
-        <div>
+        {/* <div>
         <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
                                     {item.icon}
-                                    {/* {item.title} */}
+                                    {item.title}
                                     </a>
                                
                             )
                         })}</h1>
-                        </div>
+                        </div> */}
         
           <div class="nbar">
               
