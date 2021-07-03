@@ -62,7 +62,7 @@ const NavTop =()=> {
                             )
                         })}
                         </div>
-                        {/* <div class="nbar">
+                        <div class="nbar">
                         {MenuItem3.map((item) => {
                             return(
                                     
@@ -72,7 +72,7 @@ const NavTop =()=> {
                                
                             )
                         })}
-                        </div> */}
+                        </div>
                         
                        {/* <div>
                         <DarkMode/></div> */}

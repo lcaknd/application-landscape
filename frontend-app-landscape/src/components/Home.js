@@ -5,6 +5,11 @@ import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
 import * as AiIcons from 'react-icons/ai'
+import  IMG1 from '../Team/IMG_0752.JPG';
+import  IMG2 from '../Team/IMG_0758.jpg';
+import  IMG3 from '../Team/IMG_0762.JPG';
+import  IMG4 from '../Team/IMG_8754.jpg';
+
 
 
 const Nav = styled.div`;
@@ -20,7 +25,7 @@ const navbar =()=> {
       <Nav > 
             
         <div class="nav">
-        <div>
+        {/* <div>
         <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
                             return(
                                     
@@ -30,7 +35,7 @@ const navbar =()=> {
                                
                             )
                         })}</h1>
-                        </div>
+                        </div> */}
         
           <div class="nbar">
               
@@ -59,7 +64,7 @@ const navbar =()=> {
                             )
                         })}
                         </div>
-                        {/* <div class="nbar">
+                        <div class="nbar">
                         {MenuItem3.map((item) => {
                             return(
                                     
@@ -69,7 +74,7 @@ const navbar =()=> {
                                
                             )
                         })}
-                        </div> */}
+                        </div>
                         
                    
                         
@@ -86,10 +91,17 @@ const navbar =()=> {
          <button class="click"><a href="landscape">Click here </a></button>
          <h1>You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial">Tutorials</a>  </h1>
          <h1>For further Information, contact us at</h1>
+         
          <div class="icon">
          <AiIcons.AiOutlineArrowDown/>
          </div>
          <h1> <a href="joke">thisemaildoesnotexist@justaproject.com</a></h1>
+         <div class="Team">
+         <img src={IMG1} alt="loading..."/>
+         <img src={IMG2} alt="loading..."/>
+         <img src={IMG3} alt="loading..."/>
+         <img src={IMG4} alt="loading..."/>
+         </div>
          
         
          

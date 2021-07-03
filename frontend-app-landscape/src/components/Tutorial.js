@@ -9,6 +9,8 @@ import  GIF1 from '../GIF/Node_connect.gif'
 import  GIF2 from '../GIF/Change_text.gif'
 import  GIF3 from '../GIF/Change_color.gif'
 import  GIF4 from '../GIF/Drag_and_drop.gif'
+import  GIF5 from '../GIF/Grouping.gif'
+import  GIF6 from '../GIF/Options.gif'
 
 
 
@@ -26,7 +28,7 @@ const navbar =()=> {
       <Nav > 
             
         <div class="nav">
-        <div>
+        {/* <div>
         <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
                             return(
                                     
@@ -36,7 +38,7 @@ const navbar =()=> {
                                
                             )
                         })}</h1>
-                        </div>
+                        </div> */}
         
           <div class="nbar">
               
@@ -65,7 +67,7 @@ const navbar =()=> {
                             )
                         })}
                         </div>
-                        {/* <div class="nbar">
+                        <div class="nbar">
                         {MenuItem3.map((item) => {
                             return(
                                     
@@ -75,7 +77,7 @@ const navbar =()=> {
                                
                             )
                         })}
-                        </div> */}
+                        </div>
                         
                    
                         
@@ -94,6 +96,11 @@ const navbar =()=> {
         <h2>Change the color of a node</h2></div>
         <div><img src={GIF4} alt="loading..."/>
         <h2>Drag and drop a node</h2></div>
+        <div><img src={GIF5} alt="loading..."/>
+        <h2>Grouping nodes</h2></div>
+        <div><img src={GIF6} alt="loading..."/>
+        <h2>Top right options</h2></div>
+        
         
         
          
