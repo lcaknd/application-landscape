@@ -88,7 +88,7 @@ body.dark{
 
 body.light {
 background-color: rgb(236, 236, 236);
-color: rgb(26, 57, 87);
+color: white;
 transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 font-weight: 400;
 

@@ -36,7 +36,7 @@
     display: flex;
     margin-bottom: 100px;
     flex-direction: column;
-    background: -webkit-linear-gradient(#5E5757, #F63039);
+    background: black;
   }
   .menu-item {
     cursor: pointer;
@@ -45,11 +45,11 @@
     border-bottom: 1px solid rgb(187, 187, 187);
   }
   .menu-item:hover {
-    color: #2980b9;
+    color: white;
   }
   .popup-content {
     margin: 0 0 0 0;
-    background: -webkit-linear-gradient(#5E5757, #F63039);
+    background: black;
     width: auto;
     padding: 5px;
   }
@@ -72,5 +72,6 @@
     font-size: 17px;
     font-family: 'Courier New', Courier, monospace;
     margin-top: 5px;
+    color: white;
     
   }
