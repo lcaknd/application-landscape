@@ -110,13 +110,14 @@ if (index !== -1) {
     <Popup
       open={props.open}
       onClose={popUpClosed}
+      onSubmit={e => { e.preventDefault(); }}
       // modal
       // nested
     >
         <div className="popup-content">
           <div className="header"> Modal Title </div>
           <div className="menu">
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
             <div class="test">
             <label >
               Frontend:
@@ -129,8 +130,8 @@ if (index !== -1) {
             </label>
             </div>
             
-          </form>
-          <form>
+          </form >
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
           <label>
               Backend:
@@ -142,7 +143,7 @@ if (index !== -1) {
             </label>
             </div>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
           <label>
               Number of users: 
@@ -154,7 +155,7 @@ if (index !== -1) {
             </label>
             </div>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
           <label>
               Creator:
@@ -166,7 +167,7 @@ if (index !== -1) {
             </label>
             </div>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
             <label>
               Date of creation:
@@ -179,7 +180,7 @@ if (index !== -1) {
             </label>
             </div>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
             <label>
               Date of termination:
@@ -192,7 +193,7 @@ if (index !== -1) {
             </label>
             </div>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
             <label>
               License:
@@ -205,7 +206,7 @@ if (index !== -1) {
             </label>
             </div>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <div class="test">
             <label>
               Version:
@@ -218,9 +219,9 @@ if (index !== -1) {
             </label>
             </div>
             
-          </form>
+          </form >
           
-          <form method="post" onChange={handleInputServices} >
+          <form  onSubmit={e => { e.preventDefault(); }} method="post" onChange={handleInputServices} >
           <div class="test">
             <fieldset><legend>Services</legend>
               <label> Data
@@ -256,7 +257,7 @@ if (index !== -1) {
               
           </form>
           
-          <form method="post" onChange={handleInputDepartments}>
+          <form  onSubmit={e => { e.preventDefault(); }} method="post" onChange={handleInputDepartments}>
           <div class="test">
             <fieldset><legend>Departments</legend>
               <label> Finance
