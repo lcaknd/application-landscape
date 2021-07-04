@@ -23,6 +23,9 @@
 
 
 }
+body.dark .nav-links{
+  color:black;
+}
 
 .nav-links:hover {
   text-decoration: underline;
@@ -76,7 +79,8 @@
 
 } */
 body.dark{
-  background-color: rgb(26, 57, 87);
+  /* background-color: rgb(26, 57, 87); */
+  background:black;
   color: rgb(236, 236, 236);
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
@@ -121,7 +125,12 @@ align-items: center;
 border-radius: 5px;
 display: flex;
 z-index:1;
+transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 
+}
+body.dark .nav{
+  background:white;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 .site_heading{
   font: bold 175% arial, sans-serif;
@@ -139,6 +148,105 @@ z-index:1;
 
 .icon{
   font-size: 50px;
+}
+
+/* Team Box  */
+
+
+.box {
+  background:   -webkit-linear-gradient(#5E5757, #F63039);
+  border-radius: 5px;
+  color:white;
+  padding: 0px;
+  height: 190px;
+  width: 280px;
+  /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3); */
+ margin-top:100px;
+  transition: 0.3s;
+  
+  
+}
+
+body.dark .box{
+  background:white;
+}
+.box:hover {
+  
+  background: white;
+  border-radius: 5px;
+ 
+  /* transition: ease-in-out 0.3s; */
+  height: 190px;
+  width: 280px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+  
+  
+  
+}
+.box:hover .name{
+  color:black;
+  display:block;
+}
+.box:hover .img-box{
+  
+/* margin-top:-50px; */
+position:relative;
+box-shadow: 0 8px 8px 8px white;
+/* transition: background 0.3s ease-in-out, color 0.3s ease-in-out; */
+}
+body.dark .box:hover{
+  box-shadow: 0 3px 5px 2px white;
+}
+
+.img-box {
+  height: 190px;
+  width: 180px;
+  top:-80px;
+  object-fit: cover;
+  border-radius: 90px;
+  /* border: 1px solid black;  */
+  /* box-shadow: 0 3px 5px 2px rgba(255, 142, 164, 0.3); */
+  
+  background-color: white;
+  /* display: block; */
+  margin-left: auto;
+  margin-right: auto;
+  transition:0.8s;
+  
+  
+}
+
+.prof-container {
+  margin: 10px;
+  /* width: fit-content; */
+  /* padding-top: 80px; */
+  position:relative;
+  z-index:auto;
+  display:inline-block;
+  height:100px;
+  
+  
+  
+}
+
+.name{
+  margin-top: -70px;
+  font-size: 23px;
+  /* font-size: x-large; */
+  text-transform: uppercase;
+  display:none;
+ 
+  
+  
+}
+
+.des {
+  margin-top: -24px;
+  font-size: 20px;
+  text-transform: uppercase;
+  display:none;
+  
+  
 }
 
 
