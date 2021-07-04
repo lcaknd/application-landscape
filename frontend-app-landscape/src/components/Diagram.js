@@ -118,6 +118,7 @@ const Diagram = (props)=>{
     const $ = go.GraphObject.make;  
     const myDiagram =
         $(go.Diagram, 
+
           { "undoManager.isEnabled": true,
             allowHorizontalScroll: true,
             allowVerticalScroll: false,
@@ -764,7 +765,7 @@ const Diagram = (props)=>{
         
         
        
-        console.log(layoutRef.current)
+        
 
 
         e.subject.each(function(p) {
@@ -778,7 +779,7 @@ const Diagram = (props)=>{
         
          array = JSON.parse(myDiagram.model.toJson())
          setDiagram(array.nodeDataArray)
-         console.log(array.nodeDataArray)
+         
          
 
 
@@ -843,7 +844,7 @@ const Diagram = (props)=>{
       myDiagram.addDiagramListener('SelectionDeleted', function() {
 
         array = JSON.parse(myDiagram.model.toJson())
-        // setDiagram(array.nodeDataArray)
+        setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
         updateSaved('inspector',false)
       
@@ -854,13 +855,21 @@ const Diagram = (props)=>{
       myDiagram.addDiagramListener('ChangedSelection', function() {
 
         array = JSON.parse(myDiagram.model.toJson())
-        // setDiagram(array.nodeDataArray)
+        setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
         
 
 
         
       });
+
+      myDiagram.addDiagramListener('SelectionDeleting', function(e){
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+        setLinks(array.linkDataArray)
+        
+      
+      })
       myDiagram.addDiagramListener('ChangingSelection', function(e) {
         updateSaved('inspector',true)
 
@@ -1037,7 +1046,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
       layoutRef.current = layout;
       
       if (fieldRef.current != null){
-        console.log("pierdolony")
+        
         
       fieldRef.current.layout = makeLayoutForced(layoutRef.current)
       

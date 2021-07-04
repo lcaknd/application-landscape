@@ -161,10 +161,10 @@ const SideMenuRight =(props)=> {
     const buttonRef = React.useRef({ update: (e) => update(e) });
 
  useEffect(() => {
-   console.log(saveRef.current)
+   
    
    setSaved(saved.inspector)
-   console.log(saveRef.current)
+   
 
  }, [saved])
 

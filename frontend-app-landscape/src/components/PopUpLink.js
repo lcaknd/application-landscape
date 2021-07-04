@@ -32,6 +32,7 @@ import './Try.css'
   function popUpClosed(){
     // setState({modelOpen: false});
     updateOpen('openLink',false)
+
     
   }
 
@@ -41,6 +42,7 @@ import './Try.css'
     <Popup
       open={props.openLink}
       onClose={popUpClosed}
+      onSubmit={e => { e.preventDefault();}}
       // modal
       // nested
     >
@@ -48,7 +50,7 @@ import './Try.css'
           <div className="header"> Modal Title </div>
           <div className="menu">
          
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <label>
               Frequency: 
               <input style={{width: '75px'}}
@@ -58,7 +60,7 @@ import './Try.css'
             />
             </label>
           </form>
-          <form>
+          <form onSubmit={e => { e.preventDefault(); }}>
           <label>
               Bandwidth: 
               <input style={{width: '75px'}}

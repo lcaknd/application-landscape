@@ -46,13 +46,6 @@ const DiagramScreen= ()=> {
 
     
 
-
-    useEffect(()=>{
-    
-    console.log(saved.layout)
-
-    }, [nameOfDiagram,saved]);
-
     
 
 //     function updateDataBusinessCapabilities(data){
