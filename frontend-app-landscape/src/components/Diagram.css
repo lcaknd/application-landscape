@@ -16,8 +16,12 @@
   .myPaletteDiv {
       width: 280px;
       height: 100px;
-      background: -webkit-linear-gradient(#5E5757, #F63039);
+      background: white;
       
+  }
+
+  body.dark .myPaletteDiv{
+    background:black;
   }
 
   .myInspector {

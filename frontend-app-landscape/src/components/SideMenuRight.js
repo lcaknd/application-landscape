@@ -26,14 +26,8 @@ display: ${({ sidebarR }) => (sidebarR ? 'flex' : 'none')};
 `;
 
 const NavRIcon = styled.div`
-  margin-left: 2550px;
-  margin-top:-65px;
-  font-size: 2rem;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  position: sticky;
+  
+  
 `;
 
 
@@ -168,7 +162,9 @@ const SideMenuRight =(props)=> {
         <WholeDiv>
 
         <NavRIcon>
+          <div class="RIcon">
      {sidebarR ? <AiIcons.AiOutlineClose onClick={showSidebarR} /> :<FaIcons.FaCodeBranch onClick={showSidebarR}/>}
+     </div>
      </NavRIcon>
 
         <Sidebar2Nav sidebarR={sidebarR}>

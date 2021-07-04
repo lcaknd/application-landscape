@@ -13,5 +13,6 @@ let paletteAllShapes = [{
         {  text: 'Hello3',category:"Diamond",fill: "#C0D7E9" },
         
         ]
+        
 
 export  default paletteAllShapes; 

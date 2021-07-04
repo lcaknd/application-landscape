@@ -18,15 +18,16 @@ import './DarkMode.css';
 
 
 const SidebarNav = styled.nav`
-background: -webkit-linear-gradient(#5E5757, #F63039);
-width: 280px;
+
+
 display: flex; 
 justify-content: center;
 position: relative;
 margin-top: -19px;
 float: left;
-left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
 z-index:3;
+left: ${({ sidebar }) => (sidebar ? '0.5' : '-100%')};
+
 
 // const Sidebar2Nav = styled.nav`
 // background: #cfeef5;
@@ -50,13 +51,7 @@ float: right;
 `;
 
 const NavIcon = styled.div`
-  margin-left: 2rem;
-  font-size: 2rem;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top:-75px;
+ 
 `;
 
 
@@ -87,10 +82,13 @@ const Sidemenu =()=> {
         <WholeDiv>
         
         <NavIcon>
+          <div class="LIcon">
         {sidebar ? <AiIcons.AiOutlineClose onClick={showSidebar} /> :<FaIcons.FaBars onClick={showSidebar}/>}
+        </div>
        </NavIcon>
      
         <SidebarNav sidebar={sidebar}>
+          <div class="sideL">
         <SidebarWrap>
         
        
@@ -98,6 +96,7 @@ const Sidemenu =()=> {
             return <SideSubMenu item ={item} key = {index} />
         })}
         </SidebarWrap>
+        </div>
         </SidebarNav>
         </WholeDiv>
         </>

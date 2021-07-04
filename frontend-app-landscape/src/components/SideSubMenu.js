@@ -4,15 +4,7 @@ import { SaveDiagram } from '../DiagramScreen';
 import Palette from './Palette';
 
 const Sidebar = styled.div`
-display: flex;
-color: #000000;
-justify-content: space-between;
-align-items: center;
-padding: 20px;
-list-style: none;
-font-size: 18px;
-height: 60px;
-text-decoration: none;
+
 
 
 &:hover {
@@ -43,12 +35,14 @@ text-decoration: none;
     return (
         <>
         <Sidebar onClick = {showSubnav}>
+            <div class="sideL_content">
             <div>
                 {item.icon}
                 <SidebarLabel>{item.title}</SidebarLabel>
             </div>
             <div>
                 {subNav ? item.iconOpened:item.iconClosed}
+            </div>
             </div>
         </Sidebar>
         
