@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState,useRef,useContext,useEffect} from 'react';
 import styled from 'styled-components';
+import { SaveDiagram } from '../DiagramScreen';
 import Palette from './Palette';
 
 const Sidebar = styled.div`
@@ -33,7 +34,10 @@ text-decoration: none;
 
   const SideSubMenu = ({item}) => {
 
+    
+
     const [subNav,setSubnav] =  useState(false)
+
 
     const showSubnav = () => setSubnav(!subNav)
     return (
@@ -47,7 +51,10 @@ text-decoration: none;
                 {subNav ? item.iconOpened:item.iconClosed}
             </div>
         </Sidebar>
+        
         {subNav ? <Palette title= {item.title} /> : null}
+        
+
         </>
     );
 };

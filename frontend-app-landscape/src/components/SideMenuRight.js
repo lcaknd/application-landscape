@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react'
+import React, {useState,useContext,useRef,useEffect} from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import styled from 'styled-components'
@@ -51,7 +51,11 @@ const SideMenuRight =(props)=> {
 
 
   const {updateName} = useContext(DataContext)
-  const {updateSaved} = useContext(SaveDiagram);
+  const {saved,updateSaved} = useContext(SaveDiagram);
+
+  const [save, setSaved] = useState(false);
+  const saveRef = useRef();
+  saveRef.current = save;
 
 
 
@@ -149,7 +153,13 @@ const SideMenuRight =(props)=> {
 
     const buttonRef = React.useRef({ update: (e) => update(e) });
 
+ useEffect(() => {
+   console.log(saveRef.current)
+   
+   setSaved(saved.inspector)
+   console.log(saveRef.current)
 
+ }, [saved])
 
 
 
@@ -167,7 +177,7 @@ const SideMenuRight =(props)=> {
         {test.map((item,index)=> {
             return <SideSubMenuR ref= {buttonRef} item ={item} key = {index} />
         })}
-        <div id="myInspector"></div>
+       {saveRef.current ? <div id="myInspector"></div>:<div hidden id="myInspector"></div>}
         </SidebarRWrap>
         </div>
         </Sidebar2Nav>

@@ -57,6 +57,5 @@ export const test = [
       iconOpened: <RiIcons.RiArrowUpSFill />
    }
 
-   
 
 ]

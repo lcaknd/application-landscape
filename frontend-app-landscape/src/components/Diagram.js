@@ -54,6 +54,8 @@ export const LinkBusinessCapabilities = createContext({
 
 const Diagram = (props)=>{
 
+  
+
   const [modalContent, setModalContent] = React.useState(false);
   const modelRef = useRef()
   modelRef.current = modalContent
@@ -88,6 +90,8 @@ const Diagram = (props)=>{
   const {nameOfDiagram, updateNameOfDiagram} = useContext(
     DataContext
   );
+
+  const [d,setD]=useState(null)
 
   const {saved,updateSaved} = useContext(SaveDiagram)
 
@@ -140,11 +144,11 @@ const Diagram = (props)=>{
                   }),
                   
                   // layout: makeLayoutForced(layoutRef.current),
-                  "InitialLayoutCompleted": function(e) {
-                    if (!e.diagram.nodes.all(n => n.location.isReal())) {
-                      e.diagram.layoutDiagram(true);
-                    }
-                  },
+                  // "InitialLayoutCompleted": function(e) {
+                  //   if (!e.diagram.nodes.all(n => n.location.isReal())) {
+                  //     e.diagram.layoutDiagram(true);
+                  //   }
+                  // },
 
           });
 
@@ -754,6 +758,7 @@ const Diagram = (props)=>{
       myDiagram.addDiagramListener('ExternalObjectsDropped',function(e){
 
         e.diagram.layoutDiagram(true)
+        
 
         
         
@@ -786,8 +791,16 @@ const Diagram = (props)=>{
       //   defaultSpringStiffness: .05, // default 0.05
       //   maxIterations :10000});
 
+      myDiagram.addDiagramListener('BackgroundSingleClicked',function(e){
+        updateSaved('inspector',false)
+      })
+      myDiagram.addDiagramListener('BackgroundDoubleClicked',function(e){
+        updateSaved('inspector',false)
+      })
+
      
       myDiagram.addDiagramListener('LinkDrawn',function(e){
+        updateSaved('inspector',true)
         array = JSON.parse(myDiagram.model.toJson())
         setLinks(array.linkDataArray)
         setModalContent({openLink:true})
@@ -832,6 +845,7 @@ const Diagram = (props)=>{
         array = JSON.parse(myDiagram.model.toJson())
         // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
+        updateSaved('inspector',false)
       
 
         
@@ -842,11 +856,13 @@ const Diagram = (props)=>{
         array = JSON.parse(myDiagram.model.toJson())
         // setDiagram(array.nodeDataArray)
         setLinks(array.linkDataArray)
+        
 
 
         
       });
       myDiagram.addDiagramListener('ChangingSelection', function(e) {
+        updateSaved('inspector',true)
 
 
         if(modelRef.current.open===false){
@@ -926,8 +942,10 @@ const Diagram = (props)=>{
       });
       myDiagram.addDiagramListener('BackgroundSingleClicked', function(e) {
 
+      
+
       var inspector = new Inspector('myInspector', myDiagram,
-      {  
+      {  visible:false,
         showAllProperties: true,
         properties: {
           // key would be automatically added for nodes, but we want to declare it read-only also:
@@ -958,7 +976,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
   return   $(go.LayeredDigraphLayout,  // this will be discussed in a later section
 { columnSpacing: 40,
  setsPortSpots: false,isInitial:true,
- isOngoing: true });}
+ isOngoing: false });}
  else if (pressedLayout==="ForceDirectedLayout"){
   
       return $(go.ForceDirectedLayout, {
@@ -971,7 +989,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
         defaultSpringLength:100,
         defaultElectricalCharge: 100,
         isInitial:true,
-        isOngoing: true, 
+        isOngoing: false, 
         setsPortSpots: false
          
        })
@@ -994,7 +1012,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
            treeStyle: go.TreeLayout.PathDefault,
           
 
-        isOngoing: true, 
+        isOngoing: false, 
         isInitial:true,
           setsPortSpot: false,
           
@@ -1019,6 +1037,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
       layoutRef.current = layout;
       
       if (fieldRef.current != null){
+        console.log("pierdolony")
         
       fieldRef.current.layout = makeLayoutForced(layoutRef.current)
       
@@ -1033,6 +1052,13 @@ if (pressedLayout==="LayeredDiagramLayout") {
     
 
     },[saved.layout])
+
+    useEffect(()=>{
+
+      updateSaved('myDiagram',field)
+
+   
+    },[field])
       
 
 
@@ -1119,6 +1145,17 @@ if (pressedLayout==="LayeredDiagramLayout") {
         
         
     },[nameOfDiagram,saved,business,mydiagram,links]);
+
+    useEffect(()=>{
+
+      if(field!=null){
+
+      fieldRef.current.clear()
+      }
+
+    },[nameOfDiagram])
+
+    
 
 return (
 

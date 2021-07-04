@@ -20,7 +20,9 @@ export const DataContext = createContext({
 export const SaveDiagram = createContext({
     saved: false,
     upload: false,
+    inspector: false,
     layout: "ForceDirectedLayout",
+    myDiagram:null,
     setSaved: () =>{}
 })
 
@@ -29,7 +31,7 @@ export const SaveDiagram = createContext({
 const DiagramScreen= ()=> {
 
     const [nameOfDiagram,setNameOfDiagram] = useState("")
-    const [saved,setSaved] = useState({layout:"ForceDirectedLayout",saved:false,upload:false})
+    const [saved,setSaved] = useState({layout:"ForceDirectedLayout",myDiagram:null,saved:false,inspector:false,upload:false})
     
  
 
