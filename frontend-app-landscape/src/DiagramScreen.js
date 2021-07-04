@@ -12,6 +12,7 @@ export const DataContext = createContext({
     // dataBusinessCapabilities: null,
     // links: null,
     setNameOfDiagram:() => {},
+    getNameOfDiagram:() => {},
     // setDataBusinessCapabilities:()=>{},
     // setLinks:()=>{}
 });
@@ -19,7 +20,9 @@ export const DataContext = createContext({
 export const SaveDiagram = createContext({
     saved: false,
     upload: false,
+    inspector: false,
     layout: "ForceDirectedLayout",
+    myDiagram:null,
     setSaved: () =>{}
 })
 
@@ -28,12 +31,15 @@ export const SaveDiagram = createContext({
 const DiagramScreen= ()=> {
 
     const [nameOfDiagram,setNameOfDiagram] = useState("")
-    const [saved,setSaved] = useState({layout:"ForceDirectedLayout",saved:false,upload:false})
+    const [saved,setSaved] = useState({layout:"ForceDirectedLayout",myDiagram:null,saved:false,inspector:false,upload:false})
     
  
 
     const updateName = (property, value) =>
     setNameOfDiagram(prevInfo => ({ ...prevInfo, [property]: value }));
+
+    
+    
 
     const updateSaved = (property, value) =>
     setSaved(prevInfo => ({ ...prevInfo, [property]: value }));
@@ -61,6 +67,7 @@ const DiagramScreen= ()=> {
        
         <SaveDiagram.Provider value = {{saved, updateSaved}}>
         <DataContext.Provider value= {{nameOfDiagram,updateName}}>
+        
         <div id='diagram' className="App">
         <div>
             <NavTop />
@@ -69,12 +76,14 @@ const DiagramScreen= ()=> {
         
        <Sidemenu  />
         <Diagram nameOfDiagram={nameOfDiagram} layout={saved.layout} />
-       <SideMenuRight />
+       {/* <SideMenuRight /> */}
        </div>
        </div>
+       
        </DataContext.Provider>
        </SaveDiagram.Provider>
       
+       
        
       
     

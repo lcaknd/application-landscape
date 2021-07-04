@@ -1,18 +1,50 @@
 import './App.css';
-import Sidemenu from './components/Sidemenu';
-import React, {useContext} from 'react'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Home from "./components/Home";
+import Joke from "./components/Joke"
+
+import React from 'react'
 import DiagramScreen from './DiagramScreen';
+
+import './components/DarkMode.css';
+{/* <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+</head>
+</html> */}
+
 
 
 
 
 function App() {
   return (
-     
+    <Router>
     <div className="App">
-     <DiagramScreen />
+     
+     <div className="content">
+       <Switch>
+       <Route exact path="/">
+           <Home/>
+           </Route>
+
+           
+
+         <Route exact path="/landscape">
+         <DiagramScreen/>
+         </Route>
+         <Route exact path="/joke">
+           <Joke/>
+         </Route>
+         
+           
+         
+         
+       </Switch>
+    
+       </div>
     </div>
-  
+    </Router>
   );
 }
 

@@ -1,12 +1,19 @@
-import React from 'react'
+import React,{useContext,useRef,useEffect} from 'react'
 import * as go from 'gojs';
 import {  ReactPalette } from 'gojs-react';
 import "./Diagram.css"
 import paletteAllShapes from './PaletteAllShapes';
 import paletteGroups from './PaletteGroups';
+import { SaveDiagram } from '../DiagramScreen';
 
 
-window.initPalette = function(){
+
+
+
+
+const Palette =(props)=>{
+
+  window.initPalette = function(){
 
     function animateFadeDown(e) {
         var diagram = e.diagram;
@@ -21,7 +28,7 @@ window.initPalette = function(){
       }
     
     const $ = go.GraphObject.make;
-    const myDiagram = window.initDiagram()
+    const myDiagram = fieldRef.current
     const myPalette =
     $(go.Palette,  
       {
@@ -29,7 +36,7 @@ window.initPalette = function(){
         "InitialAnimationStarting": animateFadeDown, 
 
         nodeTemplateMap: myDiagram.nodeTemplateMap,
-        groupTemplateMap: myDiagram.groupTemplateMap,
+        // groupTemplateMap: myDiagram.groupTemplateMap,
         allowDelete: false,
         allowZoom: false,  
         model: new go.GraphLinksModel([ 
@@ -56,9 +63,25 @@ window.initPalette = function(){
     return myPalette;
 }
 
+  const {saved} = useContext(SaveDiagram)
+    
+    const [field,setField] = React.useState(saved.myDiagram)
+    const fieldRef = useRef();
+    fieldRef.current = field;
 
 
-const Palette =(props)=>{
+    useEffect(() => {
+      setField(saved.myDiagram)
+      console.log(saved.myDiagram)
+      
+  }, [saved.myDiagram])
+
+  useEffect(()=>{
+console.log(fieldRef.current)
+
+  },[field]
+
+  );
 
     const shapeType = (name) => {
     
