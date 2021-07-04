@@ -924,6 +924,7 @@ const Diagram = (props)=>{
         
 
       });
+      myDiagram.addDiagramListener('BackgroundSingleClicked', function(e) {
 
       var inspector = new Inspector('myInspector', myDiagram,
       {  
@@ -941,7 +942,7 @@ const Diagram = (props)=>{
 
         }
       });
-
+    });
       setField(myDiagram)
 
       return myDiagram
