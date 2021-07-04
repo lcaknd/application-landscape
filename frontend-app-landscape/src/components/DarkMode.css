@@ -9,11 +9,16 @@
     background:none;
    border:none;
    margin-left: -35px;
+   margin-top:-20px;
+   color:white;
     /* justify-content: left; */
     /* transition: background-color 0.3s ease-in-out, filter 0.3s ease-in-out; */
     
     
     
+  }
+  body.dark #darkMode{
+    color:black;
   }
   .darkModeIcon{
     text-align: left;

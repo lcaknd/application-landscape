@@ -18,15 +18,7 @@ import './DarkMode.css'
 
 
 const Sidebar2Nav = styled.nav`
-background: -webkit-linear-gradient(#5E5757, #F63039);;
-width: 280px;
-display: flex;
-justify-content: right;
-position: absolute;
-margin-top: -15px;
-margin-left: 2300px;
-// float:right;
-z-index:3;
+
 
 
 
@@ -47,6 +39,7 @@ const NavRIcon = styled.div`
 
 const SidebarRWrap = styled.div`
   width: 100%;
+  
 `;
 const WholeDiv = styled.div`
 float: right;
@@ -169,12 +162,14 @@ const SideMenuRight =(props)=> {
      </NavRIcon>
 
         <Sidebar2Nav sidebarR={sidebarR}>
+          <div class="sideR">
         <SidebarRWrap>
         {test.map((item,index)=> {
             return <SideSubMenuR ref= {buttonRef} item ={item} key = {index} />
         })}
         <div id="myInspector"></div>
         </SidebarRWrap>
+        </div>
         </Sidebar2Nav>
         </WholeDiv>
 

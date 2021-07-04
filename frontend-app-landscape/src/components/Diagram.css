@@ -3,13 +3,14 @@
   .myDiagramDiv {   
     /* background-color: #d9dedf; */
     width: 100%;
-    height: 120vh;
+    height: 95vh;
     position: absolute;
     border-radius: 5px;
     border:dashed;
     z-index:2;
     margin-left: -275px;
     margin-top:-10px;
+    
   } 
   
   .myPaletteDiv {
@@ -62,7 +63,7 @@ with allowances for the title (top) and the resize handle (bottom)
   } */
   .container {
     width: 100%;
-    height: 100vh;
+    
     display: flex;
     
   }

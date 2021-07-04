@@ -15,7 +15,7 @@
 }
 
 .nav-links {
-  margin-top: -20px;
+  /* margin-top: -20px; */
   color: white;
 
     font: italic 200% arial, sans-serif;
@@ -66,7 +66,7 @@ body.dark .nav-links{
   color: var(--text-color);
   font-weight: var(--font-weight); */
 
-  height: 2000px;
+  height: auto;
   text-align: center;
 }
 
@@ -109,7 +109,38 @@ color: yellow;
 .moon {
   color: grey;
 }
+.sideR{
+  background: black;
+width: 280px;
+display: flex;
+justify-content: right;
+position: absolute;
+margin-top: -15px;
+margin-left: 2300px;
+/* float:right; */
+z-index:3;
 
+
+
+
+}
+body.dark .sideR{
+  background:white;
+}
+.sideR_content{
+  display: flex;
+color: white;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+list-style: none;
+font-size: 18px;
+height: 60px;
+text-decoration: none;
+}
+body.dark .sideR_content{
+  color:black;
+}
 
 
 .nav{
@@ -118,7 +149,7 @@ color: yellow;
   padding-top: 15px;
   text-align: center;
   margin: 0;
-  background: -webkit-linear-gradient(#5E5757, #F63039);
+  background: black;
   border-radius: 15px 15px 15px 15px;
   border: 1px solid #0096D4;
 align-items: center;
@@ -135,7 +166,7 @@ body.dark .nav{
 .site_heading{
   font: bold 175% arial, sans-serif;
   color: #E91741;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 
 
 }
