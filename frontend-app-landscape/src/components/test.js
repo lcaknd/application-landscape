@@ -34,10 +34,28 @@ export const test = [
    },
    {
       title: 'Create Diagram',
-      icon:<FaIcons.FaCloud />
-      // iconClosed: <RiIcons.RiArrowDownSFill />,
-      // iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<FaIcons.FaCloud />,
+      iconClosed: <RiIcons.RiArrowDownSFill />,
+      iconOpened: <RiIcons.RiArrowUpSFill />
+   }, 
+   {
+      title: 'LayeredDiagramLayout',
+      icon:<FaIcons.FaCloud />,
+      iconClosed: <RiIcons.RiArrowDownSFill />,
+      iconOpened: <RiIcons.RiArrowUpSFill />
    },
-   
-  
+   {
+      title: 'ForceDirectedLayout',
+      icon:<FaIcons.FaCloud />,
+      iconClosed: <RiIcons.RiArrowDownSFill />,
+      iconOpened: <RiIcons.RiArrowUpSFill />
+   },
+   {
+      title: 'TreeLayout',
+      icon:<FaIcons.FaCloud />,
+      iconClosed: <RiIcons.RiArrowDownSFill />,
+      iconOpened: <RiIcons.RiArrowUpSFill />
+   }
+
+
 ]

@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react'
+import React, {useState,useContext,useRef,useEffect} from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import styled from 'styled-components'
@@ -18,15 +18,7 @@ import './DarkMode.css'
 
 
 const Sidebar2Nav = styled.nav`
-background: -webkit-linear-gradient(#5E5757, #F63039);;
-width: 280px;
-display: flex;
-justify-content: right;
-position: absolute;
-margin-top: -15px;
-margin-left: 2300px;
-// float:right;
-z-index:3;
+
 
 
 
@@ -34,19 +26,14 @@ display: ${({ sidebarR }) => (sidebarR ? 'flex' : 'none')};
 `;
 
 const NavRIcon = styled.div`
-  margin-left: 2550px;
-  margin-top:-65px;
-  font-size: 2rem;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  position: sticky;
+  
+  
 `;
 
 
 const SidebarRWrap = styled.div`
   width: 100%;
+  
 `;
 const WholeDiv = styled.div`
 float: right;
@@ -58,7 +45,11 @@ const SideMenuRight =(props)=> {
 
 
   const {updateName} = useContext(DataContext)
-  const {updateSaved} = useContext(SaveDiagram);
+  const {saved,updateSaved} = useContext(SaveDiagram);
+
+  const [save, setSaved] = useState(false);
+  const saveRef = useRef();
+  saveRef.current = save;
 
 
 
@@ -137,6 +128,18 @@ const SideMenuRight =(props)=> {
               })
  break;
 
+              case "ForceDirectedLayout":
+                updateSaved('layout',"ForceDirectedLayout")
+                break;
+              case "LayeredDiagramLayout":
+                updateSaved('layout',"LayeredDiagramLayout")
+              break;
+              case "TreeLayout":
+                updateSaved('layout',"TreeLayout")
+              break;
+             
+
+
     }
 
 
@@ -144,7 +147,13 @@ const SideMenuRight =(props)=> {
 
     const buttonRef = React.useRef({ update: (e) => update(e) });
 
+ useEffect(() => {
+   
+   
+   setSaved(saved.inspector)
+   
 
+ }, [saved])
 
 
 
@@ -153,16 +162,20 @@ const SideMenuRight =(props)=> {
         <WholeDiv>
 
         <NavRIcon>
+          <div class="RIcon">
      {sidebarR ? <AiIcons.AiOutlineClose onClick={showSidebarR} /> :<FaIcons.FaCodeBranch onClick={showSidebarR}/>}
+     </div>
      </NavRIcon>
 
         <Sidebar2Nav sidebarR={sidebarR}>
+          <div class="sideR">
         <SidebarRWrap>
         {test.map((item,index)=> {
             return <SideSubMenuR ref= {buttonRef} item ={item} key = {index} />
         })}
-        <div id="myInspector"></div>
+       {saveRef.current ? <div id="myInspector"></div>:<div hidden id="myInspector"></div>}
         </SidebarRWrap>
+        </div>
         </Sidebar2Nav>
         </WholeDiv>
 

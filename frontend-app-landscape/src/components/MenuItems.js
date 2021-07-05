@@ -2,6 +2,7 @@ import * as AiIcons from 'react-icons/ai'
 import * as  GrIcons  from "react-icons/gr";
 import * as  CgIcons  from "react-icons/cg";
 import * as FcIcons from "react-icons/fc";
+import * as FaIcons from "react-icons/fa";
 
 
 export const MenuItem_logo = [
@@ -33,9 +34,9 @@ export const MenuItem2 = [
 ]
 export const MenuItem3 = [
     {
-        title: 'Settings',
-        icon:<AiIcons.AiFillSetting />,
-        
+        title: 'Tutorials',
+        icon:<FaIcons.FaChalkboardTeacher />,
+        url: 'tutorial',
         cName: 'nav-links'
     }
     

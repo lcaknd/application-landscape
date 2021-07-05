@@ -1,34 +1,39 @@
-import React from 'react'
+import React from "react";
 import styled from 'styled-components'
-import { MenuItem_logo, MenuItem1, MenuItem2, MenuItem3 } from "./MenuItems"
-import './Diagram.css'
+import {MenuItem1, MenuItem2, MenuItem3, MenuItem_logo } from "./MenuItems"
 import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
+import * as AiIcons from 'react-icons/ai'
+import  GIF1 from '../GIF/Node_connect.gif'
+import  GIF2 from '../GIF/Change_text.gif'
+import  GIF3 from '../GIF/Change_color.gif'
+import  GIF4 from '../GIF/Drag_and_drop.gif'
+import  GIF5 from '../GIF/Grouping.gif'
+import  GIF6 from '../GIF/Options.gif'
 
 
 
-import SideMenuRight from "./SideMenuRight";
 
-import "./Diagram.css"
+const Nav = styled.div`;
 
-const Nav = styled.div`
+ `;
 
-`;
 
-const NavTop =()=> {
 
+const navbar =()=> {
     return (
         <>
-        <Nav > 
-            <div class="nav">
+        
+      <Nav > 
+            
+        <div class="nav">
         {/* <div>
         <h1 className="nbar-logo">{MenuItem_logo.map((item) => {
                             return(
                                     
                                     <a className={item.cName} href={item.url}>
                                     {item.icon}
-                                    {item.title}
                                     </a>
                                
                             )
@@ -74,18 +79,35 @@ const NavTop =()=> {
                         })}
                         </div>
                         
-                       {/* <div>
-                        <DarkMode/></div> */}
-                       
-                        </div>
-                    
+                   
+                        
+                        <DarkMode/>
+                        </div>     
         </Nav>
-        <div class="wrapR">
-                        <SideMenuRight/></div>
+       
+        <h1>Tutorials</h1>
+        <div>
+        <img src={GIF1} alt="loading..."/>
+        <h2>Connecting a Node</h2>
+        </div>
+        <div><img src={GIF2} alt="loading..."/>
+        <h2>Change the text of a node</h2></div>
+        <div><img src={GIF3} alt="loading..."/>
+        <h2>Change the color of a node</h2></div>
+        <div><img src={GIF4} alt="loading..."/>
+        <h2>Drag and drop a node</h2></div>
+        <div><img src={GIF5} alt="loading..."/>
+        <h2>Grouping nodes</h2></div>
+        <div><img src={GIF6} alt="loading..."/>
+        <h2>Top right options</h2></div>
+        
+        
+        
+         
+         
+         
         </>
-    
     );
+};
 
-}
-
-export default NavTop;
+export default navbar;

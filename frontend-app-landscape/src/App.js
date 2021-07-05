@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/theme';
 import { GlobalStyles } from './components/global';
 import Joke from "./components/Joke"
-
+import Tutorial from "./components/Tutorial"
 import React from 'react'
 import DiagramScreen from './DiagramScreen';
 
@@ -46,6 +46,9 @@ function App() {
          </Route>
          <Route exact path="/joke">
            <Joke/>
+         </Route>
+         <Route exact path="/tutorial">
+           <Tutorial/>
          </Route>
          
            
