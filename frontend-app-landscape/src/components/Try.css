@@ -1,16 +1,20 @@
 .modal {
     font-size: 12px;
   }
+  .header{
+    text-align: center;
+  }
   .modal > .header {
     width: 100%;
     border-bottom: 1px solid gray;
     font-size: 18px;
-    text-align: center;
+    
     padding: 5px;
   }
   .modal > .content {
     width: 100%;
     padding: 10px 5px;
+    
   }
   .modal > .actions {
     width: 100%;
@@ -37,6 +41,7 @@
     margin-bottom: 100px;
     flex-direction: column;
     background: #39395f ;
+    
   }
   .menu-item {
     cursor: pointer;
@@ -52,6 +57,7 @@
     background: #39395f ;
     width: auto;
     padding: 5px;
+    border-radius: 20px;
   }
   /* .popup-arrow {
     color: black
