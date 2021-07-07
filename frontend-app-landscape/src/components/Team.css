@@ -10,9 +10,9 @@
 
 
 
-.container {
-  max-width: 900px;
-  display: flex;
+.containerT {
+  max-width: 250px;
+  display: inline-flex;
   justify-content: space-evenly;
   margin: 0 auto;
 }
