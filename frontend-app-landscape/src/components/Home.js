@@ -176,7 +176,7 @@ const navbar =()=> {
      
  </div>
 
- <div class="container">
+ <div class="containerT">
     
     <div class="card-wrapper">
       
@@ -198,7 +198,7 @@ const navbar =()=> {
   </div>
   </div>
 
-  <div class="container">
+  <div class="containerT">
     
     <div class="card-wrapper">
       
@@ -220,7 +220,7 @@ const navbar =()=> {
   </div>
   </div>
 
-  <div class="container">
+  <div class="containerT">
     
     <div class="card-wrapper">
       
@@ -242,7 +242,7 @@ const navbar =()=> {
   </div>
   </div>
 
-  <div class="container">
+  <div class="containerT">
     
     <div class="card-wrapper">
       
