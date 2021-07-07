@@ -132,7 +132,7 @@ const navbar =()=> {
 
          
         
-<div class="container">
+<div class="containerT">
     
     <div class="card-wrapper">
       
