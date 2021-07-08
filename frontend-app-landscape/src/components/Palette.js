@@ -36,7 +36,7 @@ const Palette =(props)=>{
         "InitialAnimationStarting": animateFadeDown, 
 
         nodeTemplateMap: myDiagram.nodeTemplateMap,
-        // groupTemplateMap: myDiagram.groupTemplateMap,
+        groupTemplateMap: myDiagram.groupTemplateMap,
         allowDelete: false,
         allowZoom: false,  
         model: new go.GraphLinksModel([ 
