@@ -1,6 +1,6 @@
 
 #darkMode {
-    background-color: -webkit-linear-gradient(#5E5757, #F63039);
+    /* background-color: -webkit-linear-gradient(#5E5757, #F63039); */
     /* background-size: 30px 30px; */
     /* margin-right: 80px;
     margin-bottom: 10px; */
@@ -18,7 +18,7 @@
     
   }
   body.dark #darkMode{
-    color:black;
+    color:#39395f;
   }
   .darkModeIcon{
     text-align: left;

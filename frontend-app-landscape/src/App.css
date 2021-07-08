@@ -218,6 +218,14 @@ body.dark .pic2{
     margin-left: 50px;
     letter-spacing: 5px;
     width: 100%;
+    
+}
+.nbarH{
+  font-family: arial;
+    margin-left: 50px;
+    letter-spacing: 5px;
+    width: 100%;
+    z-index: 999;
 }
 
 .nav-links {
