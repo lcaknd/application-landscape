@@ -101,6 +101,19 @@ if (index !== -1) {
     
     updateBusiness('services', stateServices.services)  
     updateBusiness('departments',stateDepartment.departments)
+    setState({
+      frontend: null,
+      backend: null,
+      user: "",
+      date: "",
+      modelOpen:props.open,
+      termination:"",
+      license:"",
+      version:"",
+      creator:""
+  
+    })
+
     
   }
 

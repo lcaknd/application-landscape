@@ -36,7 +36,7 @@ const Palette =(props)=>{
         "InitialAnimationStarting": animateFadeDown, 
 
         nodeTemplateMap: myDiagram.nodeTemplateMap,
-        // groupTemplateMap: myDiagram.groupTemplateMap,
+        groupTemplateMap: myDiagram.groupTemplateMap,
         allowDelete: false,
         allowZoom: false,  
         model: new go.GraphLinksModel([ 
@@ -72,16 +72,10 @@ const Palette =(props)=>{
 
     useEffect(() => {
       setField(saved.myDiagram)
-      console.log(saved.myDiagram)
+      
       
   }, [saved.myDiagram])
 
-  useEffect(()=>{
-console.log(fieldRef.current)
-
-  },[field]
-
-  );
 
     const shapeType = (name) => {
     

@@ -205,7 +205,7 @@ body.dark .LIcon{
   margin: 0;
   background: black;
   border-radius: 15px 15px 15px 15px;
-  border: 1px solid #0096D4;
+  border: 1px solid;
 align-items: center;
 border-radius: 5px;
 display: flex;

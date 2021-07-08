@@ -18,15 +18,15 @@ public class Link {
     @Column(name="to_Node")
     private int to;
 
-    public int getStrokeWidth() {
+    public double getStrokeWidth() {
         return strokeWidth;
     }
 
-    public void setStrokeWidth(int strokeWidth) {
+    public void setStrokeWidth(double strokeWidth) {
         this.strokeWidth = strokeWidth;
     }
 
-    private int strokeWidth;
+    private double strokeWidth;
 
     public int getFrequency() {
         return frequency;
@@ -88,7 +88,7 @@ public class Link {
 
     }
 
-    public Link(int id, int keyOfLink, int from, int to, int strokeWidth, int frequency, int bandwidth, Double[] points) {
+    public Link(int id, int keyOfLink, int from, int to, double strokeWidth, int frequency, int bandwidth, Double[] points) {
         this.name = id;
         this.keyOfLink = keyOfLink;
         this.from = from;

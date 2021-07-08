@@ -33,7 +33,7 @@ export const BusinessCapabilities = createContext({
     frontend: null,
     backend: null,
     user: null,
-    date: "2021-01-01",
+    date: "",
     services:[],
     departments:[],
     termination:"",
@@ -87,11 +87,10 @@ const Diagram = (props)=>{
     setBusinessLinkModel(prevInfo => ({ ...prevInfo, [property]: value }));
 
 
-  const {nameOfDiagram, updateNameOfDiagram} = useContext(
+  const {nameOfDiagram, updateName} = useContext(
     DataContext
   );
 
-  const [d,setD]=useState(null)
 
   const {saved,updateSaved} = useContext(SaveDiagram)
 
@@ -153,55 +152,6 @@ const Diagram = (props)=>{
 
           });
 
-          
-
-      //     function makeLayoutForced(pressedLayout){
-      // 
-            
-      // if (pressedLayout==="LayeredDiagramLayout") {return   $(go.LayeredDigraphLayout,  // this will be discussed in a later section
-      // { columnSpacing: 5,
-      //  setsPortSpots: false });}
-      //  else if (pressedLayout==="ForceDirectedLayout"){
-      //       return $(go.ForceDirectedLayout, {
-      //         maxIterations:100,
-      //         epsilonDistance:100,
-      //         infinityDistance:20,
-      //         arrangementSpacing:new go.Size(100,100),
-      //         defaultGravitationalMass:100,
-      //         defaultSpringStiffness:100,
-      //         defaultSpringLength:100,
-      //         defaultElectricalCharge: 100,
-      //         // isInitial: true,
-      //         // isOngoing: false, 
-      //         setsPortSpots: false
-               
-        
-
-      //        })
-      //       } else if(pressedLayout==="TreeLayout"){
-      //         return $(go.TreeLayout, {
-      //           // angle:90,
-      //           layerSpacing:20,
-      //           nodeSpacing:100,
-      //           setsChildPortSpot: false,
-      //           alignment:go.TreeLayout.AlignmentStart,
-      //           sorting: go.TreeLayout.SortingAscending,
-      //           comparer: function(a,b){
-      //             a = a.node; b=b.node;
-      //             if(a.data.key < b.data.key) return -1;
-      //             if(a.data.key > b.data.key) return 1;
-      //             return 0;
-      //           },
-      //            treeStyle: go.TreeLayout.PathDefault,
-      //           // alternateAngle:0,
-      //           setsPortSpot: false,
-      //           // isOngoing: false
-      //         }
-      //         )
-
-      //       }
-            
-      //     }
 
           function makeLayout(horiz) {  // a Binding conversion function
             if (horiz) {
@@ -655,7 +605,7 @@ const Diagram = (props)=>{
                 margin: 8,
                 maxSize: new go.Size(160, NaN),
                 wrap: go.TextBlock.WrapFit,
-                editable: true
+                editable: false
               },
               new go.Binding("text").makeTwoWay(),
               )
@@ -735,6 +685,23 @@ const Diagram = (props)=>{
               new go.Binding("text").makeTwoWay())
           )
         );
+
+        var inspector = new Inspector('myInspector', myDiagram,
+        {  visible:false,
+          showAllProperties: true,
+          properties: {
+            // key would be automatically added for nodes, but we want to declare it read-only also:
+            "key": { readOnly: true, show: Inspector.showIfPresent },
+            // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
+            "fill": { show: Inspector.showIfPresent, type: 'color' },
+            "stroke": { show: Inspector.showIfPresent, type: 'color' },
+            "backend": {show: Inspector.showIfPresent,type: 'checkbox'},
+            "frontend":{show: Inspector.showIfPresent,type: 'checkbox'},
+            
+            
+  
+          }
+        });
        
 
         
@@ -758,15 +725,14 @@ const Diagram = (props)=>{
       });
       myDiagram.addDiagramListener('ExternalObjectsDropped',function(e){
 
-        e.diagram.layoutDiagram(true)
-        
+        console.log(stateRef.current.nameOfDiagram)
 
-        
-        
-        
-       
-        
+          if(stateRef.current.nameOfDiagram===""|| stateRef.current.nameOfDiagram===undefined){
+          swal("Error", "Create name of diagram!", "error");
+          setDiagram([])
 
+        } else {
+          e.diagram.layoutDiagram(true)
 
         e.subject.each(function(p) {
           if (p instanceof go.Group) {
@@ -774,23 +740,21 @@ const Diagram = (props)=>{
               setModalContent({open:true})}
             
         })
+        array = JSON.parse(myDiagram.model.toJson())
+        setDiagram(array.nodeDataArray)
+
+        }
         
 
         
-         array = JSON.parse(myDiagram.model.toJson())
-         setDiagram(array.nodeDataArray)
+         
          
          
 
 
       });
 
-      // $(go.ForceDirectedLayout,{
-      //   defaultElectricalCharge: 50,
-      //   defaultGravitationalMass: 1,
-      //   defaultSpringLength:150,
-      //   defaultSpringStiffness: .05, // default 0.05
-      //   maxIterations :10000});
+     
 
       myDiagram.addDiagramListener('BackgroundSingleClicked',function(e){
         updateSaved('inspector',false)
@@ -903,6 +867,22 @@ const Diagram = (props)=>{
 
            
            setModalContent(false)
+           setBusinessModel(
+           {
+  
+            frontend: null,
+            backend: null,
+            user: null,
+            date: "",
+            services:[],
+            departments:[],
+            termination:"",
+            license:"",
+            version:"",
+            creator:"",
+            
+        }
+           )
            setDiagram(array.nodeDataArray)
            setLinks(array.linkDataArray)
          
@@ -923,13 +903,19 @@ const Diagram = (props)=>{
 
 
         if (part instanceof go.Link) {
+          if (businessLinkRef.current.frequency<=250 && businessLinkRef.current.frequency>=1){
           var percentage = businessLinkRef.current.frequency/250
           var stroke = percentage*5
             myDiagram.model.startTransaction();
             myDiagram.model.setDataProperty(part.data,"strokeWidth",stroke);
+            
+            myDiagram.model.commitTransaction("modified properties");}
+            else {
+              
+              myDiagram.model.setDataProperty(part.data,"strokeWidth",6);
+            }
             myDiagram.model.setDataProperty(part.data,"frequency",businessLinkRef.current.frequency);
             myDiagram.model.setDataProperty(part.data,"bandwidth",businessLinkRef.current.bandwidth);
-            myDiagram.model.commitTransaction("modified properties");
            setLinks(array.linkDataArray)
         
       }
@@ -949,27 +935,7 @@ const Diagram = (props)=>{
         
 
       });
-      myDiagram.addDiagramListener('BackgroundSingleClicked', function(e) {
-
-      
-
-      var inspector = new Inspector('myInspector', myDiagram,
-      {  visible:false,
-        showAllProperties: true,
-        properties: {
-          // key would be automatically added for nodes, but we want to declare it read-only also:
-          "key": { readOnly: true, show: Inspector.showIfPresent },
-          // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
-          "fill": { show: Inspector.showIfPresent, type: 'color' },
-          "stroke": { show: Inspector.showIfPresent, type: 'color' },
-          "backend": {show: Inspector.showIfPresent,type: 'checkbox'},
-          "frontend":{show: Inspector.showIfPresent,type: 'checkbox'},
-          
-          
-
-        }
-      });
-    });
+    
       setField(myDiagram)
 
       return myDiagram
@@ -1087,6 +1053,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
             businessCapabilities:null
           }
           
+          if( stateRef.current!==""){
           DiagramService.createDiagram(diagramNodes).then((res) => {
             if (res.status === 200) {
               swal("Success", "Your data is saved", "success");
@@ -1101,9 +1068,24 @@ if (pressedLayout==="LayeredDiagramLayout") {
               swal.close();
             }
           })
+        }
+          else {
+            swal("Failure", "Your data is not saved, try again", "error");
+          }
+          updateSaved('saved',false)
           
           setSaved(false)
-        }
+          updateName('nameOfDiagram',"")
+          
+          
+
+          if(field!=null){
+
+            fieldRef.current.clear()
+            setDiagram([])
+            setLinks([])
+            }
+        } 
         if(saved.upload){
 
           DiagramService.getDiagramByName(nameOfDiagram.nameOfDiagram).then((res)=>{
@@ -1153,13 +1135,17 @@ if (pressedLayout==="LayeredDiagramLayout") {
         }
         
         
-    },[nameOfDiagram,saved,business,mydiagram,links]);
+    },[saved]);
 
     useEffect(()=>{
+      setDiagramName(nameOfDiagram.nameOfDiagram)
+      console.log(nameOfDiagram)
 
       if(field!=null){
 
       fieldRef.current.clear()
+      setDiagram([])
+      setLinks([])
       }
 
     },[nameOfDiagram])
