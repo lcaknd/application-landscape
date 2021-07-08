@@ -72,16 +72,10 @@ const Palette =(props)=>{
 
     useEffect(() => {
       setField(saved.myDiagram)
-      console.log(saved.myDiagram)
+      
       
   }, [saved.myDiagram])
 
-  useEffect(()=>{
-console.log(fieldRef.current)
-
-  },[field]
-
-  );
 
     const shapeType = (name) => {
     
