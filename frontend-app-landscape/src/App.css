@@ -117,11 +117,32 @@ body.dark .tutorial{
   border:solid #39395f;
   float: left;
   margin-left:20px;
-  transition:ease-out 0.3s;
+  
   width:auto;
   height:368px;
   margin-top: 20px;
+  transition:all;
   /* background-image: url("Drag_and_drop.gif"); */
+}
+.pic7{
+  border:solid #39395f;
+  float: left;
+  margin-left:20px;
+  
+  width:auto;
+  height:368px;
+  margin-top: 20px;
+  display:none;
+  transition:all;
+}
+body.dark .pic1{
+  display:none;
+  transition:all;
+}
+body.dark .pic7{
+  display:block;
+  border:solid white;
+  transition:all;
 }
 /* .pic1:hover{
   -webkit-transform:scale(1.3);

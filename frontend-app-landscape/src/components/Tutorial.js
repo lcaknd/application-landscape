@@ -8,9 +8,10 @@ import * as AiIcons from 'react-icons/ai'
 import  GIF1 from '../GIF/Node_connect.gif'
 import  GIF2 from '../GIF/Change_text.gif'
 import  GIF3 from '../GIF/Change_color.gif'
-import  GIF4 from '../GIF/Drag_and_drop.gif'
+import  GIF4 from '../GIF/Drag_and_drop_light.gif'
 import  GIF5 from '../GIF/Grouping.gif'
 import  GIF6 from '../GIF/Options.gif'
+import  GIF7 from '../GIF/Drag_and_drop_dark.gif'
 
 
 
@@ -90,6 +91,7 @@ const navbar =()=> {
         </div>
         <div class="DragDropNode">
             <img  class="pic1" src={GIF4} alt="loading..."/>
+            <img  class="pic7" src={GIF7} alt="loading..."/>
         <h2 class="tutorial"><u>Drag and drop a node</u></h2>
         <h3 class="tutorial">Open the top left menu <br></br> choose a node<br></br> drag it to the diagram<br></br> and drop it</h3>
         </div>
