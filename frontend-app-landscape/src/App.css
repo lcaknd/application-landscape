@@ -325,7 +325,6 @@ margin-top: -15px;
 margin-left: 2300px;
 /* float:right; */
 z-index:3;
-border-radius: 20px;
 
 
 
@@ -338,7 +337,6 @@ body.dark .sideR{
 .sideL{
   background: #39395f;
   width: 280px;
-  border-radius: 20px;
 }
 
 body.dark .sideL{
