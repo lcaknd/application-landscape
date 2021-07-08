@@ -13,7 +13,8 @@ import  IMG3 from '../Team/IMG_0762.JPG';
 import  IMG4 from '../Team/MS.png';
 import  IMG5 from '../Team/IMG_0031.png';
 import './Team.css';
-
+import IMG6 from './HomePic/1.png'
+import IMG7 from './HomePic/2.png'
 
 
 
@@ -91,17 +92,20 @@ const navbar =()=> {
         <div class="site_heading">
         <h1>Welcome to our Application Landscape</h1>
         </div>
+          <img  class="HomePic1" src={IMG6} alt="loading..."/>
          <div class="DevCon">
          <h1 class="home">This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
          <h1 class="home">To start or continue working on the landscape</h1>
          <button class="click"><a href="landscape">Click here </a></button>
          <h1 class="home">You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial">Tutorials</a>  </h1>
          <h1 class="home">For further Information, contact us at</h1>
+         
          </div>
          <div class="icon">
          <AiIcons.AiOutlineArrowDown/>
          </div>
          <h1> <a href="joke">thisemaildoesnotexist@justaproject.com</a></h1>
+         <img  class="HomePic2" src={IMG7} alt="loading..."/>
          {/* <div class="Team">
          <img src={IMG1} alt="loading..."/>
          <img src={IMG2} alt="loading..."/>
