@@ -5,6 +5,9 @@ import * as FaIcons from 'react-icons/fa'
 import * as RiIcons from 'react-icons/ri'
 import * as BsIcons from 'react-icons/bs'
 import * as CgIcons from "react-icons/cg";
+import * as ImIcons from "react-icons/im";
+import * as IoIcons from "react-icons/io";
+import * as SiIcons from "react-icons/si";
 import DarkMode from './DarkMode'
 import './DarkMode.css'
 
@@ -34,27 +37,27 @@ export const test = [
    },
    {
       title: 'Create Diagram',
-      icon:<FaIcons.FaCloud />,
-      iconClosed: <RiIcons.RiArrowDownSFill />,
-      iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<IoIcons.IoIosCreate />
+      // iconClosed: <RiIcons.RiArrowDownSFill />,
+      // iconOpened: <RiIcons.RiArrowUpSFill />
    }, 
    {
       title: 'LayeredDiagramLayout',
-      icon:<FaIcons.FaCloud />,
-      iconClosed: <RiIcons.RiArrowDownSFill />,
-      iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<ImIcons.ImTree />
+      // iconClosed: <RiIcons.RiArrowDownSFill />,
+      // iconOpened: <RiIcons.RiArrowUpSFill />
    },
    {
       title: 'ForceDirectedLayout',
-      icon:<FaIcons.FaCloud />,
-      iconClosed: <RiIcons.RiArrowDownSFill />,
-      iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<SiIcons.SiApachekafka />
+      // iconClosed: <RiIcons.RiArrowDownSFill />,
+      // iconOpened: <RiIcons.RiArrowUpSFill />
    },
    {
       title: 'TreeLayout',
-      icon:<FaIcons.FaCloud />,
-      iconClosed: <RiIcons.RiArrowDownSFill />,
-      iconOpened: <RiIcons.RiArrowUpSFill />
+      icon:<CgIcons.CgListTree />
+      // iconClosed: <RiIcons.RiArrowDownSFill />,
+      // iconOpened: <RiIcons.RiArrowUpSFill />
    }
 
 

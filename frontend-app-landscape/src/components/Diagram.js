@@ -691,7 +691,7 @@ const Diagram = (props)=>{
           showAllProperties: true,
           properties: {
             // key would be automatically added for nodes, but we want to declare it read-only also:
-            "key": { readOnly: true, show: Inspector.showIfPresent },
+            "key": { readOnly: true, show:false },
             // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
             "fill": { show: Inspector.showIfPresent, type: 'color' },
             "stroke": { show: Inspector.showIfPresent, type: 'color' },
