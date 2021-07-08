@@ -91,12 +91,13 @@ const navbar =()=> {
         <div class="site_heading">
         <h1>Welcome to our Application Landscape</h1>
         </div>
-        <h1 class="home">This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
+         <div class="DevCon">
+         <h1 class="home">This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
          <h1 class="home">To start or continue working on the landscape</h1>
          <button class="click"><a href="landscape">Click here </a></button>
          <h1 class="home">You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial">Tutorials</a>  </h1>
          <h1 class="home">For further Information, contact us at</h1>
-         
+         </div>
          <div class="icon">
          <AiIcons.AiOutlineArrowDown/>
          </div>

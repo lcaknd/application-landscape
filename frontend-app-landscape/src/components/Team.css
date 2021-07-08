@@ -13,17 +13,18 @@
 .containerT {
   /* max-width: 200px; */
   display: inline-table;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   /* margin: 0 auto; */
-  width:fit-content;
+  /* width:fit-content; */
   margin-top: 150px;
-  margin:150px 15px 15px 15px;
+  margin:150px 15px 50px 15px;
 }
 
 .card-wrapper {
-  width: 200px;
-  height: 195px;
+  width: 150px;
+  /* height: 195px; */
   position: relative;
+  
 }
 
 .card {
