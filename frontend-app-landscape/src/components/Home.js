@@ -13,9 +13,11 @@ import * as AiIcons from 'react-icons/ai'
 import  IMG1 from '../Team/IMG_0752.JPG';
 import  IMG2 from '../Team/IMG_0758.jpg';
 import  IMG3 from '../Team/IMG_0762.JPG';
-import  IMG4 from '../Team/IMG_0786.png';
+import  IMG4 from '../Team/MS.png';
 import  IMG5 from '../Team/IMG_0031.png';
-
+import './Team.css';
+import IMG6 from './HomePic/1.png'
+import IMG7 from './HomePic/2.png'
 
 
 
@@ -93,16 +95,20 @@ const navbar =()=> {
         <div class="site_heading">
         <h1>Welcome to our Application Landscape</h1>
         </div>
-        <h1>This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
-         <h1>To start or continue working on the landscape</h1>
+          <img  class="HomePic1" src={IMG6} alt="loading..."/>
+         <div class="DevCon">
+         <h1 class="home">This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
+         <h1 class="home">To start or continue working on the landscape</h1>
          <button class="click"><a href="landscape">Click here </a></button>
-         <h1>You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial">Tutorials</a>  </h1>
-         <h1>For further Information, contact us at</h1>
+         <h1 class="home">You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial">Tutorials</a>  </h1>
+         <h1 class="home">For further Information, contact us at</h1>
          
+         </div>
          <div class="icon">
          <AiIcons.AiOutlineArrowDown/>
          </div>
          <h1> <a href="joke">thisemaildoesnotexist@justaproject.com</a></h1>
+         <img  class="HomePic2" src={IMG7} alt="loading..."/>
          {/* <div class="Team">
          <img src={IMG1} alt="loading..."/>
          <img src={IMG2} alt="loading..."/>
@@ -130,51 +136,181 @@ const navbar =()=> {
   <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 35" width="30"><path d="M5 30L50 5l45 25" fill="none" stroke="#000" stroke-width="5"/></svg>
 </div> */}
 
-<Team/>
+{/* <Team/> */}
 
          
         
-         
+<div class="containerT">
+    
+    <div class="card-wrapper">
+      
+      <div class="card">
+        
+        <div class="card-image">
+          <img class="team-pic" src={IMG1} alt="profile one"></img>
+        </div>
+
+     
+
+      <div class="details">
+        <h2 class="t-name">Burak Kocabas</h2>
+          {/* <h2>
+          <span class="job-title">UI Developer</span>
+        </h2> */}
+      </div>
+    </div>
+  </div>
+  
+    
+    
+{/* <div class="card-wrapper">
+      
+      <div class="card profile-two">
+        
+        <div class="card-image profile-img--two">
+          <img src="https://image.ibb.co/c9rY6J/profile02.jpg" alt="profile two"></img>
+        </div>
+
+        
+
+        <div class="details jane">
+            <h2 class="t-name">Jane Doe
+              <br></br>
+              <span class="job-title">UI Designer</span>
+            </h2>
+        </div>
+    </div>
+ </div> */}
+     
+ </div>
+
+ <div class="containerT">
+    
+    <div class="card-wrapper">
+      
+      <div class="card">
+        
+        <div class="card-image">
+          <img class="team-pic" src={IMG2} alt="profile one"></img>
+        </div>
+
+     
+
+      <div class="details">
+        <h2 class="t-name">Arslan Muneeb</h2>
+          {/* <h2>
+          <span class="job-title">UI Developer</span>
+        </h2> */}
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="containerT">
+    
+    <div class="card-wrapper">
+      
+      <div class="card">
+        
+        <div class="card-image">
+          <img class="team-pic" src={IMG3} alt="profile one"></img>
+        </div>
+
+     
+
+      <div class="details">
+        <h2 class="t-name">Huzeifa Marzouka</h2>
+          {/* <h2>
+          <span class="job-title">UI Developer</span>
+        </h2> */}
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="containerT">
+    
+    <div class="card-wrapper">
+      
+      <div class="card">
+        
+        <div class="card-image">
+          <img class="team-pic" src={IMG4} alt="profile one"></img>
+        </div>
+
+     
+
+      <div class="details">
+        <h2 class="t-name">Mohammad Speen</h2>
+          {/* <h2>
+          <span class="job-title">UI Developer</span>
+        </h2> */}
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="containerT">
+    
+    <div class="card-wrapper">
+      
+      <div class="card">
+        
+        <div class="card-image">
+          <img class="team-pic" src={IMG5} alt="profile one"></img>
+        </div>
+
+     
+
+      <div class="details">
+        <h2 class="t-name">Magdalena Pękacka</h2>
+          {/* <h2>
+          <span class="job-title">UI Developer</span>
+        </h2> */}
+      </div>
+    </div>
+  </div>
+  </div>
          
          
         </>
     );
 };
-export function Team() {
-    return (
-        <div>
-            <ProfileUi
-            imgUrl={IMG1}
-            name='Burak Kocabas'
-            designation='wagwan'
-            color='#FFFFFF'
-            />
+// export function Team() {
+//     return (
+//         <div>
+//             <ProfileUi
+//             imgUrl={IMG1}
+//             name='Burak Kocabas'
+//             designation='wagwan'
+//             color='#FFFFFF'
+//             />
             
-            <ProfileUi
-            imgUrl={IMG2}
-            name='Arslan Muneeb'
-            designation='wagwan2'
-            />
+//             <ProfileUi
+//             imgUrl={IMG2}
+//             name='Arslan Muneeb'
+//             designation='wagwan2'
+//             />
             
-            <ProfileUi
-            imgUrl={IMG3}
-            name='Huzeifa Marzouka'
-            designation='wagwan2'
-            />
-            <ProfileUi
-            imgUrl={IMG4}
-            name='Mohammad Speen'
-            designation='wagwan2'
-            />
-            <ProfileUi
-            imgUrl={IMG5}
-            name='Magdalena Pękacka'
-            designation='wagwan2'
-            />
-        </div>
+//             <ProfileUi
+//             imgUrl={IMG3}
+//             name='Huzeifa Marzouka'
+//             designation='wagwan2'
+//             />
+//             <ProfileUi
+//             imgUrl={IMG4}
+//             name='Mohammad Speen'
+//             designation='wagwan2'
+//             />
+//             <ProfileUi
+//             imgUrl={IMG5}
+//             name='Magdalena Pękacka'
+//             designation='wagwan2'
+//             />
+//         </div>
         
-    )
-}
+//     )
+// }
 
 // export function Arslan() {
 //     return (

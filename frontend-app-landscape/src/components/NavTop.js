@@ -35,7 +35,7 @@ const NavTop =()=> {
                         })}</h1>
                         </div> */}
         
-          <div class="nbar">
+          <div class="nbarH">
               
                         {MenuItem1.map((item) => {
                             
