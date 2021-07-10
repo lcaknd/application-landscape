@@ -1,21 +1,28 @@
 
 .site_heading{
   text-align: center;
+  padding: 25px;
 }
-
-
+.click:hover{
+  border: inset 5px white;
+}
+.home{
+  padding: 15px;
+}
 /* * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 } */
 .HomePic1{
-  display: block;
+  display: none;
   float: right;
+  width: 200px;
 }
 .HomePic2{
-  display: block;
+  display: none;
   float: left;
+  width: 200px;
 }
 
 .containerT {
@@ -25,7 +32,7 @@
   /* margin: 0 auto; */
   /* width:fit-content; */
   margin-top: 150px;
-  margin:150px 15px 50px 15px;
+  margin:150px 1px 50px 1px;
   
 }
 
