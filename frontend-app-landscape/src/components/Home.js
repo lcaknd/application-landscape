@@ -16,6 +16,7 @@ import './Team.css';
 import IMG6 from './HomePic/1.png'
 import IMG7 from './HomePic/2.png'
 import  GIFT from '../GIF/Tutorial.gif'
+import  GIFL from '../GIF/Landscape.gif'
 
 
 
@@ -97,7 +98,7 @@ const navbar =()=> {
          <div class="DevCon">
          <h1 class="home">This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
          <h1 class="home">To start or continue working on the landscape</h1>
-         <button class="click"><a href="landscape">Click here </a></button>
+         <a href="landscape"><img  class="picL" src={GIFL} alt="loading..."/> </a>
          <h1 class="home">You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial"><img  class="picT" src={GIFT} alt="loading..."/></a>  </h1>
          <img  class="HomePic2" src={IMG7} alt="loading..."/>
          <h1 class="home">For further Information, contact us at</h1>
