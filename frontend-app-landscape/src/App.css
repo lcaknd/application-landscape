@@ -1,11 +1,16 @@
 .picT{
   width:150px;
   height:100px;
+  border: #39395f solid;
  
 }
 .picL{
   width:150px;
   height:100px;
+  border: #39395f solid;
+}
+body.dark .picT, body.dark .picL{
+  border: white solid;
 }
 .home{
   color:black;
