@@ -97,9 +97,9 @@ const navbar =()=> {
         </div>
           <img  class="HomePic1" src={IMG6} alt="loading..."/>
          <div class="DevCon">
-         <h1 class="home">- Create your own application landscape using our editor </h1>
-         <h1 class="home">- Visualize all software systems of your organization</h1>
-         <h1 class="home">- Save your applications and continue anytime</h1>
+         <h1 class="home">Create your own application landscape using our editor </h1>
+         <h1 class="home">Visualize all software systems of your organization</h1>
+         <h1 class="home">Save your applications and continue anytime</h1>
          <h1 class="home">To start or continue working on the landscape</h1>
          <div class="iconL">
          <BsIcons.BsArrowDownRight/><AiIcons.AiOutlineArrowDown/><BsIcons.BsArrowDownLeft/>
