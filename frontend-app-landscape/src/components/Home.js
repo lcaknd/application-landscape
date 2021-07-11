@@ -6,6 +6,7 @@ import DarkMode from './DarkMode.js';
 import './DarkMode.css';
 import * as FiIcons  from "react-icons/fi";
 import * as AiIcons from 'react-icons/ai'
+import * as BsIcons from "react-icons/bs";
 // import '../node_modules/react-profile-card/dist/profileui.css'
 import  IMG1 from '../Team/BK.JPG';
 import  IMG2 from '../Team/AM.jpg';
@@ -92,14 +93,23 @@ const navbar =()=> {
        
         
         <div class="site_heading">
-        <h1>Welcome to our Application Landscape</h1>
+        <h1>Welcome to our Application Landscape tool</h1>
         </div>
           <img  class="HomePic1" src={IMG6} alt="loading..."/>
          <div class="DevCon">
-         <h1 class="home">This tool is provided by Burak Kocabas, Magdalena Pękacka, Mohammad Speen, Arslan Muneeb, Huzeifa Marzouka </h1>
+         <h1 class="home">- Create your own application landscape using our editor </h1>
+         <h1 class="home">- Visualize all software systems of your organization</h1>
+         <h1 class="home">- Save your applications and continue anytime</h1>
          <h1 class="home">To start or continue working on the landscape</h1>
+         <div class="iconL">
+         <BsIcons.BsArrowDownRight/><AiIcons.AiOutlineArrowDown/><BsIcons.BsArrowDownLeft/>
+         </div>
          <a href="landscape"><img  class="picL" src={GIFL} alt="loading..."/> </a>
-         <h1 class="home">You are new here? Then check our <AiIcons.AiOutlineArrowRight/> <a href="tutorial"><img  class="picT" src={GIFT} alt="loading..."/></a>  </h1>
+         <h1 class="home">You are new here? Then check our</h1>
+         <div class="iconT">
+         <BsIcons.BsArrowDownRight/><AiIcons.AiOutlineArrowDown/><BsIcons.BsArrowDownLeft/>
+         </div>
+         <a href="tutorial"><img  class="picT" src={GIFT} alt="loading..."/></a>
          <img  class="HomePic2" src={IMG7} alt="loading..."/>
          <h1 class="home">For further Information, contact us at</h1>
          
@@ -107,7 +117,7 @@ const navbar =()=> {
          {/* <div class="icon">
          <AiIcons.AiOutlineArrowDown/>
          </div> */}
-         <h1 class="home"> <a href="joke">thisemaildoesnotexist@justaproject.com</a></h1>
+         <h1 class="home"> <u>advanced-programming@group-e.com</u></h1>
          
          
 
