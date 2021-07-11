@@ -27,16 +27,18 @@ public class LinkController {
     }
 
     @PutMapping("link/{id}")
-    public ResponseEntity<Link> updateTheLink(@PathVariable Long id, @RequestBody Link link){
+    public ResponseEntity<Link> updateTheLink(@PathVariable Integer id, @RequestBody Link link){
         Link linkNodes = linkRepository.findById(id).orElseThrow(null);
+        linkNodes.setBandwidth(link.getBandwidth());
+        linkNodes.setFrequency(link.getFrequency());
+        linkNodes.setFrom(link.getFrom());
+        linkNodes.setTo(link.getTo());
+        linkNodes.setPoints(link.getPoints());
+        linkNodes.setStrokeWidth(link.getStrokeWidth());
+        linkNodes.setModified(link.isModified());
 
         Link updatedLink = linkRepository.save(link);
         return ResponseEntity.ok(updatedLink);
     }
 
-    @DeleteMapping("link/delete/{id}")
-    public void delete(@PathVariable long id) {
-        Link link = linkRepository.findById(id).orElseThrow(null);;
-        linkRepository.delete(link);
-    }
 }

@@ -3,18 +3,6 @@ import go from 'gojs';
 import Inspector from 'gojs/extensions/DataInspector';
 import { ReactDiagram} from 'gojs-react';
 import "./Diagram.css"
-import { Context, DiagramContext } from '../DiagramScreen';
-  import {
-    Button,
-    Checkbox,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    Menu,
-    Segment,
-    Sidebar,
-  } from 'semantic-ui-react'
 import DiagramVisualService from './ApiService/DiagramVisualService';
 import { DataContext, SaveDiagram } from '../DiagramScreen';
 import DiagramService from './ApiService/DiagramService';
@@ -697,6 +685,8 @@ const Diagram = (props)=>{
             "stroke": { show: Inspector.showIfPresent, type: 'color' },
             "backend": {show: Inspector.showIfPresent,type: 'checkbox'},
             "frontend":{show: Inspector.showIfPresent,type: 'checkbox'},
+            "services":{show: Inspector.showIfPresent,type:'arrayofstring'},
+            "departments":{show: Inspector.showIfPresent,type:'arrayofstring'}
             
             
   
@@ -725,6 +715,8 @@ const Diagram = (props)=>{
       });
       myDiagram.addDiagramListener('ExternalObjectsDropped',function(e){
 
+        
+
         console.log(stateRef.current.nameOfDiagram)
 
           if(stateRef.current.nameOfDiagram===""|| stateRef.current.nameOfDiagram===undefined){
@@ -737,11 +729,16 @@ const Diagram = (props)=>{
         e.subject.each(function(p) {
           if (p instanceof go.Group) {
             setModalContent(false)} else{
-              setModalContent({open:true})}
+              setModalContent({open:true})
+              myDiagram.model.startTransaction();
+              myDiagram.model.setDataProperty(p.data, "modified", false);
+              myDiagram.model.commitTransaction("modified properties");
+            }
             
         })
         array = JSON.parse(myDiagram.model.toJson())
         setDiagram(array.nodeDataArray)
+        console.log(array.nodeDataArray)
 
         }
         
@@ -1046,28 +1043,86 @@ if (pressedLayout==="LayeredDiagramLayout") {
         if(saved.saved){
          
 
-          var diagramNodes ={
-            name: nameOfDiagram.nameOfDiagram,
-            diagramVisuals: mydiagram,
-            links:links,
-            businessCapabilities:null
-          }
+          
           
           if( stateRef.current!==""){
-          DiagramService.createDiagram(diagramNodes).then((res) => {
-            if (res.status === 200) {
-              swal("Success", "Your data is saved", "success");
-            } else {
-              swal("Failure", "Your data is not saved, try again", "error");
+            var diagramModified=[]
+            var newNodes=[]
+            var linksModified=[]
+            var newLinks = []
+            var diagramNodesNew = {}
+            var diagramUpdate={}
+
+            console.log(fieldRef.current.model.nodeDataArray)
+            console.log(mydiagram)
+            
+            mydiagram.forEach(function (i) {
+              console.log(i)
+              
+             if(i.modified===false){
+               newNodes.push(i)
+             } else {
+               console.log(i)
+               diagramModified.push(i)
+             }
+            
+          });
+
+            links.forEach(function(i){
+              if(i.modified===false){
+                newLinks.push(i)
+              } else {
+                linksModified.push(i)
+              }
+            });
+
+             diagramModified.forEach(function(i){
+
+             
+              DiagramVisualService.updateDiagramVisualById(i.name,i).then(()=>{
+
+              })
+            });
+
+            linksModified.forEach(function(i){
+             
+              DiagramVisualService.updateDiagramVisualById(i.name,i).then(()=>{
+
+              })
+            });
+ 
+             diagramNodesNew= {
+              name: nameOfDiagram.nameOfDiagram,
+              diagramVisuals: mydiagram,
+              links:links,
+              businessCapabilities:null
             }
-          }).catch(err => {
-            if (err) {
-              swal("Oh noes!", "Something  wrong happened with your data!", "error");
-            } else {
-              swal.stopLoading();
-              swal.close();
+            
+
+            diagramNodesNew= {
+              name: nameOfDiagram.nameOfDiagram,
+              diagramVisuals: mydiagram,
+              links:links,
+              businessCapabilities:null
             }
-          })
+
+
+           
+          // DiagramService.createDiagram(diagramNodesNew).then((res) => {
+          //   if (res.status === 200) {
+          //     swal("Success", "Your data is saved", "success");
+          //   } else {
+          //     swal("Failure", "Your data is not saved, try again", "error");
+          //   }
+          // })
+          // .catch(err => {
+          //   if (err) {
+          //     swal("Oh noes!", "Something  wrong happened with your data!", "error");
+          //   } else {
+          //     swal.stopLoading();
+          //     swal.close();
+          //   }
+          // })
         }
           else {
             swal("Failure", "Your data is not saved, try again", "error");
@@ -1090,6 +1145,8 @@ if (pressedLayout==="LayeredDiagramLayout") {
 
           DiagramService.getDiagramByName(nameOfDiagram.nameOfDiagram).then((res)=>{
             if (res.status ===200){
+              
+              setDiagramName(res.data.name)
               var diagram = []
 
               var node = res.data.diagramVisuals
@@ -1100,9 +1157,9 @@ if (pressedLayout==="LayeredDiagramLayout") {
 
                 if (node[i].isGroup===false){
 
-                diagram.push({key:node[i].key,frontend:node[i].frontend,loc:node[i].loc,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,termination:node[i].termination,creator:node[i].creator,groupNumber:node[i].groupNumber}) }
+                diagram.push({name:node[i].name,key:node[i].key,frontend:node[i].frontend,loc:node[i].loc,text:node[i].text,users:node[i].users,category:node[i].category,date:node[i].date,backend:node[i].backend,fill:node[i].fill,services:node[i].services,departments:node[i].departments,license:node[i].license,version:node[i].version,termination:node[i].termination,creator:node[i].creator,groupNumber:node[i].groupNumber,modified:true}) }
                 else {
-                diagram.push({key:node[i].key,isGroup:node[i].isGroup,text:node[i].text,horiz:node[i].horiz})
+                diagram.push({name:node[i].name,key:node[i].key,isGroup:node[i].isGroup,text:node[i].text,horiz:node[i].horiz,groupNumber:node[i].groupNumber,modified:true})
                 }
                 
               }
@@ -1111,7 +1168,7 @@ if (pressedLayout==="LayeredDiagramLayout") {
 
 
               for(var i=0;i<link.length;i++){
-                links.push({keyOfLink:link[i].keyOfLink,from:link[i].from,to:link[i].to,points:link[i].points,strokeWidth:link[i].strokeWidth,frequency:link[i].frequency,bandwidth:link[i].bandwidth})
+                links.push({name:link[i].name,keyOfLink:link[i].keyOfLink,from:link[i].from,to:link[i].to,points:link[i].points,strokeWidth:link[i].strokeWidth,frequency:link[i].frequency,bandwidth:link[i].bandwidth,modified:true})
 
               }
 
