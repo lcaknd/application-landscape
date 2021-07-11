@@ -26,7 +26,7 @@ public class DiagramVisual {
     private int name;
 
 
-    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horiz, String category, String users, boolean frontend, boolean backend, String date, String[] services, String[] departments, String version, String license, String termination, String creator,int groupNumber) {
+    public DiagramVisual(int name, int key, String fill, String loc, String text, boolean isGroup, boolean horiz, String category, String users, boolean frontend, boolean backend, String date, String services, String departments, String version, String license, String termination, String creator,int groupNumber,boolean modified) {
         this.key= key;
         this.groupNumber = groupNumber;
         this.fill = fill;
@@ -46,6 +46,7 @@ public class DiagramVisual {
         this.license = license;
         this.termination = termination;
         this.creator = creator;
+        this.modified = modified;
     }
 
         @Column(name="key_nr")
@@ -73,19 +74,19 @@ public class DiagramVisual {
         this.groupNumber = groupNumber;
     }
 
-    public String[] getServices() {
+    public String getServices() {
         return services;
     }
 
-    public void setServices(String[] services) {
+    public void setServices(String services) {
         this.services = services;
     }
 
-    public String[] getDepartments() {
+    public String getDepartments() {
         return departments;
     }
 
-    public void setDepartments(String[] departments) {
+    public void setDepartments(String departments) {
         this.departments = departments;
     }
 
@@ -122,13 +123,23 @@ public class DiagramVisual {
     }
 
 
-    private String [] services;
-    private String [] departments;
+    private String services;
+    private String departments;
 
     private String version;
     private String license;
     private String termination;
     private String creator;
+
+    public boolean isModified() {
+        return modified;
+    }
+
+    public void setModified(boolean modified) {
+        this.modified = modified;
+    }
+
+    private boolean modified;
 
 
     public String getUsers() {

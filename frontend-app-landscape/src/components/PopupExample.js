@@ -99,9 +99,13 @@ if (index !== -1) {
   function popUpClosed(){
     // setState({modelOpen: false});
     updateOpen('open',false)
+
+    let services = stateServices.services.toString()
+    let departments = stateDepartment.departments.toString()
     
-    updateBusiness('services', stateServices.services)  
-    updateBusiness('departments',stateDepartment.departments)
+    updateBusiness('services', services)  
+    updateBusiness('departments',departments)
+    console.log(services)
     setState({
       frontend: null,
       backend: null,

@@ -11,6 +11,9 @@ class LinkService {
       createLinks(links) {
         return axios.post(LINK_REST_API_URL+"link", links);
       }
+      updateLinksById(id,links){
+        return axios.put(LINK_REST_API_URL+"link/"+id,links)
+      }
 
 }
 

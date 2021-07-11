@@ -13,7 +13,7 @@ class DiagramVisualService {
       }
 
       updateDiagramVisualById(id,diagram){
-        return axios.put()
+        return axios.put(DIAGRAM_REST_API_URL+"diagramVisual/"+id,diagram)
       }
 
 }

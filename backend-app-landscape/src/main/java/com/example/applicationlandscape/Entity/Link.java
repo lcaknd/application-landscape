@@ -7,6 +7,14 @@ import javax.persistence.*;
 @Table(name = "link")
 public class Link {
 
+    public int getName() {
+        return name;
+    }
+
+    public void setName(int name) {
+        this.name = name;
+    }
+
     @Id
     @Column(name="name")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +25,17 @@ public class Link {
     private int from;
     @Column(name="to_Node")
     private int to;
+
+    public boolean isModified() {
+        return modified;
+    }
+
+    public void setModified(boolean modified) {
+        this.modified = modified;
+    }
+
+    private boolean modified;
+
 
     public double getStrokeWidth() {
         return strokeWidth;
@@ -88,7 +107,7 @@ public class Link {
 
     }
 
-    public Link(int id, int keyOfLink, int from, int to, double strokeWidth, int frequency, int bandwidth, Double[] points) {
+    public Link(int id, int keyOfLink, int from, int to, double strokeWidth, int frequency, int bandwidth, Double[] points,boolean modified) {
         this.name = id;
         this.keyOfLink = keyOfLink;
         this.from = from;
@@ -97,5 +116,6 @@ public class Link {
         this.frequency = frequency;
         this.bandwidth = bandwidth;
         this.points = points;
+        this.modified=modified;
     }
 }
