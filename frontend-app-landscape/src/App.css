@@ -1,9 +1,359 @@
+.picT{
+  width:150px;
+  height:100px;
+  border: #39395f solid;
+ 
+}
+.picL{
+  width:150px;
+  height:100px;
+  border: #39395f solid;
+}
+body.dark .picT, body.dark .picL{
+  border: white solid;
+}
+.home{
+  color:black;
+}
+body.dark .home{
+  color:white;
+}
 
+/* tutorial */
+.tutheader{
+  font-size:50px;
+  color:black;
+}
+body.dark .tutheader{
+  color:white;
+}
+.ConNode{
+  height:370px;
+  width:100%;
+  display:table;
+  /* border:solid white; */
+  margin: 20px 0 0px 0;
+  /* background:rgb(236, 236, 236); */
+  transition:ease-out 0.3s;
+}
+.ConNode:hover{
+  box-shadow: inset 0 0 0 20px #39395f;
+  transform:scale(1.02);
+  transition:ease-in 0.3s;
+}
+body.dark .ConNode:hover{
+  box-shadow: inset 0 0 0 20px white;
+}
+.ChangeNode{
+  height:360px;
+  width:100%;
+  display:table;
+  /* display:-ms-inline-grid; */
+  /* border:solid white; */
+  margin: 20px 0 20px 0;
+  transition:ease-out 0.3s;
+}
+.ChangeNode:hover{
+  box-shadow: inset 0 0 0 20px #39395f;
+  transform:scale(1.02);
+  transition:ease-in 0.3s;
+}
+body.dark .ChangeNode:hover{
+  box-shadow: inset 0 0 0 20px white;
+}
+.ColorNode{
+  height:360px;
+  width:100%;
+  display:table;
+  /* border:solid white; */
+  margin: 10px 0 10px 0;
+  transition:ease-out 0.3s;
+}
+
+.ColorNode:hover{
+  box-shadow: inset 0 0 0 20px #39395f;
+  transform:scale(1.02);
+  transition:ease-in 0.3s;
+}
+body.dark .ColorNode:hover{
+  box-shadow: inset 0 0 0 20px white;
+}
+.DragDropNode{
+  width:100%;
+  display:table;
+  /* border:solid white; */
+  /* border-bottom:rgb(236, 236, 236) solid; */
+  margin: 10px 0 10px 0;
+  height:408px;
+  transition:ease-out 0.3s;
+}
+
+
+.DragDropNode:hover{
+  box-shadow: inset 0 0 0 20px #39395f;
+  transform:scale(1.02);
+  transition:ease-in 0.3s;
+}
+body.dark .DragDropNode:hover{
+  box-shadow: inset 0 0 0 20px white;
+}
+.GroupNode{
+  width:100%;
+  display:table;
+  height:408px;
+  /* border:solid white; */
+  margin: 10px 0 10px 0;
+  transition:ease-out 0.3s;
+}
+.GroupNode:hover{
+  box-shadow: inset 0 0 0 20px #39395f;
+  transform:scale(1.02);
+  transition:ease-in 0.3s;
+}
+body.dark .GroupNode:hover{
+  box-shadow: inset 0 0 0 20px white;
+}
+.TopRightOptions{
+  height:370px;
+  width:100%;
+  display:table;
+  /* border:solid white; */
+  margin: 20px 0 0px 0;
+  transition:ease-out 0.3s;
+}
+
+.TopRightOptions:hover{
+  box-shadow: inset 0 0 0 20px #39395f;
+  transform:scale(1.02);
+  transition:ease-in 0.3s;
+}
+body.dark .TopRightOptions:hover{
+  box-shadow: inset 0 0 0 20px white;
+}
+.tutorial{
+  color:black;
+  
+}
+body.dark .tutorial{
+  color:white;
+}
+
+/* DragDrop */
+.pic1{
+  border:solid #39395f;
+  float: right;
+  margin-right:20px;
+  opacity: 100%;
+  transition: opacity 1s;
+  width:auto;
+  height:368px;
+  margin-top: 20px;
+  /* transition:all; */
+  /* background-image: url("Drag_and_drop.gif"); */
+}
+.pic2{
+  border:solid #39395f;
+  float: left;
+  margin-left:20px;
+  
+  width:auto;
+  height:368px;
+  margin-top: 20px;
+  opacity: 0%;
+  transition: opacity 1s;
+  
+  
+}
+body.dark .pic1{
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic2{
+  /* display:block; */
+  border:solid white;
+  transition:all;
+  opacity: 100%;
+  transition: opacity 1s;
+}
+
+
+
+/* ConNode */
+.pic3{
+  border:solid #39395f;
+  float:left;
+  margin-left:20px;
+  opacity: 100%;
+  transition: opacity 1s;
+  width:auto;
+  height:330px;
+  margin-top: 20px;
+  
+}
+.pic4{
+  border:solid white;
+  float: right;
+  margin-right:20px;
+  
+  width:auto;
+  height:330px;
+  margin-top: 20px;
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic3{
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic4{
+  opacity: 100%;
+  transition: opacity 1s;
+}
+
+/* GroupNode */
+
+.pic5{
+  border:solid #39395f;
+  float: right;
+  margin-right:20px;
+  opacity: 100%;
+  transition: opacity 1s;
+  width:auto;
+  height:371px;
+  margin-top: 17px;
+
+  
+}
+.pic6{
+  border:solid #39395f;
+  float: left;
+  margin-left:20px;
+  
+  width:auto;
+  height:368px;
+  margin-top: 20px;
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic5{
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic6{
+  /* display:block; */
+  border:solid white;
+  transition:all;
+  opacity: 100%;
+  transition: opacity 1s;
+}
+
+/* Options */
+
+
+.pic7{
+  border:solid #39395f;
+  float:left;
+  margin-left:20px;
+  opacity: 100%;
+  transition: opacity 1s;
+  width:auto;
+  height:330px;
+  margin-top: 20px;
+}.pic8{
+  border:solid white;
+  float: right;
+  margin-right:20px;
+  
+  width:auto;
+  height:330px;
+  margin-top: 20px;
+  opacity: 0%;
+  transition: opacity 1s;
+
+
+}
+body.dark .pic7{
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic8{
+  opacity: 100%;
+  transition: opacity 1s;
+}
+
+/* ChangeNode */
+.pic9{
+  border:solid #39395f;
+  float: right;
+  margin-right:20px;
+  opacity: 100%;
+  transition: opacity 1s;
+  width:auto;
+  height:325px;
+  margin-top: 17px;
+}
+.pic10{
+  border:solid #39395f;
+  float: left;
+  margin-left:20px;
+  
+  width:auto;
+  height:322px;
+  margin-top: 20px;
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic9{
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic10{
+  /* display:block; */
+  border:solid white;
+  transition:all;
+  opacity: 100%;
+  transition: opacity 1s;
+}
+
+/* ColorNode */
+
+.pic11{
+  border:solid #39395f;
+  float:left;
+  margin-left:20px;
+  opacity: 100%;
+  transition: opacity 1s;
+  width:auto;
+  height:322px;
+  margin-top: 20px;
+}
+.pic12{
+  border:solid white;
+  float: right;
+  margin-right:20px;
+  
+  width:auto;
+  height:322px;
+  margin-top: 20px;
+  opacity: 0%;
+  transition: opacity 1s;
+}
+
+body.dark .pic11{
+  opacity: 0%;
+  transition: opacity 1s;
+}
+body.dark .pic12{
+  opacity: 100%;
+  transition: opacity 1s;
+}
+
+/* /////////////////////////////////////////////////////////////// */
 
 .diagram-component {
   width: 400px;
   height: 400px;
-  border: solid 1px black;
+  border: solid 1px #39395f;
   background-color: white;
 }
 .nbar {
@@ -12,6 +362,14 @@
     margin-left: 50px;
     letter-spacing: 5px;
     width: 100%;
+    
+}
+.nbarH{
+  font-family: arial;
+    margin-left: 50px;
+    letter-spacing: 5px;
+    width: 100%;
+    z-index: 999;
 }
 
 .nav-links {
@@ -24,7 +382,7 @@
 
 }
 body.dark .nav-links{
-  color:black;
+  color:#39395f ;
 }
 
 .nav-links:hover {
@@ -47,7 +405,7 @@ body.dark .nav-links{
 }
 .nav-link {
   text-decoration: none;
-  color: black;
+  color: #39395f ;
   font-family: sans-serif;
   cursor:pointer;
 }
@@ -80,7 +438,7 @@ body.dark .nav-links{
 } */
 body.dark{
   /* background-color: rgb(26, 57, 87); */
-  background:black;
+  background:#39395f ;
   color: rgb(236, 236, 236);
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
@@ -101,25 +459,26 @@ font-weight: 400;
 
 }
 
-.sun{
+/* .sun{
 color: yellow;
 }
 
 
 .moon {
   color: grey;
-}
+} */
 .sideR{
-  background: black;
+  background: #39395f;
 width: 280px;
 display: flex;
 justify-content: right;
+
 position: absolute;
 margin-top: -15px;
 margin-left: 2300px;
 /* float:right; */
 z-index:3;
-
+border-radius: 20px;
 
 
 
@@ -129,8 +488,9 @@ body.dark .sideR{
 }
 
 .sideL{
-  background: black;
+  background: #39395f;
   width: 280px;
+  border-radius: 20px;
 }
 
 body.dark .sideL{
@@ -148,7 +508,7 @@ height: 60px;
 text-decoration: none;
 }
 body.dark .sideR_content{
-  color:black;
+  color:#39395f ;
 }
 
 .sideL_content{
@@ -164,7 +524,7 @@ text-decoration: none;
 }
 
 body.dark .sideL_content{
-  color:black;
+  color:#39395f ;
 }
 .RIcon{
   margin-left: 2550px;
@@ -178,7 +538,7 @@ body.dark .sideL_content{
   color:white;
 }
 body.dark .RIcon{
-  color:black;
+  color:#39395f ;
 }
 
 .LIcon{
@@ -193,7 +553,7 @@ body.dark .RIcon{
 }
 
 body.dark .LIcon{
-  color:black;
+  color:#39395f ;
 }
 
 
@@ -203,7 +563,7 @@ body.dark .LIcon{
   padding-top: 15px;
   text-align: center;
   margin: 0;
-  background: black;
+  background: #39395f ;
   border-radius: 15px 15px 15px 15px;
   border: 1px solid;
 align-items: center;
@@ -260,7 +620,7 @@ body.dark .box{
   background: white;
   border-radius: 5px;
  
-  /* transition: ease-in-out 0.3s; */
+  transition: ease-in-out 0.3s;
   height: 190px;
   width: 280px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
@@ -332,6 +692,13 @@ body.dark .box:hover{
   display:none;
   
   
+}
+
+.inspector td{
+  color: white;
+}
+body.dark .inspector td{
+  color:black;
 }
 
 

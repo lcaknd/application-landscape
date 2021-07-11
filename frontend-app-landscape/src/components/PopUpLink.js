@@ -2,7 +2,8 @@ import React,{useState,useContext,useRef,useEffect} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { BusinessCapabilities, LinkBusinessCapabilities, OpenPopup } from './Diagram';
-import './Try.css'
+
+
 
  const PopUpLink =(props)=> {
 
@@ -46,29 +47,29 @@ import './Try.css'
       // modal
       // nested
     >
-        <div className="popup-content">
-          <div className="header"> Modal Title </div>
-          <div className="menu">
-         
+        <div className="popup-contentL">
+          
+          <div className="menuLink">
+          <h1>PLEASE SELECT </h1>
           <form onSubmit={e => { e.preventDefault(); }}>
-          <label>
+          <fieldset class="fieldset1">
               Frequency: 
               <input style={{width: '75px'}}
                 name="frequency"            type="number"  min="1" max="250"
                 value={stateRef.current.frequency}
                 onChange={handleInputChange}
             />
-            </label>
+            </fieldset>
           </form>
           <form onSubmit={e => { e.preventDefault(); }}>
-          <label>
+          <fieldset class="fieldset1">
               Bandwidth: 
               <input style={{width: '75px'}}
                 name="bandwidth"            type="number" min="1" max="250"
                 value={stateRef.current.bandwidth}
                 onChange={handleInputChange}
             />
-            </label>
+            </fieldset>
           </form>
           
           

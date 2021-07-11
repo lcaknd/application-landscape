@@ -1,8 +1,9 @@
 import React,{useState,useContext,useRef,useEffect} from 'react';
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+// import 'reactjs-popup/dist/index.css';
 import { BusinessCapabilities, OpenPopup } from './Diagram';
 import './Try.css'
+
 
  const PopupExample =(props)=> {
 
@@ -131,9 +132,10 @@ if (index !== -1) {
       // modal
       // nested
     >
-        <div className="popup-content">
-          <div className="header"> Modal Title </div>
-          <div className="menu">
+        <div className="popup-contentEx">
+          
+          <div className="menuY">
+          <h1>PLEASE SELECT </h1>
           <form onSubmit={e => { e.preventDefault(); }}>
             <div class="test">
             <label >
@@ -240,7 +242,7 @@ if (index !== -1) {
           
           <form  onSubmit={e => { e.preventDefault(); }} method="post" onChange={handleInputServices} >
           <div class="test">
-            <fieldset><legend>Services</legend>
+            <fieldset class="fieldset1"><legend>Services</legend>
               <label> Data
               <input name="Data" type="checkbox" id="version" value= "data"/>
               </label>
@@ -276,7 +278,7 @@ if (index !== -1) {
           
           <form  onSubmit={e => { e.preventDefault(); }} method="post" onChange={handleInputDepartments}>
           <div class="test">
-            <fieldset><legend>Departments</legend>
+            <fieldset class="fieldset1"><legend>Departments</legend>
               <label> Finance
               <input name="Finance" type="checkbox"  value= "finance"/>
               </label>

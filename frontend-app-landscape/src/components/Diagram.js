@@ -679,7 +679,7 @@ const Diagram = (props)=>{
           showAllProperties: true,
           properties: {
             // key would be automatically added for nodes, but we want to declare it read-only also:
-            "key": { readOnly: true, show: Inspector.showIfPresent },
+            "key": { readOnly: true, show:false },
             // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
             "fill": { show: Inspector.showIfPresent, type: 'color' },
             "stroke": { show: Inspector.showIfPresent, type: 'color' },
@@ -930,7 +930,26 @@ const Diagram = (props)=>{
         
 
       });
-    
+      myDiagram.addDiagramListener('BackgroundSingleClicked', function(e) {
+
+      
+
+      var inspector = new Inspector('myInspector', myDiagram,
+      {  visible:false,
+        showAllProperties: true,
+        properties: {
+          // key would be automatically added for nodes, but we want to declare it read-only also:
+          "key": { readOnly: true, show: false },
+          // fill and stroke would be automatically added for nodes, but we want to declare it a color also:
+          "fill": { show: Inspector.showIfPresent, type: 'color' },
+          "stroke": { show: Inspector.showIfPresent, type: 'color' },
+          "backend": {show: Inspector.showIfPresent,type: 'checkbox'},
+          "frontend":{show: Inspector.showIfPresent,type: 'checkbox'},
+          "groupNumber":{show: false,readOnly: true}
+
+        }
+      });
+    });
       setField(myDiagram)
 
       return myDiagram
