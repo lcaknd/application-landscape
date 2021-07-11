@@ -2,6 +2,7 @@ import React from "react"
 import "./DarkMode.css"
 import * as FiIcons  from "react-icons/fi";
 import * as CgIcons from "react-icons/cg";
+import * as BsIcons from "react-icons/bs";
 
 const DarkMode = () => {
     let clickedClass = "clicked"
@@ -40,8 +41,13 @@ const DarkMode = () => {
         id="darkMode"
         onClick={e => switchTheme(e)}
       ><div class="darkModeIcon">
-        <CgIcons.CgDarkMode/>
-        DarkMode 
+        <BsIcons.BsToggleOn/>   DarkMode
+         
+        {/* <div class="sun"><FiIcons.FiSun /></div><div class="moon"><FiIcons.FiMoon /></div> */}
+      </div>
+      <div class="lightModeIcon">
+        <BsIcons.BsToggleOff/> LightMode
+         
         {/* <div class="sun"><FiIcons.FiSun /></div><div class="moon"><FiIcons.FiMoon /></div> */}
       </div>
       </button>

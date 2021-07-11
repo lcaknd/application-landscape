@@ -26,6 +26,20 @@
     margin-left: 15px;
     margin-top: 10px;
     letter-spacing: 1px;
+    display:none;
+  }
+  .lightModeIcon{
+    text-align: left;
+    font-size:17px;
+    margin-left: 15px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+  body.dark .lightModeIcon{
+    display:none;
+  }
+  body.dark .darkModeIcon{
+    display:block;
   }
   
   
