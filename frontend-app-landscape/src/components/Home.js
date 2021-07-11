@@ -10,7 +10,7 @@ import * as AiIcons from 'react-icons/ai'
 import  IMG1 from '../Team/BK.JPG';
 import  IMG2 from '../Team/AM.jpg';
 import  IMG3 from '../Team/HM.jpg';
-import  IMG4 from '../Team/MS.png';
+import  IMG4 from '../Team/MS.jpg';
 import  IMG5 from '../Team/MP.png';
 import './Team.css';
 import IMG6 from './HomePic/1.png'
