@@ -1,17 +1,44 @@
 .picT{
-  width:150px;
-  height:100px;
+  width:170px;
+  height:120px;
   border: #39395f solid;
- 
+  transition: ease-in-out 0.3s;
 }
 .picL{
-  width:150px;
-  height:100px;
+  width:170px;
+  height:120px;
   border: #39395f solid;
+  transition: ease-in-out 0.3s;
 }
 body.dark .picT, body.dark .picL{
   border: white solid;
 }
+.picT:hover, .picL:hover{
+  width:200px;
+  height:150px;
+  transition: ease-in-out 0.3s;
+  /* margin-top: -5px; */
+}
+.iconL, .iconT{
+  color:#39395f;
+  font-size: 50px;
+  padding-bottom: 20px;
+}
+body.dark .iconL, body.dark .iconT{
+  color:white
+}
+.iconL, .iconT, .picT, .picL {
+  animation-name : mymove;
+  animation-iteration-count : infinite;
+  animation-direction : alternate;
+  animation-duration : 2s;
+}
+
+@keyframes mymove {
+  from {transform: translateY(0px);}
+  to {transform: translateY(20px);}
+}
+
 .home{
   color:black;
 }
@@ -591,9 +618,9 @@ body.dark .nav{
   background:white;
 }
 
-.icon{
+/* .icon{
   font-size: 50px;
-}
+} */
 
 /* Team Box  */
 
