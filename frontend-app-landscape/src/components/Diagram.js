@@ -22,8 +22,8 @@ export const BusinessCapabilities = createContext({
     backend: null,
     user: null,
     date: "",
-    services:[],
-    departments:[],
+    services:"",
+    departments:"",
     termination:"",
     license:"",
     version:"",
@@ -684,9 +684,7 @@ const Diagram = (props)=>{
             "fill": { show: Inspector.showIfPresent, type: 'color' },
             "stroke": { show: Inspector.showIfPresent, type: 'color' },
             "backend": {show: Inspector.showIfPresent,type: 'checkbox'},
-            "frontend":{show: Inspector.showIfPresent,type: 'checkbox'},
-            "services":{show: Inspector.showIfPresent,type:'arrayofstring'},
-            "departments":{show: Inspector.showIfPresent,type:'arrayofstring'}
+            "frontend":{show: Inspector.showIfPresent,type: 'checkbox'}
             
             
   
@@ -1108,21 +1106,21 @@ if (pressedLayout==="LayeredDiagramLayout") {
 
 
            
-          // DiagramService.createDiagram(diagramNodesNew).then((res) => {
-          //   if (res.status === 200) {
-          //     swal("Success", "Your data is saved", "success");
-          //   } else {
-          //     swal("Failure", "Your data is not saved, try again", "error");
-          //   }
-          // })
-          // .catch(err => {
-          //   if (err) {
-          //     swal("Oh noes!", "Something  wrong happened with your data!", "error");
-          //   } else {
-          //     swal.stopLoading();
-          //     swal.close();
-          //   }
-          // })
+          DiagramService.createDiagram(diagramNodesNew).then((res) => {
+            if (res.status === 200) {
+              swal("Success", "Your data is saved", "success");
+            } else {
+              swal("Failure", "Your data is not saved, try again", "error");
+            }
+          })
+          .catch(err => {
+            if (err) {
+              swal("Oh noes!", "Something  wrong happened with your data!", "error");
+            } else {
+              swal.stopLoading();
+              swal.close();
+            }
+          })
         }
           else {
             swal("Failure", "Your data is not saved, try again", "error");
